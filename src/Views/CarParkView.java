@@ -1,13 +1,18 @@
 package Views;
 
+import Controllers.SimulatorController;
+import Controllers.VehicleController;
 import Models.Car;
 import Models.Location;
+import Models.Vehicle;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class CarParkView extends JPanel {
-    private SimulatorView simulatorView;
+    private SimulatorView simView;
+    private SimulatorController simController;
+    private VehicleController vehController;
     private Dimension size;
     private Image carParkImage;
 
@@ -15,7 +20,9 @@ public class CarParkView extends JPanel {
      * Constructor for objects of class CarPark
      */
     public CarParkView(SimulatorView simulatorView) {
-        this.simulatorView = simulatorView;
+        this.simView = simulatorView;
+        simController = simView.getSimulatorController();
+        vehController = simController.getVehicleController();
         size = new Dimension(0, 0);
     }
 
@@ -52,12 +59,12 @@ public class CarParkView extends JPanel {
             carParkImage = createImage(size.width, size.height);
         }
         Graphics graphics = carParkImage.getGraphics();
-        for(int floor = 0; floor < simulatorView.simulatorController.getNumberOfFloors(); floor++) {
-            for(int row = 0; row < simulatorView.simulatorController.getNumberOfRows(); row++) {
-                for(int place = 0; place < simulatorView.simulatorController.getNumberOfPlaces(); place++) {
+        for(int floor = 0; floor < simController.getNumberOfFloors(); floor++) {
+            for(int row = 0; row < simController.getNumberOfRows(); row++) {
+                for(int place = 0; place < simController.getNumberOfPlaces(); place++) {
                     Location location = new Location(floor, row, place);
-                    Car car = simulatorView.simulatorController.getCarAt(location);
-                    Color color = car == null ? Color.white : car.getColor();
+                    Vehicle vehicle = vehController.getVehicleAt(location);
+                    Color color = vehicle == null ? Color.white : vehicle.getColor();
                     drawPlace(graphics, location, color);
                 }
             }

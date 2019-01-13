@@ -1,18 +1,20 @@
 package Views;
 
 import Controllers.SimulatorController;
-import Models.Car;
-import Models.Location;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class SimulatorView extends JFrame {
     private CarParkView carParkView;
-    protected SimulatorController simulatorController;
+    private SimulatorController simController;
+
+    public SimulatorController getSimulatorController() {
+        return simController;
+    }
 
     public SimulatorView(SimulatorController simulatorController) {
-        this.simulatorController = simulatorController;
+        this.simController = simulatorController;
         carParkView = new CarParkView(this);
 
         Container contentPane = getContentPane();
