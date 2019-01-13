@@ -1,3 +1,8 @@
+package Controllers;
+
+import Models.*;
+import Views.*;
+
 import java.util.Random;
 
 /**
@@ -51,7 +56,7 @@ public class SimulatorController {
     }
 
     /**
-     * Initialize the SimulatorController class
+     * Initialize the Controllers.SimulatorController class
      * @param numberOfFloors
      * @param numberOfRows
      * @param numberOfPlaces
@@ -60,14 +65,17 @@ public class SimulatorController {
         this.numberOfFloors = numberOfFloors;
         this.numberOfRows = numberOfRows;
         this.numberOfPlaces = numberOfPlaces;
-        this.numberOfOpenSpots =numberOfFloors*numberOfRows*numberOfPlaces;
+        this.numberOfOpenSpots = numberOfFloors*numberOfRows*numberOfPlaces;
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
-        simulatorView = new SimulatorView(this);
 
         entranceCarQueue = new CarQueue();
         entrancePassQueue = new CarQueue();
         paymentCarQueue = new CarQueue();
         exitCarQueue = new CarQueue();
+
+        simulatorView = new SimulatorView(this);
+
+
 
 //        Container contentPane = getContentPane();
 //        contentPane.add(carParkView, BorderLayout.CENTER);
@@ -157,24 +165,10 @@ public class SimulatorController {
         return null;
     }
 
-//    public void tick() {
-//        for (int floor = 0; floor < getNumberOfFloors(); floor++) {
-//            for (int row = 0; row < getNumberOfRows(); row++) {
-//                for (int place = 0; place < getNumberOfPlaces(); place++) {
-//                    Location location = new Location(floor, row, place);
-//                    Car car = getCarAt(location);
-//                    if (car != null) {
-//                        car.tick();
-//                    }
-//                }
-//            }
-//        }
-//    }
-
     private void tick() {
         advanceTime();
         handleExit();
-        // updateViews(); Used to be SimulatorView.tick:
+        // updateViews(); Used to be Views.SimulatorView.tick:
         for (int floor = 0; floor < getNumberOfFloors(); floor++) {
             for (int row = 0; row < getNumberOfRows(); row++) {
                 for (int place = 0; place < getNumberOfPlaces(); place++) {
@@ -256,7 +250,7 @@ public class SimulatorController {
     private void carsReadyToLeave(){
         // Add leaving cars to the payment queue.
         Car car = getFirstLeavingCar();
-        while (car!=null) {
+        while (car !=null) {
             if (car.getHasToPay()){
                 car.setIsPaying(true);
                 paymentCarQueue.addCar(car);
