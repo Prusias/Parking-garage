@@ -1,6 +1,8 @@
+package Models;
+
 import java.awt.*;
 
-public abstract class Car {
+public abstract class Car{
 
     private Location location;
     private int minutesLeft;
@@ -8,7 +10,7 @@ public abstract class Car {
     private boolean hasToPay;
 
     /**
-     * Constructor for objects of class Car
+     * Constructor for objects of class Models.Car
      */
     public Car() {
 
