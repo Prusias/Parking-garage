@@ -1,10 +1,9 @@
-package Views;
+package nl.hanze.experience.views;
 
-import Controllers.SimulatorController;
-import Controllers.VehicleController;
-import Models.Car;
-import Models.Location;
-import Models.Vehicle;
+import nl.hanze.experience.controllers.SimulatorController;
+import nl.hanze.experience.controllers.VehicleController;
+import nl.hanze.experience.models.Location;
+import nl.hanze.experience.models.Vehicle;
 
 import javax.swing.*;
 import java.awt.*;

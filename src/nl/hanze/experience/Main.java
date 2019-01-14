@@ -1,7 +1,9 @@
-import Controllers.SimulatorController;
+package nl.hanze.experience;
+
+import nl.hanze.experience.controllers.SimulatorController;
 
 /**
- * Main class for the ParkingGarage
+ * nl.hanze.experience.Main class for the ParkingGarage
  * @author Mike van der Velde
  * @version 0.2
  * @since 0.2

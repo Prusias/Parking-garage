@@ -1,4 +1,4 @@
-package Models;
+package nl.hanze.experience.models;
 
 import java.util.LinkedList;
 import java.util.Queue;

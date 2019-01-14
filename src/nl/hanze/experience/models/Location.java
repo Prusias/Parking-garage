@@ -1,4 +1,4 @@
-package Models;
+package nl.hanze.experience.models;
 
 public class Location {
 
@@ -7,7 +7,7 @@ public class Location {
     private int place;
 
     /**
-     * Constructor for objects of class Models.Location
+     * Constructor for objects of class nl.hanze.experience.models.Location
      */
     public Location(int floor, int row, int place) {
         this.floor = floor;
