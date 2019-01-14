@@ -1,6 +1,6 @@
-package Views;
+package nl.hanze.experience.views;
 
-import Controllers.SimulatorController;
+import nl.hanze.experience.controllers.SimulatorController;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,6 +1,4 @@
-package Models;
-
-import Models.Location;
+package nl.hanze.experience.models;
 
 import java.awt.*;
 
@@ -11,7 +9,7 @@ public abstract class Vehicle {
     private boolean hasToPay;
 
     /**
-     * Constructor for objects of class Models.Vehicle
+     * Constructor for objects of class nl.hanze.experience.models.Vehicle
      */
     public Vehicle() {
 

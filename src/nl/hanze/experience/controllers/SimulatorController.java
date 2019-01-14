@@ -1,7 +1,7 @@
-package Controllers;
+package nl.hanze.experience.controllers;
 
-import Models.*;
-import Views.*;
+import nl.hanze.experience.models.*;
+import nl.hanze.experience.views.*;
 
 /**
  * Class that acts as the Controller for the Simulation
@@ -63,7 +63,7 @@ public class SimulatorController {
     }
 
     /**
-     * Initialize the Controllers.SimulatorController class
+     * Initialize the nl.hanze.experience.controllers.SimulatorController class
      * @param numberOfFloors
      * @param numberOfRows
      * @param numberOfPlaces
@@ -88,7 +88,7 @@ public class SimulatorController {
     private void tick() {
         advanceTime();
         vehicleController.handleExit();
-        // updateViews(); Used to be Views.SimulatorView.tick:
+        // updateViews(); Used to be nl.hanze.experience.views.SimulatorView.tick:
         for (int floor = 0; floor < getNumberOfFloors(); floor++) {
             for (int row = 0; row < getNumberOfRows(); row++) {
                 for (int place = 0; place < getNumberOfPlaces(); place++) {

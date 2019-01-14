@@ -1,6 +1,6 @@
-package Controllers;
+package nl.hanze.experience.controllers;
 
-import Models.*;
+import nl.hanze.experience.models.*;
 
 import java.util.Random;
 
