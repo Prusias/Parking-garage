@@ -1,5 +1,8 @@
 package nl.hanze.experience;
 
+import nl.hanze.experience.objects.Reservation;
+import nl.hanze.experience.objects.ReservationPriorityQueue;
+
 /**
  * nl.hanze.experience.Main class for the ParkingGarage
  * @author Mike van der Velde
@@ -12,7 +15,6 @@ public class Main {
      * Initialize the simulation
      */
     public static void main(String[] args) {
-        Simulation sim = new Simulation(3, 6, 30);
-        sim.run();
+
     }
 }

@@ -1,5 +1,10 @@
 package nl.hanze.experience.objects;
 
+/**
+ * @author
+ * @version 0.0.4
+ * @since 0.0.4
+ */
 public class Reservation {
     private Vehicle vehicle;
     private int timeOfArrival;

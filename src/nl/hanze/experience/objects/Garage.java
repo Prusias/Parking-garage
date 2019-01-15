@@ -1,7 +1,5 @@
 package nl.hanze.experience.objects;
 
-//import java.util.ArrayList;
-
 /**
  * @author
  * @version 0.0.4
