@@ -13,7 +13,7 @@ public abstract class Model {
     /**
      * A list of all Controllers that are listening to changes to this Model
       */
-    private ArrayList<Controller> listeners;
+    protected ArrayList<Controller> listeners;
 
     /**
      * Constructor

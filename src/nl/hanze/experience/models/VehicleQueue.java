@@ -3,7 +3,8 @@ package nl.hanze.experience.models;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class VehicleQueue {
+//TODO: Implement listeners
+public class VehicleQueue extends Model {
     private Queue<Vehicle> queue = new LinkedList<>();
 
     public boolean addVehicle(Vehicle vehicle) {

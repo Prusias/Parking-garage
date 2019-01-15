@@ -2,8 +2,9 @@ package nl.hanze.experience.models;
 
 import java.awt.*;
 
+//TODO: Implement listeners
 public abstract class Vehicle {
-    private Location location;
+    private ParkingSpot parkingSpot;
     private int minutesLeft;
     private boolean isPaying;
     private boolean hasToPay;
@@ -15,12 +16,12 @@ public abstract class Vehicle {
 
     }
 
-    public Location getLocation() {
-        return location;
+    public ParkingSpot getParkingSpot() {
+        return parkingSpot;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
+    public void setParkingSpot(ParkingSpot parkingSpot) {
+        this.parkingSpot = parkingSpot;
     }
 
     public int getMinutesLeft() {

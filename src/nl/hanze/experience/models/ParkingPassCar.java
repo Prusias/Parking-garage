@@ -3,6 +3,7 @@ package nl.hanze.experience.models;
 import java.util.Random;
 import java.awt.*;
 
+//TODO: Implement listeners
 public class ParkingPassCar extends Car {
 	private static final Color COLOR=Color.blue;
 	

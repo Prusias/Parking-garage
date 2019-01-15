@@ -1,27 +1,29 @@
 package nl.hanze.experience.views;
 
-import nl.hanze.experience.controllers.SimulatorController;
-import nl.hanze.experience.controllers.VehicleController;
-import nl.hanze.experience.models.Location;
+import nl.hanze.experience.controllers.CarParkController;
+import nl.hanze.experience.controllers.Controller;
+import nl.hanze.experience.models.ParkingSpot;
 import nl.hanze.experience.models.Vehicle;
 
-import javax.swing.*;
 import java.awt.*;
 
-public class CarParkView extends JPanel {
-    private SimulatorView simView;
-    private SimulatorController simController;
-    private VehicleController vehController;
+/**
+ * @author Mike van der Velde
+ * @version 0.0.3
+ * @since 0.0.2
+ */
+public class CarParkView extends View {
+
     private Dimension size;
     private Image carParkImage;
+    private CarParkController controller;
 
     /**
      * Constructor for objects of class CarPark
      */
-    public CarParkView(SimulatorView simulatorView) {
-        this.simView = simulatorView;
-        simController = simView.getSimulatorController();
-        vehController = simController.getVehicleController();
+    public CarParkView(CarParkController controller) {
+        super(controller);
+        this.controller = controller;
         size = new Dimension(0, 0);
     }
 
@@ -58,13 +60,13 @@ public class CarParkView extends JPanel {
             carParkImage = createImage(size.width, size.height);
         }
         Graphics graphics = carParkImage.getGraphics();
-        for(int floor = 0; floor < simController.getNumberOfFloors(); floor++) {
-            for(int row = 0; row < simController.getNumberOfRows(); row++) {
-                for(int place = 0; place < simController.getNumberOfPlaces(); place++) {
-                    Location location = new Location(floor, row, place);
-                    Vehicle vehicle = vehController.getVehicleAt(location);
+        for(int floor = 0; floor < controller.getGarage().getNumberOfFloors(); floor++) {
+            for(int row = 0; row < controller.getGarage().getNumberOfRows(); row++) {
+                for(int place = 0; place < controller.getGarage().getNumberOfPlaces(); place++) {
+                    ParkingSpot parkingSpot = new ParkingSpot(floor, row, place);
+                    Vehicle vehicle = controller.getGarage().getVehicleAt(parkingSpot);
                     Color color = vehicle == null ? Color.white : vehicle.getColor();
-                    drawPlace(graphics, location, color);
+                    drawPlace(graphics, parkingSpot, color);
                 }
             }
         }
@@ -74,11 +76,11 @@ public class CarParkView extends JPanel {
     /**
      * Paint a place on this car park view in a given color.
      */
-    private void drawPlace(Graphics graphics, Location location, Color color) {
+    private void drawPlace(Graphics graphics, ParkingSpot parkingSpot, Color color) {
         graphics.setColor(color);
         graphics.fillRect(
-                location.getFloor() * 260 + (1 + (int)Math.floor(location.getRow() * 0.5)) * 75 + (location.getRow() % 2) * 20,
-                60 + location.getPlace() * 10,
+                parkingSpot.getFloor() * 260 + (1 + (int)Math.floor(parkingSpot.getRow() * 0.5)) * 75 + (parkingSpot.getRow() % 2) * 20,
+                60 + parkingSpot.getPlace() * 10,
                 20 - 1,
                 10 - 1); // TODO use dynamic size or constants
     }
