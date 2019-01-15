@@ -3,6 +3,11 @@ package nl.hanze.experience.objects;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ * @author
+ * @version 0.0.4
+ * @since 0.0.4
+ */
 public class VehicleQueue {
     private Queue<Vehicle> queue;
 
