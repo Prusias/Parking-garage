@@ -1,5 +1,10 @@
 package nl.hanze.experience.objects;
 
+/**
+ * @author
+ * @version 0.0.4
+ * @since 0.0.4
+ */
 public class Vehicle {
     public enum Type { CAR, ELECTRIC_CAR, MOTORCYCLE }
     public enum PaymentType { TICKET, RESERVATION, SUBSCRIPTION }
