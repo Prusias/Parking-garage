@@ -3,6 +3,7 @@ package nl.hanze.experience.models;
 import java.util.Random;
 import java.awt.*;
 
+//TODO: Implement listeners
 public class AdHocCar extends Car {
 	private static final Color COLOR=Color.red;
 	
