@@ -6,6 +6,7 @@ public abstract class View extends JPanel {
 
     private Controller controller;
 
+    //TODO: Should this be part of the constructor?
     /**
      * Attach controller to view
      * @param controller
