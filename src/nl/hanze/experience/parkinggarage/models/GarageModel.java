@@ -10,18 +10,22 @@ public class GarageModel extends Model {
         this.garage = new Garage(floorAmount, rowPerFloor, spotsPerRow);
     }
 
-    public void vehicleToQueue(Vehicle.Type type, Vehicle.PaymentType paymentType, int duration) {
+    public void vehicleToQueue(Vehicle.Type vehicleType, Vehicle.PaymentType paymentType, int duration) {
         switch (paymentType) {
             case TICKET:
-                garage.addToTicketQueue(new Vehicle(type, paymentType, duration));
+                garage.addToTicketQueue(new Vehicle(vehicleType, paymentType, duration));
                 break;
             case RESERVATION:
-                garage.addToTicketQueue(new Vehicle(type, paymentType, duration));
+                garage.addToSubscriptionQueue(new Vehicle(vehicleType, paymentType, duration));
                 break;
             case SUBSCRIPTION:
-                garage.addToSubscriptionQueue(new Vehicle(type, paymentType, duration));
+                garage.addToSubscriptionQueue(new Vehicle(vehicleType, paymentType, duration));
                 break;
         }
-
     }
+
+    public int getNumberOfFreeSpots() {
+        return garage.getNumberOfOpenSpots();
+    }
+
 }
