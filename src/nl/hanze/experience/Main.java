@@ -1,5 +1,6 @@
 package nl.hanze.experience;
 
+import nl.hanze.experience.objects.Vehicle;
 import nl.hanze.experience.parkinggarage.controllers.*;
 import nl.hanze.experience.parkinggarage.models.*;
 import nl.hanze.experience.parkinggarage.views.*;
@@ -23,6 +24,11 @@ public class Main {
         TestModel testModel = new TestModel();
         TestView testView = new TestView();
         TestController testController = new TestController(testModel);
+
+        GarageModel garageModel = new GarageModel();
+        garageModel.createGarage(3,4,22);
+        System.out.println(garageModel.getNumberOfFreeSpots());
+        garageModel.vehicleToQueue(Vehicle.Type.CAR, Vehicle.PaymentType.RESERVATION, 25);
 
         testModel.addView(testView);
         testView.setController(testController);
