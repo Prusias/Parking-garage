@@ -12,6 +12,7 @@ public class Garage {
     private int numberOfRows;
     private int numberOfPlaces;
     private int numberOfOpenSpots;
+    private int price = 65;
 
     private VehicleQueue ticketQueue;
     private VehicleQueue subscriptionQueue;
@@ -23,6 +24,7 @@ public class Garage {
         this.numberOfPlaces = numberOfPlaces;
         this.numberOfOpenSpots = numberOfFloors * numberOfRows * numberOfPlaces;
         createParkspots();
+        createQueues();
     }
 
     private void createParkspots() {
@@ -33,5 +35,22 @@ public class Garage {
                 }
             }
         }
+    }
+
+    private void createQueues() {
+        ticketQueue = new VehicleQueue();
+        subscriptionQueue = new VehicleQueue();
+    }
+
+    public int getNumberOfOpenSpots() {
+        return numberOfOpenSpots;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 }

@@ -16,6 +16,7 @@ public class ParkingSpot {
     private boolean reserved;
     private Vehicle vehicle;
 
+    // getters floor/type
     public int getFloor() {
         return floor;
     }
@@ -56,6 +57,12 @@ public class ParkingSpot {
         this.number = number;
         this.type = type;
     }
+
+    public void changeType(Type type) {
+        this.type = type;
+    }
+
+
 
 
 

@@ -15,7 +15,7 @@ public class VehicleQueue {
         queue = new LinkedList<>();
     }
 
-    public void add(Vehicle vehicle) {
+    public void addVehicle(Vehicle vehicle) {
         queue.add(vehicle);
     }
     public Vehicle poll() {

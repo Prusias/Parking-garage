@@ -25,4 +25,5 @@ public class Reservation {
         this.timeOfArrival = timeOfArrival;
         this.duration = duration;
     }
+
 }

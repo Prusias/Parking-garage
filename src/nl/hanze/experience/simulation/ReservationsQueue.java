@@ -1,4 +1,6 @@
-package nl.hanze.experience.objects;
+package nl.hanze.experience.simulation;
+
+import nl.hanze.experience.objects.Reservation;
 
 import java.util.PriorityQueue;
 import java.util.Comparator;
@@ -8,10 +10,10 @@ import java.util.Comparator;
  * @version 0.0.4
  * @since 0.0.4
  */
-public class ReservationPriorityQueue {
+public class ReservationsQueue {
     private PriorityQueue<Reservation> queue;
 
-    public ReservationPriorityQueue() {
+    public ReservationsQueue() {
         ReservationComparator comparator = new ReservationComparator();
         queue = new PriorityQueue<>(999, comparator);
     }
@@ -43,7 +45,7 @@ public class ReservationPriorityQueue {
 //
 //    EXAMPLE OF USING A PRIORITY QUEUE
 //
-//    ReservationPriorityQueue queue = new ReservationPriorityQueue();
+//    ReservationsQueue queue = new ReservationsQueue();
 //    Reservation rev1 = new Reservation(null, 10, 10);
 //    Reservation rev2 = new Reservation(null, 20, 20);
 //    Reservation rev3 = new Reservation(null, 30, 30);
