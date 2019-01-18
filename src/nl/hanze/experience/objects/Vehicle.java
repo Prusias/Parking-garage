@@ -11,6 +11,7 @@ public class Vehicle {
 
     private Type type;
     private PaymentType paymentType;
+    private int duration; //minuts
     private int timeLeft;
 
     public Type getType() {
@@ -27,9 +28,10 @@ public class Vehicle {
         this.timeLeft = timeLeft;
     }
 
-    public Vehicle(Type type, PaymentType paymentType) {
+    public Vehicle(Type type, PaymentType paymentType, int duration) {
         this.type = type;
         this.paymentType = paymentType;
+        this.duration = duration;
     }
 
 
