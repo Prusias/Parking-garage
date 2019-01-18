@@ -53,4 +53,12 @@ public class Garage {
     public void setPrice(int price) {
         this.price = price;
     }
+
+    public void addToTicketQueue(Vehicle vehicle) {
+        ticketQueue.addVehicle(vehicle);
+    }
+
+    public void addToSubscriptionQueue(Vehicle vehicle) {
+        subscriptionQueue.addVehicle(vehicle);
+    }
 }
