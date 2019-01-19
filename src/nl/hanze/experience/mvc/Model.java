@@ -3,7 +3,7 @@ package nl.hanze.experience.mvc;
 import java.util.ArrayList;
 
 /**
- * @author
+ * @author Mike van der Velde
  * @version 0.0.4
  * @since 0.0.4
  */

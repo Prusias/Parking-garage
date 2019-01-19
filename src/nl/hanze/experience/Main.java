@@ -12,7 +12,7 @@ import java.awt.*;
 /**
  * nl.hanze.experience.Main class for the ParkingGarage
  * @author Mike van der Velde
- * @version 0.0.3
+ * @version 0.0.4
  * @since 0.0.2
  */
 public class Main {

@@ -1,7 +1,7 @@
 package nl.hanze.experience.objects;
 
 /**
- * @author
+ * @author Mike van der Velde
  * @version 0.0.4
  * @since 0.0.4
  */

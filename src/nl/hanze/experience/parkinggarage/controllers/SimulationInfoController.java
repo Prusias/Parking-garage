@@ -4,7 +4,11 @@ import nl.hanze.experience.mvc.*;
 import nl.hanze.experience.parkinggarage.models.SimulationInfoModel;
 import nl.hanze.experience.parkinggarage.views.SimulationInfoView;
 
-
+/**
+ * @author Mike van der Velde
+ * @version 0.0.4
+ * @since 0.0.4
+ */
 public class SimulationInfoController extends Controller {
 
     public static final int EVENT_ID_PAUSE = 1;

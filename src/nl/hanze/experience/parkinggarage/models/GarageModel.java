@@ -3,6 +3,11 @@ package nl.hanze.experience.parkinggarage.models;
 import nl.hanze.experience.mvc.Model;
 import nl.hanze.experience.objects.*;
 
+/**
+ * @author Mike van der Velde
+ * @version 0.0.4
+ * @since 0.0.4
+ */
 public class GarageModel extends Model {
     private Garage garage;
 

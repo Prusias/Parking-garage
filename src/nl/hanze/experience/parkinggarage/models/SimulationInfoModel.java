@@ -6,6 +6,11 @@ import nl.hanze.experience.simulation.Simulation;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * @author Mike van der Velde
+ * @version 0.0.4
+ * @since 0.0.4
+ */
 public class SimulationInfoModel extends Model {
     private Simulation simulation;
     private int tickCount;

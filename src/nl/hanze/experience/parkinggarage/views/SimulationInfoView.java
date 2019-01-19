@@ -8,7 +8,11 @@ import static nl.hanze.experience.parkinggarage.controllers.SimulationInfoContro
 import javax.swing.*;
 import java.awt.*;
 
-
+/**
+ * @author Mike van der Velde
+ * @version 0.0.4
+ * @since 0.0.4
+ */
 public class SimulationInfoView extends View {
 
     private JLabel tickCountLabel;
