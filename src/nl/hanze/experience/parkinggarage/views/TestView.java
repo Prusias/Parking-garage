@@ -13,7 +13,7 @@ import static nl.hanze.experience.parkinggarage.controllers.TestController.EVENT
  * @version 0.0.4
  * @since 0.0.4
  */
-public class TestView extends View {
+public class TestView extends JPanelView {
 
     private JTextField input;
     private JLabel output;
@@ -34,7 +34,7 @@ public class TestView extends View {
     }
 
     @Override
-    protected void update(Model model) {
+    public void update(Model model) {
         //TODO: Is this the right exception?
         if (!(model instanceof TestModel)) {
             throw new IllegalArgumentException("Wrong model given to view.update");

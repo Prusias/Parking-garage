@@ -2,7 +2,9 @@ package nl.hanze.experience.parkinggarage.views;
 
 import nl.hanze.experience.mvc.*;
 
-public class GarageView extends View {
+import javax.swing.*;
+
+public class GarageView extends JPanelView {
 
     public GarageView() {
 
@@ -10,7 +12,7 @@ public class GarageView extends View {
     }
 
     @Override
-    protected void update(Model model) {
+    public void update(Model model) {
 
     }
 }

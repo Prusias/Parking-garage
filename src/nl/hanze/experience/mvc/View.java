@@ -7,38 +7,25 @@ import javax.swing.JPanel;
  * @version 0.0.4
  * @since 0.0.4
  */
-public abstract class View extends JPanel {
-
-    private Controller controller;
-
+public interface View {
     //TODO: Should this be part of the constructor?
     /**
      * Attach controller to view
      * @param controller
      */
-    public void setController(Controller controller) {
-        if (this.controller!=null) {
-            throw new IllegalStateException("Controller already set.");
-        }
-        this.controller = controller;
-    }
+    void setController(Controller controller);
 
     /**
      * Notify controller of event, called by subclasses (concrete views)
      * @param event_id id of event
      */
-    protected void notifyController(int event_id) {
-        if (controller==null) {
-            throw new IllegalStateException("View does not have a controller.");
-        }
-        controller.notify(this, event_id);
-    }
+    void notifyController(int event_id);
 
     /**
      * Notify from model. Called by class Model
      * @param model Model
      */
-    void notify(Model model) {
+    default void notify(Model model) {
         update(model);
     }
 
@@ -46,6 +33,6 @@ public abstract class View extends JPanel {
      * Updatehandler
      * @param model Model
      */
-    protected abstract void update(Model model);
+    void update(Model model);
 
 }

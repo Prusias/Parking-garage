@@ -18,16 +18,20 @@ public class Simulation {
     
     private SimulationInfoModel simulationInfoModel;
     private SimulationInfoView simulationInfoView;
-    private SimulationInfoController simulationInfoController;
+    //private SimulationInfoController simulationInfoController;
 
     public Simulation() {
         simulationInfoModel = new SimulationInfoModel();
         simulationInfoModel.setSimulation(this); // In order to let the model interact with the simulation
         simulationInfoView = new SimulationInfoView();
-        simulationInfoController = new SimulationInfoController(simulationInfoModel);
+        SimulationInfoController simulationInfoController = new SimulationInfoController(simulationInfoModel);
 
         simulationInfoModel.addView(simulationInfoView);
         simulationInfoView.setController(simulationInfoController);
+
+
+
+
     }
 
     public void start() {
@@ -106,8 +110,6 @@ public class Simulation {
             }
         }
     }
-    
-
 
     public SimulationInfoView getSimulationInfoView() {
         return simulationInfoView;
