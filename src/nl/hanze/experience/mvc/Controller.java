@@ -20,21 +20,21 @@ public abstract class Controller {
     /**
      * Called from class View to notify controller of events
      * @param view View where event comes from
-     * @param event_id id of event
+     * @param event_enum enum of event
      */
-    void notify(View view, int event_id) {
-        if (!event(view, event_id)) {
-            throw new IllegalStateException("Event (event_id="+event_id+") not handled.");
+    void notify(View view, Enum event_enum) {
+        if (!event(view, event_enum)) {
+            throw new IllegalStateException("Event (event_id="+event_enum+") not handled.");
         }
     }
 
     /**
      * Eventhandler of controller
      * @param view View where event comes from
-     * @param event_id id of event
+     * @param event_enum enum of event
      * @return true if event is handled
      */
-    protected abstract boolean event(View view, int event_id);
+    protected abstract <E extends Enum<E>> boolean event(View view, Enum<E> event_enum);
 
 
 }
