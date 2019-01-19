@@ -4,6 +4,11 @@ import nl.hanze.experience.mvc.*;
 import nl.hanze.experience.parkinggarage.models.TestModel;
 import nl.hanze.experience.parkinggarage.views.TestView;
 
+/**
+ * @author Mike van der Velde
+ * @version 0.0.4
+ * @since 0.0.4
+ */
 public class TestController extends Controller {
 
     public static final int EVENT_ID_TEST = 1;

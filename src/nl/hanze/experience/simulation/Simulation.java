@@ -8,7 +8,11 @@ import nl.hanze.experience.parkinggarage.views.SimulationInfoView;
 import javax.swing.*;
 import java.awt.*;
 
-
+/**
+ * @author Mike van der Velde
+ * @version 0.0.4
+ * @since 0.0.4
+ */
 public class Simulation {
     private SimulationThread simulationThread;
     
@@ -42,6 +46,14 @@ public class Simulation {
         }
         simulationThread.resume();
     }
+
+    public boolean isPaused() {
+        if (simulationThread == null) {
+            throw new IllegalStateException("Simulation has never been started");
+        }
+        return simulationThread.paused;
+    }
+
 
     class SimulationThread implements Runnable {
 

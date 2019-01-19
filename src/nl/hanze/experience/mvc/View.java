@@ -2,6 +2,11 @@ package nl.hanze.experience.mvc;
 
 import javax.swing.JPanel;
 
+/**
+ * @author Mike van der Velde
+ * @version 0.0.4
+ * @since 0.0.4
+ */
 public abstract class View extends JPanel {
 
     private Controller controller;

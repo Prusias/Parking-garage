@@ -2,6 +2,7 @@ package nl.hanze.experience.objects;
 
 /**
  * @author Steven Woudstra
+ * @author Mike van der Velde
  * @version 0.0.4
  * @since 0.0.4
  */

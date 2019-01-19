@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * @author
+ * @author Mike van der Velde
  * @version 0.0.4
  * @since 0.0.4
  */

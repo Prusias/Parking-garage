@@ -8,6 +8,11 @@ import java.awt.*;
 
 import static nl.hanze.experience.parkinggarage.controllers.TestController.EVENT_ID_TEST;
 
+/**
+ * @author Mike van der Velde
+ * @version 0.0.4
+ * @since 0.0.4
+ */
 public class TestView extends View {
 
     private JTextField input;
