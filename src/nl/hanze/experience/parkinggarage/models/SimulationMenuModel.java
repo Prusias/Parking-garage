@@ -14,6 +14,14 @@ public class SimulationMenuModel extends Model {
     public void setSimulation(Simulation simulation) {
         this.simulation = simulation;
     }
+
+    public void startSimulation() {
+        if (simulation == null) {
+            throw new IllegalStateException("Simulation has not been set");
+        }
+        simulation.start();
+        notifyView();
+    }
     public void pauseSimulation() {
         if (simulation == null) {
             throw new IllegalStateException("Simulation has not been set");

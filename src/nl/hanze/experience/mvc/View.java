@@ -17,9 +17,9 @@ public interface View {
 
     /**
      * Notify controller of event, called by subclasses (concrete views)
-     * @param event_id id of event
+     * @param event_enum enum of event
      */
-    void notifyController(int event_id);
+    void notifyController(Enum event_enum);
 
     /**
      * Notify from model. Called by class Model

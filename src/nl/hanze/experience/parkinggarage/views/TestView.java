@@ -6,7 +6,7 @@ import nl.hanze.experience.parkinggarage.models.TestModel;
 import javax.swing.*;
 import java.awt.*;
 
-import static nl.hanze.experience.parkinggarage.controllers.TestController.EVENT_ID_TEST;
+import static nl.hanze.experience.parkinggarage.controllers.TestController.EventId;
 
 /**
  * @author Mike van der Velde
@@ -29,7 +29,7 @@ public class TestView extends JPanelView {
         this.add(button);
         this.add(output);
 
-        button.addActionListener(e -> notifyController(EVENT_ID_TEST));
+        button.addActionListener(e -> notifyController(EventId.TEST));
 
     }
 
