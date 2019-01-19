@@ -15,6 +15,7 @@ public class ParkingSpot {
     private boolean subscriptionSpot;
     private boolean reserved;
     private Vehicle vehicle;
+    private int weight;
 
     // getters floor/type
     public int getFloor() {
@@ -51,11 +52,19 @@ public class ParkingSpot {
         this.vehicle = vehicle;
     }
 
-    public ParkingSpot(int floor, int row, int number, Type type) {
+    public int getWeight(){
+        return weight;
+    }
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    public ParkingSpot(int floor, int row, int number, Type type, int weight) {
         this.floor = floor;
         this.row = row;
         this.number = number;
         this.type = type;
+        this.weight = weight;
     }
 
     public void changeType(Type type) {
