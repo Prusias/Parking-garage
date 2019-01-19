@@ -29,7 +29,7 @@ public class Main {
         garageModel.createGarage(3,4,22);
         System.out.println(garageModel.getNumberOfFreeSpots());
         garageModel.vehicleToQueue(Vehicle.Type.CAR, Vehicle.PaymentType.RESERVATION, 25);
-
+        System.out.println(garageModel.getParkingSpot(2,2,3).getWeight());
         testModel.addView(testView);
         testView.setController(testController);
 
