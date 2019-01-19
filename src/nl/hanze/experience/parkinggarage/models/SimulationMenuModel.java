@@ -8,7 +8,7 @@ import nl.hanze.experience.simulation.Simulation;
  * @version 0.0.4
  * @since 0.0.4
  */
-public class MenuModel extends Model {
+public class SimulationMenuModel extends Model {
     private Simulation simulation;
 
     public void setSimulation(Simulation simulation) {

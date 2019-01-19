@@ -1,12 +1,11 @@
 package nl.hanze.experience.parkinggarage.views;
 
 import nl.hanze.experience.mvc.*;
-import nl.hanze.experience.parkinggarage.models.MenuModel;
+import nl.hanze.experience.parkinggarage.models.SimulationMenuModel;
 
 import javax.swing.*;
-import java.awt.*;
 
-import static nl.hanze.experience.parkinggarage.controllers.MenuController.*;
+import static nl.hanze.experience.parkinggarage.controllers.SimulationMenuController.*;
 
 /**
  * @author Mike van der Velde
@@ -15,45 +14,42 @@ import static nl.hanze.experience.parkinggarage.controllers.MenuController.*;
  *
  * TODO: Decide whether or not this object should be a JMenuBar instead of returning one.
  */
-public class MenuView extends View {
+public class SimulationMenuView extends JMenuView {
 
-    private JMenuBar menuBar;
     private JMenuItem pauseMenuItem;
     private JMenuItem resumeMenuItem;
 
-    public MenuView() {
-        menuBar = new JMenuBar();
-        JMenu menu = new JMenu("Simulation");
-        menuBar.add(menu);
+    public SimulationMenuView() {
+        this.setText("Simulation");
 
         pauseMenuItem = new JMenuItem("Pause");
         pauseMenuItem.addActionListener(e -> notifyController(EVENT_ID_PAUSE));
-        menu.add(pauseMenuItem);
+        this.add(pauseMenuItem);
 
         resumeMenuItem = new JMenuItem("Resume");
         resumeMenuItem.addActionListener(e -> notifyController(EVENT_ID_RESUME));
         resumeMenuItem.setEnabled(false);
-        menu.add(resumeMenuItem);
+        this.add(resumeMenuItem);
 
         JMenuItem settingsMenuItem = new JMenuItem("Settings");
         settingsMenuItem.addActionListener(e -> notifyController(EVENT_ID_SETTINGS));
-        menu.add(settingsMenuItem);
+        this.add(settingsMenuItem);
 
-        //this.add(menuBar);
-    }
+        this.addSeparator();
 
-    public JMenuBar getMenuBar() {
-        return menuBar;
+        JMenuItem quitMenuItem = new JMenuItem("Quit");
+        quitMenuItem.addActionListener(e -> notifyController(EVENT_ID_QUIT));
+        this.add(quitMenuItem);
     }
 
     @Override
-    protected void update(Model model) {
-        if (!(model instanceof MenuModel)) {
+    public void update(Model model) {
+        if (!(model instanceof SimulationMenuModel)) {
             throw new IllegalArgumentException("Wrong model given to view.update");
         }
-        MenuModel menuModel = (MenuModel) model;
+        SimulationMenuModel simulationMenuModel = (SimulationMenuModel) model;
 
-        if (menuModel.simulationIsPaused()) {
+        if (simulationMenuModel.simulationIsPaused()) {
             pauseMenuItem.setEnabled(false);
             resumeMenuItem.setEnabled(true);
         } else {

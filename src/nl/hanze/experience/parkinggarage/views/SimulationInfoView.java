@@ -13,7 +13,7 @@ import java.awt.*;
  * @version 0.0.4
  * @since 0.0.4
  */
-public class SimulationInfoView extends View {
+public class SimulationInfoView extends JPanelView {
 
     private JLabel tickCountLabel;
     private JLabel dateTimeLabel;
@@ -37,7 +37,7 @@ public class SimulationInfoView extends View {
     }
 
     @Override
-    protected void update(Model model) {
+    public void update(Model model) {
         //TODO: Is this the right exception?
         if (!(model instanceof SimulationInfoModel)) {
             throw new IllegalArgumentException("Wrong model given to view.update");

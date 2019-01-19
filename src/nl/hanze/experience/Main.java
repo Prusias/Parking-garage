@@ -12,7 +12,7 @@ import java.awt.*;
 /**
  * nl.hanze.experience.Main class for the ParkingGarage
  * @author Mike van der Velde
- * @version 0.0.4
+ * @version 0.0.5
  * @since 0.0.2
  */
 public class Main {
@@ -35,19 +35,23 @@ public class Main {
 
         Simulation simulation = new Simulation();
 
-        MenuModel menuModel = new MenuModel();
-        menuModel.setSimulation(simulation);
-        MenuController menuController = new MenuController(menuModel);
-        MenuView menuView = new MenuView();
-        menuView.setController(menuController);
-        menuModel.addView(menuView);
+        SimulationMenuModel simulationMenuModel = new SimulationMenuModel();
+        simulationMenuModel.setSimulation(simulation);
+        SimulationMenuController simulationMenuController = new SimulationMenuController(simulationMenuModel);
+        SimulationMenuView simulationMenuView = new SimulationMenuView();
+        simulationMenuView.setController(simulationMenuController);
+        simulationMenuModel.addView(simulationMenuView);
 
         JFrame frame = new JFrame();
         frame.setTitle("Garage");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container container = frame.getContentPane();
         container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
-        frame.setJMenuBar(menuView.getMenuBar());
+
+        JMenuBar menuBar = new JMenuBar();
+        menuBar.add(simulationMenuView);
+        frame.setJMenuBar(menuBar);
+
         container.add(simulation.getSimulationInfoView());
         container.add(testView);
         frame.pack();
