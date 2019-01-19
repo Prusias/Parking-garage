@@ -33,4 +33,7 @@ public class GarageModel extends Model {
         return garage.getNumberOfOpenSpots();
     }
 
+    public ParkingSpot getParkingSpot(int floor, int row, int spot) {
+        return garage.getParkingspot(floor, row, spot);
+    }
 }
