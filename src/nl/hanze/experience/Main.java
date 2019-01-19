@@ -35,11 +35,19 @@ public class Main {
 
         Simulation simulation = new Simulation();
 
+        MenuModel menuModel = new MenuModel();
+        menuModel.setSimulation(simulation);
+        MenuController menuController = new MenuController(menuModel);
+        MenuView menuView = new MenuView();
+        menuView.setController(menuController);
+        menuModel.addView(menuView);
+
         JFrame frame = new JFrame();
         frame.setTitle("Garage");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container container = frame.getContentPane();
         container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
+        frame.setJMenuBar(menuView.getMenuBar());
         container.add(simulation.getSimulationInfoView());
         container.add(testView);
         frame.pack();
