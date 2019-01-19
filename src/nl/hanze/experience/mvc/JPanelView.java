@@ -24,13 +24,13 @@ public abstract class JPanelView extends JPanel implements View {
 
     /**
      * Notify controller of event, called by subclasses (concrete views)
-     * @param event_id id of event
+     * @param event_enum enum of event
      */
-    public void notifyController(int event_id) {
+    public void notifyController(Enum event_enum) {
         if (controller==null) {
             throw new IllegalStateException("View does not have a controller.");
         }
-        controller.notify(this, event_id);
+        controller.notify(this, event_enum);
     }
 
 //   Is implemented as default

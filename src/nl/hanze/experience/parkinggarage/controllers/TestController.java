@@ -11,15 +11,17 @@ import nl.hanze.experience.parkinggarage.views.TestView;
  */
 public class TestController extends Controller {
 
-    public static final int EVENT_ID_TEST = 1;
+    public enum EventId { TEST }
 
     public TestController(TestModel model) {super(model); }
 
     @Override
-    protected boolean event(View view, int event_id) {
-        if (event_id == EVENT_ID_TEST) {
-            TestModel testModel = (TestModel) model;
-            TestView testView = (TestView) view;
+    protected <E extends Enum<E>> boolean event(View view, Enum<E> event_enum) {
+        EventId eventId = (EventId) event_enum;
+        TestModel testModel = (TestModel) model;
+        TestView testView = (TestView) view;
+
+        if (eventId == EventId.TEST) {
             testModel.setAmountOfCars(testView.getAmountOfCars());
             return true;
         }

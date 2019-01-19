@@ -21,19 +21,19 @@ public class SimulationInfoView extends JPanelView {
     public SimulationInfoView() {
         this.setLayout(new FlowLayout());
         add(new JLabel("Amount of ticks: "));
-        tickCountLabel = new JLabel();
+        tickCountLabel = new JLabel("0");
         this.add(tickCountLabel);
         add(new JLabel("Time: "));
-        dateTimeLabel = new JLabel();
+        dateTimeLabel = new JLabel("00-00 00:00");
         this.add(dateTimeLabel);
 
-        JButton pauseButton = new JButton("Pause");
-        this.add(pauseButton);
-        pauseButton.addActionListener(e ->  notifyController(EVENT_ID_PAUSE));
+//        JButton pauseButton = new JButton("Pause");
+//        this.add(pauseButton);
+//        pauseButton.addActionListener(e ->  notifyController(EVENT_ID_PAUSE));
 
-        JButton resumeButton = new JButton("Resume");
-        this.add(resumeButton);
-        resumeButton.addActionListener(e ->  notifyController(EVENT_ID_RESUME));
+//        JButton resumeButton = new JButton("Resume");
+//        this.add(resumeButton);
+//        resumeButton.addActionListener(e ->  notifyController(EVENT_ID_RESUME));
     }
 
     @Override

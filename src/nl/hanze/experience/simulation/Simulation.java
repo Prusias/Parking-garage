@@ -28,10 +28,6 @@ public class Simulation {
 
         simulationInfoModel.addView(simulationInfoView);
         simulationInfoView.setController(simulationInfoController);
-
-
-
-
     }
 
     public void start() {
