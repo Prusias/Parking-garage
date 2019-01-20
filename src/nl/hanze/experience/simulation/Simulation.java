@@ -2,11 +2,13 @@ package nl.hanze.experience.simulation;
 
 import nl.hanze.experience.mvc.*;
 import nl.hanze.experience.parkinggarage.controllers.SimulationInfoController;
+import nl.hanze.experience.parkinggarage.models.GarageModel;
 import nl.hanze.experience.parkinggarage.models.SimulationInfoModel;
 import nl.hanze.experience.parkinggarage.views.SimulationInfoView;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashMap;
 
 /**
  * @author Mike van der Velde
@@ -18,7 +20,9 @@ public class Simulation {
     
     private SimulationInfoModel simulationInfoModel;
     private SimulationInfoView simulationInfoView;
+    private HashMap<String, Integer> garageSettings = new HashMap<>();
     //private SimulationInfoController simulationInfoController;
+    private GarageModel garage;
 
     public Simulation() {
         simulationInfoModel = new SimulationInfoModel();
@@ -28,11 +32,27 @@ public class Simulation {
 
         simulationInfoModel.addView(simulationInfoView);
         simulationInfoView.setController(simulationInfoController);
+
+        garageSettings.put("floors",3);
+        garageSettings.put("rows",5);
+        garageSettings.put("spots",20);
+    }
+
+    public HashMap getGarageSettings() {
+        return garageSettings;
+    }
+
+    public void setGarageSettings(int floors, int rows, int spots) {
+        garageSettings.put("floors", floors);
+        garageSettings.put("rows", rows);
+        garageSettings.put("spots", spots);
     }
 
     public void start() {
         simulationThread = new SimulationThread();
         simulationThread.run();
+        garage = new GarageModel();
+        garage.createGarage(garageSettings.get("floors"),garageSettings.get("rows"),garageSettings.get("spots"));
     }
     public void pause() {
         if (simulationThread == null) {

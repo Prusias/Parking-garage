@@ -24,7 +24,7 @@ public class Main {
         TestModel testModel = new TestModel();
         TestView testView = new TestView();
         TestController testController = new TestController(testModel);
-
+        /*
         GarageModel garageModel = new GarageModel();
         garageModel.createGarage(3,4,22);
         System.out.println(garageModel.getNumberOfFreeSpots());
@@ -32,7 +32,7 @@ public class Main {
         System.out.println(garageModel.getParkingSpot(2,2,3).getWeight());
         testModel.addView(testView);
         testView.setController(testController);
-
+        */
         Simulation simulation = new Simulation();
 
         SimulationMenuModel simulationMenuModel = new SimulationMenuModel();
