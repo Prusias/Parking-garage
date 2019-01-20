@@ -22,7 +22,7 @@ public class Simulation {
     private SimulationInfoView simulationInfoView;
     private HashMap<String, Integer> garageSettings = new HashMap<>();
     //private SimulationInfoController simulationInfoController;
-    private GarageModel garage;
+    private GarageModel garageModel;
 
     public Simulation() {
         simulationInfoModel = new SimulationInfoModel();
@@ -51,8 +51,8 @@ public class Simulation {
     public void start() {
         simulationThread = new SimulationThread();
         simulationThread.run();
-        garage = new GarageModel();
-        garage.createGarage(garageSettings.get("floors"),garageSettings.get("rows"),garageSettings.get("spots"));
+        garageModel = new GarageModel();
+        garageModel.createGarage(garageSettings.get("floors"),garageSettings.get("rows"),garageSettings.get("spots"));
     }
     public void pause() {
         if (simulationThread == null) {
