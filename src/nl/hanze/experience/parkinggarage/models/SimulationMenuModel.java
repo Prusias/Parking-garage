@@ -1,6 +1,8 @@
 package nl.hanze.experience.parkinggarage.models;
 
 import nl.hanze.experience.mvc.Model;
+import nl.hanze.experience.parkinggarage.controllers.SettingController;
+import nl.hanze.experience.parkinggarage.views.SettingView;
 import nl.hanze.experience.simulation.Simulation;
 
 /**
@@ -10,6 +12,7 @@ import nl.hanze.experience.simulation.Simulation;
  */
 public class SimulationMenuModel extends Model {
     private Simulation simulation;
+    private SettingView settingView;
 
     public void setSimulation(Simulation simulation) {
         this.simulation = simulation;
@@ -34,6 +37,17 @@ public class SimulationMenuModel extends Model {
             throw new IllegalStateException("Simulation has not been set");
         }
         simulation.resume();
+        notifyView();
+    }
+    public void openSettings() {
+        if (settingView == null) {
+            SettingModel settingModel = new SettingModel();
+            settingView = new SettingView();
+            SettingController settingController = new SettingController(settingModel);
+            settingModel.addView(settingView);
+            settingView.setController(settingController);
+        }
+        settingView.setVisible(true);
         notifyView();
     }
 

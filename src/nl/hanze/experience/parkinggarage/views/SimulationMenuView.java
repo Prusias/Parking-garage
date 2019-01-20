@@ -27,8 +27,6 @@ public class SimulationMenuView extends JMenuView {
         startMenuItem.addActionListener(e -> notifyController(EventId.START));
         this.add(startMenuItem);
 
-        this.addSeparator();
-
         pauseMenuItem = new JMenuItem("Pause");
         pauseMenuItem.addActionListener(e -> notifyController(EventId.PAUSE));
         this.add(pauseMenuItem);
@@ -37,6 +35,8 @@ public class SimulationMenuView extends JMenuView {
         resumeMenuItem.addActionListener(e -> notifyController(EventId.RESUME));
         resumeMenuItem.setEnabled(false);
         this.add(resumeMenuItem);
+
+        this.addSeparator();
 
         JMenuItem settingsMenuItem = new JMenuItem("Settings");
         settingsMenuItem.addActionListener(e -> notifyController(EventId.SETTINGS));

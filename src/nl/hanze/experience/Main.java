@@ -58,6 +58,7 @@ public class Main {
         frame.setSize(800,800);
         frame.setVisible(true);
 
+        //TODO: Why does this work here and not elsewhere
         simulation.start();
     }
 }
