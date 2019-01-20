@@ -14,7 +14,7 @@ public class GarageModel extends Model {
     public void createGarage(int floorAmount, int rowPerFloor, int spotsPerRow) {
         this.garage = new Garage(floorAmount, rowPerFloor, spotsPerRow);
     }
-
+    /*
     public void vehicleToQueue(Vehicle.Type vehicleType, Vehicle.PaymentType paymentType, int duration) {
         switch (paymentType) {
             case TICKET:
@@ -28,11 +28,15 @@ public class GarageModel extends Model {
                 break;
         }
     }
+    */
 
     public int getNumberOfFreeSpots() {
         return garage.getNumberOfOpenSpots();
     }
 
+    public ParkingSpot[][][] getParkingSpots() {
+        return garage.parkingspots;
+    }
     public ParkingSpot getParkingSpot(int floor, int row, int spot) {
         return garage.getParkingspot(floor, row, spot);
     }

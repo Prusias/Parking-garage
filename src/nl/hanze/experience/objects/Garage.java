@@ -7,7 +7,7 @@ package nl.hanze.experience.objects;
  * @since 0.0.4
  */
 public class Garage {
-    private ParkingSpot[][][] parkingspots; // floor - row - place
+    public ParkingSpot[][][] parkingspots; // floor - row - place
 
     private int numberOfFloors;
     private int numberOfRows;
@@ -15,8 +15,8 @@ public class Garage {
     private int numberOfOpenSpots;
     private int price = 65;
 
-    private VehicleQueue ticketQueue;
-    private VehicleQueue subscriptionQueue;
+    private int ticketQueue;
+    private int subscriptionQueue;
 
     //constructors en functies voor constructors start
     public Garage(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
@@ -27,7 +27,8 @@ public class Garage {
         this.numberOfOpenSpots = numberOfFloors * numberOfRows * numberOfPlaces;
         parkingspots = new ParkingSpot[numberOfFloors][numberOfRows][numberOfPlaces];
         createParkspots();
-        createQueues();
+        ticketQueue = 0;
+        subscriptionQueue = 0;
     }
 
     private void createParkspots() {
@@ -42,10 +43,6 @@ public class Garage {
         }
     }
 
-    private void createQueues() {
-        ticketQueue = new VehicleQueue();
-        subscriptionQueue = new VehicleQueue();
-    }
     //einde constructors en functies
 
 
@@ -64,11 +61,11 @@ public class Garage {
         this.price = price;
     }
 
-    public void addToTicketQueue(Vehicle vehicle) {
-        ticketQueue.addVehicle(vehicle);
+    public void addToTicketQueue() {
+        ticketQueue++;
     }
 
-    public void addToSubscriptionQueue(Vehicle vehicle) {
-        subscriptionQueue.addVehicle(vehicle);
+    public void addToSubscriptionQueue() {
+        subscriptionQueue++;
     }
 }
