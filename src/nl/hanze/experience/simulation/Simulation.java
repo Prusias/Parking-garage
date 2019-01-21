@@ -50,7 +50,8 @@ public class Simulation {
 
     public void start() {
         simulationThread = new SimulationThread();
-        simulationThread.run();
+        Thread thread = new Thread(simulationThread);
+        thread.start();
         garageModel = new GarageModel();
         garageModel.createGarage(garageSettings.get("floors"),garageSettings.get("rows"),garageSettings.get("spots"));
     }

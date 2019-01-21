@@ -36,7 +36,6 @@ public class Main {
         Simulation simulation = new Simulation();
 
         SimulationMenuModel simulationMenuModel = new SimulationMenuModel();
-        simulationMenuModel.setSimulation(simulation);
         SimulationMenuController simulationMenuController = new SimulationMenuController(simulationMenuModel);
         SimulationMenuView simulationMenuView = new SimulationMenuView();
         simulationMenuView.setController(simulationMenuController);
@@ -59,6 +58,7 @@ public class Main {
         frame.setVisible(true);
 
         //TODO: Why does this work here and not elsewhere
-        simulation.start();
+        simulationMenuModel.setSimulation(simulation);
+        //simulation.start();
     }
 }
