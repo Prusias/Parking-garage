@@ -29,7 +29,9 @@ public class SimulationMenuView extends JMenuView {
 
         pauseMenuItem = new JMenuItem("Pause");
         pauseMenuItem.addActionListener(e -> notifyController(EventId.PAUSE));
+        pauseMenuItem.setEnabled(false);
         this.add(pauseMenuItem);
+
 
         resumeMenuItem = new JMenuItem("Resume");
         resumeMenuItem.addActionListener(e -> notifyController(EventId.RESUME));

@@ -6,8 +6,6 @@ import nl.hanze.experience.parkinggarage.models.GarageModel;
 import nl.hanze.experience.parkinggarage.models.SimulationInfoModel;
 import nl.hanze.experience.parkinggarage.views.SimulationInfoView;
 
-import javax.swing.*;
-import java.awt.*;
 import java.util.HashMap;
 
 /**
@@ -17,10 +15,10 @@ import java.util.HashMap;
  */
 public class Simulation {
     private SimulationThread simulationThread;
-    
+
     private SimulationInfoModel simulationInfoModel;
     private SimulationInfoView simulationInfoView;
-    private HashMap<String, Integer> garageSettings = new HashMap<>();
+    private HashMap<String, Object> garageSettings = new HashMap<>();
     //private SimulationInfoController simulationInfoController;
     private GarageModel garageModel;
 
@@ -33,19 +31,32 @@ public class Simulation {
         simulationInfoModel.addView(simulationInfoView);
         simulationInfoView.setController(simulationInfoController);
 
-        garageSettings.put("floors",3);
-        garageSettings.put("rows",5);
-        garageSettings.put("spots",20);
+        setGarageSetting("amountOfFloors", 3);
+        setGarageSetting("amountOfRows", 5);
+        setGarageSetting("amountOfSpots", 20);
+        setGarageSetting("priceInEuro", 0.5f);
     }
 
+    //TODO: Are these 2 functions needed?
     public HashMap getGarageSettings() {
         return garageSettings;
     }
 
     public void setGarageSettings(int floors, int rows, int spots) {
-        garageSettings.put("floors", floors);
-        garageSettings.put("rows", rows);
-        garageSettings.put("spots", spots);
+        garageSettings.put("amountOfFloors", floors);
+        garageSettings.put("amountOfRows", rows);
+        garageSettings.put("amountOfSpots", spots);
+    }
+
+    public Object getGarageSetting(String key) {
+        if (!garageSettings.containsKey(key)) {
+            throw new IllegalStateException("Simulation - garageSettings key does not exist");
+        }
+        return garageSettings.get(key);
+    }
+
+    public void setGarageSetting(String key, Object value) {
+        garageSettings.put(key, value);
     }
 
     public void start() {
@@ -53,7 +64,11 @@ public class Simulation {
         Thread thread = new Thread(simulationThread);
         thread.start();
         garageModel = new GarageModel();
-        garageModel.createGarage(garageSettings.get("floors"),garageSettings.get("rows"),garageSettings.get("spots"));
+        garageModel.createGarage(
+                (int)garageSettings.get("amountOfFloors"),
+                (int)garageSettings.get("amountOfRows"),
+                (int)garageSettings.get("amountOfSpots")
+        );
     }
     public void pause() {
         if (simulationThread == null) {
@@ -70,9 +85,17 @@ public class Simulation {
 
     public boolean isPaused() {
         if (simulationThread == null) {
-            throw new IllegalStateException("Simulation has never been started");
+            //throw new IllegalStateException("Simulation has never been started");
+            return false;
         }
         return simulationThread.paused;
+    }
+
+    public boolean hasStarted() {
+        if (simulationThread == null) {
+            return false;
+        }
+        return true;
     }
 
 
