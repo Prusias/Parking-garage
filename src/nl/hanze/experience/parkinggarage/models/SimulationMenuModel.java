@@ -45,7 +45,9 @@ public class SimulationMenuModel extends Model {
             settingView = new SettingView();
             SettingController settingController = new SettingController(settingModel);
             settingModel.addView(settingView);
+            settingModel.setSimulation(simulation);
             settingView.setController(settingController);
+            settingView.update(settingModel);
         }
         settingView.setVisible(true);
         notifyView();
