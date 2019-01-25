@@ -11,8 +11,13 @@ import nl.hanze.experience.objects.*;
 public class GarageModel extends Model {
     private Garage garage;
 
-    public void createGarage(int floorAmount, int rowPerFloor, int spotsPerRow) {
-        this.garage = new Garage(floorAmount, rowPerFloor, spotsPerRow);
+    public GarageModel() {garage = new Garage();
+
+    }
+
+    public void initializeGarage() {
+        garage.initializeGarage();
+        notifyView();
     }
     /*
     public void vehicleToQueue(Vehicle.Type vehicleType, Vehicle.PaymentType paymentType, int duration) {
@@ -35,9 +40,26 @@ public class GarageModel extends Model {
     }
 
     public ParkingSpot[][][] getParkingSpots() {
-        return garage.parkingspots;
+        return garage.parkingSpots;
     }
     public ParkingSpot getParkingSpot(int floor, int row, int spot) {
         return garage.getParkingspot(floor, row, spot);
     }
+    public int getNumberOfFloors() {
+        return garage.getNumberOfFloors();
+    }
+    public int getNumberOfRows() {
+        return garage.getNumberOfRows();
+    }
+    public int getNumberOfSpots() {
+        return garage.getNumberOfSpots();
+    }
+    public Object getGarageSetting(String key) {
+        return garage.getGarageSetting(key);
+    }
+    public void setGarageSetting(String key, Object value) {
+        garage.setGarageSetting(key, value);
+    }
+
+
 }

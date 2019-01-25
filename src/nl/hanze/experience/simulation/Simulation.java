@@ -4,6 +4,7 @@ import nl.hanze.experience.mvc.*;
 import nl.hanze.experience.parkinggarage.controllers.SimulationInfoController;
 import nl.hanze.experience.parkinggarage.models.GarageModel;
 import nl.hanze.experience.parkinggarage.models.SimulationInfoModel;
+import nl.hanze.experience.parkinggarage.views.GarageView;
 import nl.hanze.experience.parkinggarage.views.SimulationInfoView;
 
 import java.util.HashMap;
@@ -18,7 +19,7 @@ public class Simulation {
 
     private SimulationInfoModel simulationInfoModel;
     private SimulationInfoView simulationInfoView;
-    private HashMap<String, Object> garageSettings = new HashMap<>();
+
     //private SimulationInfoController simulationInfoController;
     private GarageModel garageModel;
 
@@ -30,45 +31,16 @@ public class Simulation {
 
         simulationInfoModel.addView(simulationInfoView);
         simulationInfoView.setController(simulationInfoController);
-
-        setGarageSetting("amountOfFloors", 3);
-        setGarageSetting("amountOfRows", 5);
-        setGarageSetting("amountOfSpots", 20);
-        setGarageSetting("priceInEuro", 0.5f);
-    }
-
-    //TODO: Are these 2 functions needed?
-    public HashMap getGarageSettings() {
-        return garageSettings;
-    }
-
-    public void setGarageSettings(int floors, int rows, int spots) {
-        garageSettings.put("amountOfFloors", floors);
-        garageSettings.put("amountOfRows", rows);
-        garageSettings.put("amountOfSpots", spots);
-    }
-
-    public Object getGarageSetting(String key) {
-        if (!garageSettings.containsKey(key)) {
-            throw new IllegalStateException("Simulation - garageSettings key does not exist");
-        }
-        return garageSettings.get(key);
-    }
-
-    public void setGarageSetting(String key, Object value) {
-        garageSettings.put(key, value);
     }
 
     public void start() {
+        if (garageModel == null) {
+            throw new IllegalStateException("Simulation - garageModel has not been set!");
+        }
         simulationThread = new SimulationThread();
         Thread thread = new Thread(simulationThread);
         thread.start();
-        garageModel = new GarageModel();
-        garageModel.createGarage(
-                (int)garageSettings.get("amountOfFloors"),
-                (int)garageSettings.get("amountOfRows"),
-                (int)garageSettings.get("amountOfSpots")
-        );
+        garageModel.initializeGarage();
     }
     public void pause() {
         if (simulationThread == null) {
@@ -153,6 +125,13 @@ public class Simulation {
 
     public SimulationInfoView getSimulationInfoView() {
         return simulationInfoView;
+    }
+
+    public GarageModel getGarageModel() {
+        return garageModel;
+    }
+    public void setGarageModel(GarageModel garageModel) {
+        this.garageModel = garageModel;
     }
 }
 

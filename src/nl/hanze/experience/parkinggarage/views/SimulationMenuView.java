@@ -57,13 +57,20 @@ public class SimulationMenuView extends JMenuView {
             throw new IllegalArgumentException("Wrong model given to view.update");
         }
         SimulationMenuModel simulationMenuModel = (SimulationMenuModel) model;
-        if (simulationMenuModel.simulationIsPaused()) {
-            pauseMenuItem.setEnabled(false);
-            resumeMenuItem.setEnabled(true);
+        if (simulationMenuModel.simulationHasStarted()) {
+            startMenuItem.setEnabled(false);
+            if (simulationMenuModel.simulationIsPaused()) {
+                pauseMenuItem.setEnabled(false);
+                resumeMenuItem.setEnabled(true);
+            } else {
+                pauseMenuItem.setEnabled(true);
+                resumeMenuItem.setEnabled(false);
+            }
         } else {
-            pauseMenuItem.setEnabled(true);
+            pauseMenuItem.setEnabled(false);
             resumeMenuItem.setEnabled(false);
         }
+
 
     }
 
