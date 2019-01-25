@@ -56,5 +56,6 @@ public class SimulationMenuModel extends Model {
     public boolean simulationIsPaused() {
         return simulation.isPaused();
     }
+    public boolean simulationHasStarted() { return simulation.hasStarted(); }
 
 }

@@ -41,6 +41,18 @@ public class Main {
         simulationMenuView.setController(simulationMenuController);
         simulationMenuModel.addView(simulationMenuView);
 
+        GarageModel garageModel = new GarageModel();
+        garageModel.setGarageSetting("amountOfFloors", 3);
+        garageModel.setGarageSetting("amountOfRows", 5);
+        garageModel.setGarageSetting("amountOfSpots", 20);
+        garageModel.setGarageSetting("priceInEuro", 0.5f);
+        GarageController garageController = new GarageController(garageModel);
+        GarageView garageView = new GarageView();
+        garageView.setController(garageController);
+        garageModel.addView(garageView);
+
+        simulation.setGarageModel(garageModel);
+
         JFrame frame = new JFrame();
         frame.setTitle("Garage");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -53,6 +65,7 @@ public class Main {
 
         container.add(simulation.getSimulationInfoView());
         container.add(testView);
+        container.add(garageView);
         frame.pack();
         frame.setSize(800,800);
         frame.setVisible(true);

@@ -17,38 +17,38 @@ public class SettingModel extends Model {
 
     public String getAmountOfFloors() {
         return Integer.toString(
-                (int)simulation.getGarageSetting("amountOfFloors")
+                (int)simulation.getGarageModel().getGarageSetting("amountOfFloors")
         );
     }
     public void setAmountOfFloors(String value) {
-        simulation.setGarageSetting("amountOfFloors", Integer.valueOf(value));
+        simulation.getGarageModel().setGarageSetting("amountOfFloors", Integer.valueOf(value));
     }
 
     public String getAmountOfRows() {
         return Integer.toString(
-                (int)simulation.getGarageSetting("amountOfRows")
+                (int)simulation.getGarageModel().getGarageSetting("amountOfRows")
         );
     }
     public void setamountOfRows(String value) {
-        simulation.setGarageSetting("amountOfRows", Integer.valueOf(value));
+        simulation.getGarageModel().setGarageSetting("amountOfRows", Integer.valueOf(value));
     }
 
     public String getAmountOfSpots() {
         return Integer.toString(
-                (int)simulation.getGarageSetting("amountOfSpots")
+                (int)simulation.getGarageModel().getGarageSetting("amountOfSpots")
         );
     }
     public void setAmountOfSpots(String value) {
-        simulation.setGarageSetting("amountOfSpots", Integer.valueOf(value));
+        simulation.getGarageModel().setGarageSetting("amountOfSpots", Integer.valueOf(value));
     }
 
     public String getPriceInEuro() {
         return Float.toString(
-                (float)simulation.getGarageSetting("priceInEuro")
+                (float)simulation.getGarageModel().getGarageSetting("priceInEuro")
         );
     }
     public void setPriceInEuro(String value) {
-        simulation.setGarageSetting("priceInEuro", Float.valueOf(value));
+        simulation.getGarageModel().setGarageSetting("priceInEuro", Float.valueOf(value));
     }
 
     public boolean simulationHasStarted() {

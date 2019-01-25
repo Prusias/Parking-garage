@@ -19,7 +19,8 @@ public class SimulationInfoView extends JPanelView {
     private JLabel dateTimeLabel;
 
     public SimulationInfoView() {
-        this.setLayout(new FlowLayout());
+        this.setLayout(new FlowLayout(FlowLayout.LEFT));
+        this.setMaximumSize( new Dimension(Integer.MAX_VALUE, 100));
         add(new JLabel("Amount of ticks: "));
         tickCountLabel = new JLabel("0");
         this.add(tickCountLabel);

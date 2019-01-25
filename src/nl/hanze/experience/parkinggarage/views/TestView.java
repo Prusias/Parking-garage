@@ -20,7 +20,7 @@ public class TestView extends JPanelView {
 
     public TestView() {
         this.setLayout(new FlowLayout());
-
+        this.setMaximumSize( new Dimension(Integer.MAX_VALUE, 100));
         add(new JLabel("Amount of vehicles "));
         input = new JTextField(30);
         add(input);

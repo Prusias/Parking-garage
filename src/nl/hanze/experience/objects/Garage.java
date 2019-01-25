@@ -1,5 +1,7 @@
 package nl.hanze.experience.objects;
 
+import java.util.HashMap;
+
 /**
  * @author Steven Woudstra
  * @author Mike van der Velde
@@ -7,11 +9,12 @@ package nl.hanze.experience.objects;
  * @since 0.0.4
  */
 public class Garage {
-    public ParkingSpot[][][] parkingspots; // floor - row - place
+    public ParkingSpot[][][] parkingSpots; // floor - row - place
+    private HashMap<String, Object> garageSettings = new HashMap<>();
 
     private int numberOfFloors;
     private int numberOfRows;
-    private int numberOfPlaces;
+    private int numberOfSpots;
     private int numberOfOpenSpots;
     private int price = 65;
 
@@ -19,16 +22,17 @@ public class Garage {
     private int subscriptionQueue;
 
     //constructors en functies voor constructors start
-    public Garage(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
-        //this.parkingspots = parkingspots;
-        this.numberOfFloors = numberOfFloors;
-        this.numberOfRows = numberOfRows;
-        this.numberOfPlaces = numberOfPlaces;
-        this.numberOfOpenSpots = numberOfFloors * numberOfRows * numberOfPlaces;
-        parkingspots = new ParkingSpot[numberOfFloors][numberOfRows][numberOfPlaces];
-        createParkspots();
+    public Garage() {
         ticketQueue = 0;
         subscriptionQueue = 0;
+    }
+    public void initializeGarage() {
+        this.numberOfFloors = (int)garageSettings.get("amountOfFloors");
+        this.numberOfRows = (int)garageSettings.get("amountOfRows");
+        this.numberOfSpots = (int)garageSettings.get("amountOfSpots");
+        this.numberOfOpenSpots = numberOfFloors * numberOfRows * numberOfSpots;
+        parkingSpots = new ParkingSpot[numberOfFloors][numberOfRows][numberOfSpots];
+        createParkspots();
     }
 
     private void createParkspots() {
@@ -36,8 +40,8 @@ public class Garage {
         for (int f=0; f<numberOfFloors; f++) {
             if(f>0) { weight += 2; }
             for (int r=0; r<numberOfRows; r++) {
-                for (int p=0; p<numberOfPlaces;p++) {
-                    parkingspots[f][r][p] = new ParkingSpot(f, r, p, ParkingSpot.Type.REGULAR, weight);
+                for (int p = 0; p< numberOfSpots; p++) {
+                    parkingSpots[f][r][p] = new ParkingSpot(f, r, p, ParkingSpot.Type.REGULAR, weight);
                 }
             }
         }
@@ -47,7 +51,7 @@ public class Garage {
 
 
     public ParkingSpot getParkingspot(int floor, int row, int place) {
-        return parkingspots[floor][row][place];
+        return parkingSpots[floor][row][place];
     }
 
     public int getNumberOfOpenSpots() {
@@ -68,4 +72,26 @@ public class Garage {
     public void addToSubscriptionQueue() {
         subscriptionQueue++;
     }
+
+    public int getNumberOfFloors() {
+        return numberOfFloors;
+    }
+    public int getNumberOfRows() {
+        return numberOfRows;
+    }
+    public int getNumberOfSpots() {
+        return numberOfSpots;
+    }
+
+    public Object getGarageSetting(String key) {
+        if (!garageSettings.containsKey(key)) {
+            throw new IllegalStateException("Garage - garageSettings key does not exist");
+        }
+        return garageSettings.get(key);
+    }
+
+    public void setGarageSetting(String key, Object value) {
+        garageSettings.put(key, value);
+    }
+
 }
