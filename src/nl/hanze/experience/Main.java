@@ -12,7 +12,7 @@ import java.awt.*;
 /**
  * nl.hanze.experience.Main class for the ParkingGarage
  * @author Mike van der Velde
- * @version 0.0.5
+ * @version 0.0.4
  * @since 0.0.2
  */
 public class Main {
@@ -46,6 +46,10 @@ public class Main {
         garageModel.setGarageSetting("amountOfRows", 5);
         garageModel.setGarageSetting("amountOfSpots", 20);
         garageModel.setGarageSetting("priceInEuro", 0.5f);
+        garageModel.setGarageSetting("maxVehicleDurationInMinutes", 1440);
+        garageModel.setGarageSetting("minVehicleDurationInMinutes", 10);
+        garageModel.setGarageSetting("maxReservationDurationInMinutes", 240);
+        garageModel.setGarageSetting("minReservationDurationInMinutes", 30);
         GarageController garageController = new GarageController(garageModel);
         GarageView garageView = new GarageView();
         garageView.setController(garageController);

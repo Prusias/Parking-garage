@@ -3,6 +3,8 @@ package nl.hanze.experience.parkinggarage.models;
 import nl.hanze.experience.mvc.Model;
 import nl.hanze.experience.objects.*;
 
+import java.time.LocalDateTime;
+
 /**
  * @author Mike van der Velde
  * @version 0.0.4
@@ -59,6 +61,13 @@ public class GarageModel extends Model {
     }
     public void setGarageSetting(String key, Object value) {
         garage.setGarageSetting(key, value);
+    }
+
+    public void increaseTime(int minutes ) {
+        garage.increaseTime(minutes);
+    }
+    public LocalDateTime getLocalDateTime() {
+        return garage.getLocalDateTime();
     }
 
 

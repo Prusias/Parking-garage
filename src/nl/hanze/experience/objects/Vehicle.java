@@ -1,5 +1,7 @@
 package nl.hanze.experience.objects;
 
+import java.net.PasswordAuthentication;
+
 /**
  * @author Mike van der Velde
  * @version 0.0.4
@@ -11,7 +13,7 @@ public class Vehicle {
 
     private Type type;
     private PaymentType paymentType;
-    private int duration; //minuts
+    private int duration; //minutes
     private int timeLeft;
 
     public Type getType() {
@@ -26,6 +28,13 @@ public class Vehicle {
     }
     public void setTimeLeft(int timeLeft) {
         this.timeLeft = timeLeft;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 
     public Vehicle(Type type, PaymentType paymentType, int duration) {

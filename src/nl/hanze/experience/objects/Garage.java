@@ -1,5 +1,6 @@
 package nl.hanze.experience.objects;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 
 /**
@@ -11,6 +12,7 @@ import java.util.HashMap;
 public class Garage {
     public ParkingSpot[][][] parkingSpots; // floor - row - place
     private HashMap<String, Object> garageSettings = new HashMap<>();
+    private LocalDateTime localDateTime;
 
     private int numberOfFloors;
     private int numberOfRows;
@@ -25,6 +27,7 @@ public class Garage {
     public Garage() {
         ticketQueue = 0;
         subscriptionQueue = 0;
+        localDateTime = LocalDateTime.of(1, 1,1, 3, 0, 0);
     }
     public void initializeGarage() {
         this.numberOfFloors = (int)garageSettings.get("amountOfFloors");
@@ -81,6 +84,13 @@ public class Garage {
     }
     public int getNumberOfSpots() {
         return numberOfSpots;
+    }
+
+    public void increaseTime(int minutes ) {
+        localDateTime = localDateTime.plusMinutes(minutes);
+    }
+    public LocalDateTime getLocalDateTime() {
+        return localDateTime;
     }
 
     public Object getGarageSetting(String key) {
