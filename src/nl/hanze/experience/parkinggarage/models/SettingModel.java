@@ -3,6 +3,8 @@ package nl.hanze.experience.parkinggarage.models;
 import nl.hanze.experience.mvc.*;
 import nl.hanze.experience.simulation.Simulation;
 
+import java.util.Arrays;
+
 /**
  * @author Mike van der Velde
  * @version 0.0.4
@@ -29,7 +31,7 @@ public class SettingModel extends Model {
                 (int)simulation.getGarageModel().getGarageSetting("amountOfRows")
         );
     }
-    public void setamountOfRows(String value) {
+    public void setAmountOfRows(String value) {
         simulation.getGarageModel().setGarageSetting("amountOfRows", Integer.valueOf(value));
     }
 
@@ -50,6 +52,7 @@ public class SettingModel extends Model {
     public void setPriceInEuro(String value) {
         simulation.getGarageModel().setGarageSetting("priceInEuro", Float.valueOf(value));
     }
+
     public String getSeed() {
         return Long.toString(simulation.getSeed());
     }
@@ -57,10 +60,21 @@ public class SettingModel extends Model {
         simulation.setSeed(Long.valueOf(value));
     }
 
+    public String getWeekdayModifier(int day) {
+        return Double.toString(simulation.getModifier().getWeekdayModifier(day));
+    }
+    public void setWeekdayModifier(int day, double modifier) {
+        simulation.getModifier().setWeekdayModifier(day, modifier);
+    }
 
+    public String getHourModifier(int hour) {
+        return Double.toString(simulation.getModifier().getHourModifier(hour));
+    }
+    public void setHourModifier(int hour, double modifier) {
+        simulation.getModifier().setHourModifier(hour, modifier);
+    }
 
     public boolean simulationHasStarted() {
         return simulation.hasStarted();
     }
-
 }

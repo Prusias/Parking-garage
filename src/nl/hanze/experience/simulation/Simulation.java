@@ -22,6 +22,8 @@ public class Simulation {
     private Random random;
     private long seed;
 
+    private Modifier modifier;
+
     private SimulationInfoModel simulationInfoModel;
     private SimulationInfoView simulationInfoView;
 
@@ -39,6 +41,8 @@ public class Simulation {
 
         seed = ThreadLocalRandom.current().nextLong();
         random = new Random(seed);
+
+        modifier = new Modifier();
     }
 
     public void start() {
@@ -62,7 +66,6 @@ public class Simulation {
         }
         simulationThread.resume();
     }
-
     public boolean isPaused() {
         if (simulationThread == null) {
             //throw new IllegalStateException("Simulation has never been started");
@@ -70,14 +73,12 @@ public class Simulation {
         }
         return simulationThread.paused;
     }
-
     public boolean hasStarted() {
         if (simulationThread == null) {
             return false;
         }
         return true;
     }
-
 
     class SimulationThread implements Runnable {
 
@@ -163,6 +164,10 @@ public class Simulation {
      */
     public long getSeed() {
         return seed;
+    }
+
+    public Modifier getModifier() {
+        return modifier;
     }
 }
 
