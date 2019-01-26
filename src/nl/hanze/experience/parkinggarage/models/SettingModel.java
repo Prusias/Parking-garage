@@ -50,6 +50,14 @@ public class SettingModel extends Model {
     public void setPriceInEuro(String value) {
         simulation.getGarageModel().setGarageSetting("priceInEuro", Float.valueOf(value));
     }
+    public String getSeed() {
+        return Long.toString(simulation.getSeed());
+    }
+    public void setSeed(String value) {
+        simulation.setSeed(Long.valueOf(value));
+    }
+
+
 
     public boolean simulationHasStarted() {
         return simulation.hasStarted();

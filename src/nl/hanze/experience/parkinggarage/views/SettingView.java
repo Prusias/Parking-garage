@@ -26,6 +26,7 @@ public class SettingView extends JFrameView {
     private JTextField amountOfRowsInput;
     private JTextField amountOfSpotsInput;
     private JTextField priceInEuroInput;
+    private JTextField seedInput;
 
     public SettingView() {
         this.setTitle("Settings");
@@ -73,11 +74,13 @@ public class SettingView extends JFrameView {
         amountOfRowsInput.setText(settingModel.getAmountOfRows());
         amountOfSpotsInput.setText(settingModel.getAmountOfSpots());
         priceInEuroInput.setText(settingModel.getPriceInEuro());
+        seedInput.setText(settingModel.getSeed());
         if (settingModel.simulationHasStarted()) {
             amountOfFloorsInput.setEnabled(false);
             amountOfRowsInput.setEnabled(false);
             amountOfSpotsInput.setEnabled(false);
             priceInEuroInput.setEnabled(false);
+            seedInput.setEnabled(false);
         }
     }
 
@@ -97,11 +100,19 @@ public class SettingView extends JFrameView {
         simulationSettings.add(new JLabel("The price of parking per 10 minutes in €."));
         priceInEuroInput = new JTextField(30);
         simulationSettings.add(priceInEuroInput);
+
+        simulationSettings.add(new JSeparator());
+        simulationSettings.add(new JSeparator());
+
+        simulationSettings.add(new JLabel("Seed for the simulation"));
+        seedInput = new JTextField(30);
+        simulationSettings.add(seedInput);
     }
 
     public String getAmountOfFloors() {return amountOfFloorsInput.getText();}
     public String getamountOfRows() {return amountOfRowsInput.getText();}
     public String getamountOfSpots() {return amountOfSpotsInput.getText();}
     public String getpriceInEuro() {return priceInEuroInput.getText();}
+    public String getSeed() {return seedInput.getText();}
 
 }

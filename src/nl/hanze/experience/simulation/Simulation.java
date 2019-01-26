@@ -8,6 +8,8 @@ import nl.hanze.experience.parkinggarage.views.GarageView;
 import nl.hanze.experience.parkinggarage.views.SimulationInfoView;
 
 import java.util.HashMap;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author Mike van der Velde
@@ -16,6 +18,9 @@ import java.util.HashMap;
  */
 public class Simulation {
     private SimulationThread simulationThread;
+
+    private Random random;
+    private long seed;
 
     private SimulationInfoModel simulationInfoModel;
     private SimulationInfoView simulationInfoView;
@@ -31,6 +36,9 @@ public class Simulation {
 
         simulationInfoModel.addView(simulationInfoView);
         simulationInfoView.setController(simulationInfoController);
+
+        seed = ThreadLocalRandom.current().nextLong();
+        random = new Random(seed);
     }
 
     public void start() {
@@ -132,6 +140,29 @@ public class Simulation {
     }
     public void setGarageModel(GarageModel garageModel) {
         this.garageModel = garageModel;
+    }
+
+    /**
+     * Get the Random object used by the simulation
+     * @return Random
+     */
+    public Random getRandom() {
+        return random;
+    }
+    /**
+     * Set the seed of the simulation
+     * @param seed seed for the simulation
+     */
+    public void setSeed(long seed) {
+        random = new Random(seed);
+        this.seed = seed;
+    }
+    /**
+     * Get the seed of the simulation
+     * @return seed for the simulation
+     */
+    public long getSeed() {
+        return seed;
     }
 }
 
