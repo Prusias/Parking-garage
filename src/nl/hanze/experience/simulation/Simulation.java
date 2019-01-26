@@ -1,12 +1,17 @@
 package nl.hanze.experience.simulation;
 
 import nl.hanze.experience.mvc.*;
+import nl.hanze.experience.objects.Reservation;
+import nl.hanze.experience.objects.Vehicle;
 import nl.hanze.experience.parkinggarage.controllers.SimulationInfoController;
 import nl.hanze.experience.parkinggarage.models.GarageModel;
 import nl.hanze.experience.parkinggarage.models.SimulationInfoModel;
 import nl.hanze.experience.parkinggarage.views.GarageView;
 import nl.hanze.experience.parkinggarage.views.SimulationInfoView;
 
+import static nl.hanze.experience.objects.Vehicle.*;
+
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
@@ -106,7 +111,8 @@ public class Simulation {
                     }
                 }
                 simulationInfoModel.setTickCount(tickCount);
-                simulationInfoModel.increaseTime(1);
+                simulationInfoModel.increaseTime();
+                generateCars();
                 tickCount++;
                 //System.out.println(tickCount);
                 try {
@@ -168,6 +174,80 @@ public class Simulation {
 
     public Modifier getModifier() {
         return modifier;
+    }
+
+    private void generateCars() {
+        LocalDateTime localDateTime = garageModel.getLocalDateTime();
+        int day = localDateTime.getDayOfWeek().getValue();
+        int hour = localDateTime.getHour();
+        PaymentType paymentType;
+        Type type;
+
+        // Calculate the chance of spawning a vehicle based on the modifiers
+        double chanceModifier = ( modifier.getWeekdayModifier(day) + modifier.getHourModifier(hour) ) /2;
+        double chance = random.nextInt(101) * chanceModifier;
+        double neededChance = 100 / modifier.getBaseVehicleModifier();
+        if (chance > neededChance) {
+
+            // We are spawning a vehicle, Does it have a subscription or a reservation?
+            int ticketChance = (int)(modifier.getBaseVehicleModifier() * 100);
+            int subscriptionChance = (int)(modifier.getSubscriptionVehicleModifier() * 100);
+            int reservationChance = (int)(modifier.getReservationVehicleModifier() * 100);
+            int vehicleChance = random.nextInt(ticketChance + subscriptionChance + reservationChance + 1);
+            if (vehicleChance > subscriptionChance + reservationChance) {
+                paymentType = PaymentType.TICKET;
+            } else if (vehicleChance > reservationChance) {
+                paymentType = PaymentType.SUBSCRIPTION;
+            } else {
+                paymentType = PaymentType.RESERVATION;
+            }
+
+            // What is the vehicle type?
+            int regularCarChance = (int)(modifier.getRegularCarModifier() * 100);
+            int electricCarChance = (int)(modifier.getElectricCarModifier() * 100);
+            int motorcycleChance = (int)(modifier.getMotorcycleModifier() * 100);
+            int typeChance = random.nextInt(regularCarChance + electricCarChance + motorcycleChance + 1);
+            if (typeChance > motorcycleChance + electricCarChance) {
+                type = Type.CAR;
+            } else if (typeChance > electricCarChance) {
+                type = Type.ELECTRIC_CAR;
+            } else {
+                type = Type.MOTORCYCLE;
+            }
+
+            double deviation = modifier.getParkingDurationModifier();
+            int max = (int)garageModel.getGarageSetting("maxVehicleDurationInMinutes");
+            int min = (int)garageModel.getGarageSetting("minVehicleDurationInMinutes");
+            double standard = random.nextGaussian();
+            int duration = (int)((standard * (deviation * 100)) + max /2);
+            if (duration < min) {
+                duration = min;
+            }
+
+            Vehicle vehicle = new Vehicle(type, paymentType, duration);
+
+            if (paymentType == PaymentType.RESERVATION) {
+                double resDeviation = modifier.getReservationVehicleModifier();
+                int resMax = (int)garageModel.getGarageSetting("maxReservationDurationInMinutes");
+                int resMin = (int)garageModel.getGarageSetting("minReservationDurationInMinutes");
+                double resStandard = random.nextGaussian();
+                int resDuration = (int)((resStandard * (resDeviation * 100)) + resMax /2);
+                if (resDuration < resMin) {
+                    resDuration = resMin;
+                }
+
+                Reservation reservation = new Reservation(vehicle, resDuration, duration);
+                System.out.println("Spawned a " + vehicle.getType() + " Reservation Time left: " + reservation.getTimeOfArrival());
+
+            } else if (paymentType == PaymentType.SUBSCRIPTION) {
+
+
+            } else {
+
+            }
+
+            System.out.println("Spawned a " + vehicle.getType() + " Time left: " + vehicle.getDuration());
+        }
     }
 }
 

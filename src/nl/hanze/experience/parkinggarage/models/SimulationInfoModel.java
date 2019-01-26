@@ -14,7 +14,6 @@ import java.time.format.DateTimeFormatter;
 public class SimulationInfoModel extends Model {
     private Simulation simulation;
     private int tickCount;
-    private LocalDateTime localDateTime = LocalDateTime.of(1, 1,1, 3, 0, 0);
 
     public int getTickCount() {
         return tickCount;
@@ -25,14 +24,14 @@ public class SimulationInfoModel extends Model {
         //notifyView(); increaseTime is called directly after this function, So we don't want to update the view twice.
     }
 
-    public void increaseTime(int minutes ) {
-        localDateTime = localDateTime.plusMinutes(minutes);
+    public void increaseTime() {
+        simulation.getGarageModel().increaseTime(1);
         notifyView();
     }
 
     public String getFormattedTime() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd HH:mm");
-        return formatter.format(localDateTime);
+        return formatter.format(simulation.getGarageModel().getLocalDateTime());
     }
 
 //    public Simulation getSimulation() {
@@ -41,6 +40,7 @@ public class SimulationInfoModel extends Model {
 //        }
 //        return simulation;
 //    }
+
     public void setSimulation(Simulation simulation) {
         this.simulation = simulation;
     }
