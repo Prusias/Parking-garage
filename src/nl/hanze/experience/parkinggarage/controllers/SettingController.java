@@ -24,10 +24,20 @@ public class SettingController extends Controller {
             SettingModel settingModel = (SettingModel) model;
             SettingView settingView = (SettingView) view;
             settingModel.setAmountOfFloors(settingView.getAmountOfFloors());
-            settingModel.setamountOfRows(settingView.getamountOfRows());
-            settingModel.setAmountOfSpots(settingView.getamountOfSpots());
-            settingModel.setPriceInEuro(settingView.getpriceInEuro());
+            settingModel.setAmountOfRows(settingView.getAmountOfRows());
+            settingModel.setAmountOfSpots(settingView.getAmountOfSpots());
+            settingModel.setPriceInEuro(settingView.getPriceInEuro());
             settingModel.setSeed(settingView.getSeed());
+            String[] weekDayModifiers = settingView.getWeekdayModifiers();
+            for (int i = 0; i < 7; i++) {
+                settingModel.setWeekdayModifier(i, Double.valueOf(weekDayModifiers[i]));
+            }
+            String[] hourModifiers = settingView.getHourModifiers();
+            for (int i = 0; i < 24; i++) {
+                settingModel.setHourModifier(i, Double.valueOf(hourModifiers[i]));
+            }
+
+
             return true;
         }
         return false;
