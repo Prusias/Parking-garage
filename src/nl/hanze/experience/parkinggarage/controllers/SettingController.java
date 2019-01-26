@@ -9,10 +9,11 @@ import nl.hanze.experience.parkinggarage.views.SettingView;
  * @version 0.0.4
  * @since 0.0.4
  */
+
+
+
 public class SettingController extends Controller {
-
     public enum EventId { SAVE }
-
     public SettingController(SettingModel model) {
         super(model);
     }
@@ -26,6 +27,7 @@ public class SettingController extends Controller {
             settingModel.setamountOfRows(settingView.getamountOfRows());
             settingModel.setAmountOfSpots(settingView.getamountOfSpots());
             settingModel.setPriceInEuro(settingView.getpriceInEuro());
+            settingModel.setSeed(settingView.getSeed());
             return true;
         }
         return false;
