@@ -16,6 +16,7 @@ public class Reservation {
     public int getTimeOfArrival() {
         return timeOfArrival;
     }
+    // TODO: This isn't needed as the vehicle also keeps track?
     public int getDuration() {
         return duration;
     }

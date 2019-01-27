@@ -2,7 +2,6 @@ package nl.hanze.experience.parkinggarage.views;
 
 import nl.hanze.experience.mvc.*;
 import nl.hanze.experience.parkinggarage.models.SimulationInfoModel;
-import static nl.hanze.experience.parkinggarage.controllers.SimulationInfoController.*;
 
 
 import javax.swing.*;
@@ -17,6 +16,8 @@ public class SimulationInfoView extends JPanelView {
 
     private JLabel tickCountLabel;
     private JLabel dateTimeLabel;
+    private JLabel subscriptionQueueSize;
+    private JLabel ticketQueueSize;
 
     public SimulationInfoView() {
         this.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -27,6 +28,13 @@ public class SimulationInfoView extends JPanelView {
         add(new JLabel("Time: "));
         dateTimeLabel = new JLabel("00-00 00:00");
         this.add(dateTimeLabel);
+        add(new JLabel("SubQueue Length: "));
+        subscriptionQueueSize = new JLabel("0");
+        this.add(subscriptionQueueSize);
+        add(new JLabel("TicketQueue Length: "));
+        ticketQueueSize = new JLabel("0");
+        this.add(ticketQueueSize);
+
 
 //        JButton pauseButton = new JButton("Pause");
 //        this.add(pauseButton);
@@ -45,8 +53,10 @@ public class SimulationInfoView extends JPanelView {
         }
         SimulationInfoModel simulationInfoModel = (SimulationInfoModel) model;
         //tickCountLabel.setBackground(Color.getHSBColor(100f, 100f, 100f));
-        tickCountLabel.setText(Integer.toString((simulationInfoModel).getTickCount()));
+        tickCountLabel.setText("" + (simulationInfoModel).getTickCount());
         dateTimeLabel.setText(simulationInfoModel.getFormattedTime());
+        subscriptionQueueSize.setText("" + simulationInfoModel.getSubscriptionQueueSize());
+        ticketQueueSize.setText("" + simulationInfoModel.getTicketQueueSize());
     }
 
 }

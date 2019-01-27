@@ -1,6 +1,7 @@
 package nl.hanze.experience.parkinggarage.models;
 
 import nl.hanze.experience.mvc.Model;
+import nl.hanze.experience.mvc.View;
 import nl.hanze.experience.objects.*;
 
 import java.time.LocalDateTime;
@@ -12,9 +13,12 @@ import java.time.LocalDateTime;
  */
 public class GarageModel extends Model {
     private Garage garage;
+    private VehicleQueue ticketQueue;
+    private VehicleQueue subscriptionQueue;
 
     public GarageModel() {garage = new Garage();
-
+        ticketQueue = new VehicleQueue();
+        subscriptionQueue = new VehicleQueue();
     }
 
     public void initializeGarage() {
@@ -37,15 +41,11 @@ public class GarageModel extends Model {
     }
     */
 
-    public int getNumberOfFreeSpots() {
-        return garage.getNumberOfOpenSpots();
-    }
-
     public ParkingSpot[][][] getParkingSpots() {
         return garage.parkingSpots;
     }
     public ParkingSpot getParkingSpot(int floor, int row, int spot) {
-        return garage.getParkingspot(floor, row, spot);
+        return garage.getParkingSpot(floor, row, spot);
     }
     public int getNumberOfFloors() {
         return garage.getNumberOfFloors();
@@ -70,5 +70,74 @@ public class GarageModel extends Model {
         return garage.getLocalDateTime();
     }
 
+    public void addToSubscriptionQueue(Vehicle vehicle) {
+        subscriptionQueue.addVehicle(vehicle);
+    }
+    public void addToTicketQueue(Vehicle vehicle) {
+        ticketQueue.addVehicle(vehicle);
+    }
 
+    public Vehicle pollVehicleFromSubscriptionQueue() {
+        return subscriptionQueue.poll();
+    }
+    public Vehicle peekVehicleFromSubscriptionQueue() {
+        return subscriptionQueue.peek();
+    }
+    public Vehicle pollVehicleFromTicketQueue() {
+        return ticketQueue.poll();
+    }
+    public Vehicle peekVehicleFromTicketQueue() {
+        return ticketQueue.peek();
+    }
+
+    public int getNumberOfFreeRegularSpots() {
+        return garage.getNumberOfFreeRegularSpots();
+    }
+    public void setNumberOfFreeRegularSpots(int numberOfFreeRegularSpots) {
+        garage.setNumberOfFreeRegularSpots(numberOfFreeRegularSpots);
+    }
+    public int getNumberOfFreeSubscriptionSpots() {
+        return garage.getNOfFreeSubSpots();
+    }
+    public void setNumberOfFreeSubscriptionSpots(int numberOfFreeSubscriptionSpots) {
+        garage.setNOfFreeSubSpots(numberOfFreeSubscriptionSpots);
+    }
+    public int getNumberOfFreeReservedSpots() {
+        return  garage.getnOfFreeResSpots();
+    }
+    public void setNumberOfFreeReservedSpots(int numberOfFreeReservedSpots) {
+        garage.setnOfFreeResSpots(numberOfFreeReservedSpots);
+    }
+    public int getNumberOfFreeElectricSpots() {
+        return  garage.getNOfFreeElecSpots();
+    }
+    public void setNumberOfFreeElectricSpots(int numberOfFreeElectricSpots) {
+        garage.setNOfFreeElecSpots(numberOfFreeElectricSpots);
+    }
+    public int getNumberOfFreeMotorcycleSpots() {
+        return  garage.getNOfFreeMotSpots();
+    }
+    public void setNumberOfFreeMotorcycleSpots(int numberOfFreeMotorcycleSpots) {
+        garage.setNOfFreeMotSpots(numberOfFreeMotorcycleSpots);
+    }
+
+    public ParkingSpot getParkingSpotLeft(ParkingSpot parkingSpot) {
+        if (parkingSpot.getSpot() == 0) {
+            return null;
+        }
+        return garage.getParkingSpot(parkingSpot.getFloor(), parkingSpot.getRow(), parkingSpot.getSpot() - 1);
+    }
+    public ParkingSpot getParkingSpotRight(ParkingSpot parkingSpot) {
+        if (parkingSpot.getSpot() == garage.getNumberOfSpots() - 1) {
+            return null;
+        }
+        return garage.getParkingSpot(parkingSpot.getFloor(), parkingSpot.getRow(), parkingSpot.getSpot() + 1);
+    }
+
+    public int getSubscriptionQueueSize() {
+        return ticketQueue.Size();
+    }
+    public int getTicketQueueSize() {
+        return subscriptionQueue.Size();
+    }
 }

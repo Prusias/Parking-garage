@@ -1,21 +1,20 @@
 package nl.hanze.experience.objects;
 
+import nl.hanze.experience.objects.Vehicle.*;
+
 /**
  * @author Mike van der Velde
  * @version 0.0.4
  * @since 0.0.4
  */
 public class ParkingSpot {
-    public enum Type { REGULAR, ELECTRIC_CHARGER, MOTORCYCLE }
-
     private int floor;
     private int row;
-    private int number;
+    private int spot;
     private Type type;
-    private boolean subscriptionSpot;
-    private boolean reserved;
+    private PaymentType paymentType;
     private Vehicle vehicle;
-    private int weight;
+    private double weight;
 
     // getters floor/type
     public int getFloor() {
@@ -24,25 +23,22 @@ public class ParkingSpot {
     public int getRow() {
         return row;
     }
-    public int getNumber() {
-        return number;
+    public int getSpot() {
+        return spot;
     }
+
     public Type getType() {
         return type;
     }
-
-    public boolean isReserved() {
-        return reserved;
-    }
-    public void setReserved(boolean reserved) {
-        this.reserved = reserved;
+    public void setType(Type type) {
+        this.type = type;
     }
 
-    public boolean isSubscriptionSpot() {
-        return subscriptionSpot;
+    public PaymentType getPaymentType() {
+        return paymentType;
     }
-    public void setSubscriptionSpot(boolean subscriptionSpot) {
-        this.subscriptionSpot = subscriptionSpot;
+    public void setPaymentType(PaymentType paymentType) {
+        this.paymentType = paymentType;
     }
 
     public Vehicle getVehicle() {
@@ -52,18 +48,19 @@ public class ParkingSpot {
         this.vehicle = vehicle;
     }
 
-    public int getWeight(){
+    public double getWeight(){
         return weight;
     }
-    public void setWeight(int weight) {
+    public void setWeight(double weight) {
         this.weight = weight;
     }
 
-    public ParkingSpot(int floor, int row, int number, Type type, int weight) {
+    public ParkingSpot(int floor, int row, int spot, Type type, PaymentType paymentType, double weight) {
         this.floor = floor;
         this.row = row;
-        this.number = number;
+        this.spot = spot;
         this.type = type;
+        this.paymentType = paymentType;
         this.weight = weight;
     }
 
@@ -71,7 +68,24 @@ public class ParkingSpot {
         this.type = type;
     }
 
-
+//    @Override
+//    public boolean equals(Object o){
+//        if (o == this) {
+//            return true;
+//        }
+//        if (!(o instanceof ParkingSpot)) {
+//            return false;
+//        }
+//        ParkingSpot p = (ParkingSpot)o;
+//        if (p.floor == floor && p.row == row && p.spot == spot) {
+//            return true;
+//        }
+//        return false;
+//    }
+//    public int hashCode() {
+//        int result = 17 + floor + 19 * row + 23 * spot;
+//        return result;
+//    }
 
 
 
