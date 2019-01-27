@@ -2,6 +2,7 @@ package nl.hanze.experience.parkinggarage.views;
 
 import nl.hanze.experience.mvc.*;
 import nl.hanze.experience.objects.ParkingSpot;
+import nl.hanze.experience.objects.Vehicle;
 import nl.hanze.experience.parkinggarage.models.GarageModel;
 
 import javax.swing.*;
@@ -41,30 +42,53 @@ public class GarageView extends JPanelView {
         repaint();
     }
 
+    // TODO: Handle SUB Type etc;
     private Color getColor(ParkingSpot parkingSpot) {
         // Is the spot reserved?
-        if (parkingSpot.isReserved()) {
+        if (parkingSpot.getPaymentType() == Vehicle.PaymentType.RESERVATION) {
             // Has the spot got a vehicle on it?
             if (parkingSpot.getVehicle() == null) {
                 return new Color(211, 255, 255);
             }
-            return new Color(211, 124, 124);
+            return new Color(100, 255, 255);
         }
         // Is the spot a subscription spot?
-        if (parkingSpot.isSubscriptionSpot()) {
+        else if (parkingSpot.getPaymentType() == Vehicle.PaymentType.SUBSCRIPTION) {
             // Has the spot got a vehicle on it?
             if (parkingSpot.getVehicle() == null) {
-                return new Color(150, 30, 30);
+                return new Color(255, 30, 30);
             }
-            return new Color(255, 30, 30);
+            //return new Color(0, 0, 0);
+            return new Color(100, 30, 30);
+        }
+        // Is the spot for electric cars?
+        else if (parkingSpot.getType() == Vehicle.Type.ELECTRIC_CAR) {
+            if (parkingSpot.getVehicle() == null) {
+                return new Color(100, 255, 100);
+
+            } else {
+                return new Color(0, 100, 0);
+            }
+        }
+        // Is the spot for Motorcycles
+        else if (parkingSpot.getType() == Vehicle.Type.MOTORCYCLE){
+            if (parkingSpot.getVehicle() == null) {
+                return new Color(255, 255, 100);
+
+            } else {
+                return new Color(255, 155, 50);
+            }
+        } else {
+            // Has the spot got a vehicle on it?
+            if (parkingSpot.getVehicle() == null) {
+                return new Color(168, 168, 168);
+
+            } else {
+                return new Color(68, 68, 68);
+            }
         }
 
-        // Has the spot got a vehicle on it?
-        if (parkingSpot.getVehicle() == null) {
-            return new Color(188, 188, 188);
-        } else {
-            return new Color(68, 68, 68);
-        }
+
     }
 
     protected void paintComponent(Graphics g) {

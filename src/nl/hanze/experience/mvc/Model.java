@@ -22,7 +22,7 @@ public abstract class Model {
     /**
      * Notify views. Called by subclasses (concrete models)
      */
-    protected void notifyView() {
+    public void notifyView() {
         for (View view : views) {
             view.notify(this);
         }

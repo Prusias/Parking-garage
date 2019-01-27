@@ -6,7 +6,7 @@ import java.util.PriorityQueue;
 import java.util.Comparator;
 
 /**
- * @author
+ * @author Mike van der Velde
  * @version 0.0.4
  * @since 0.0.4
  */

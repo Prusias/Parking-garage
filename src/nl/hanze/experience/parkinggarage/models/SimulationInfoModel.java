@@ -3,7 +3,6 @@ package nl.hanze.experience.parkinggarage.models;
 import nl.hanze.experience.mvc.Model;
 import nl.hanze.experience.simulation.Simulation;
 
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -55,5 +54,12 @@ public class SimulationInfoModel extends Model {
             throw new IllegalStateException("Simulation has not been set");
         }
         simulation.resume();
+    }
+
+    public int getSubscriptionQueueSize() {
+        return simulation.getGarageModel().getSubscriptionQueueSize();
+    }
+    public int getTicketQueueSize() {
+        return simulation.getGarageModel().getTicketQueueSize();
     }
 }

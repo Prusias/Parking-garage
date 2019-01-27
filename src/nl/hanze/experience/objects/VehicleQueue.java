@@ -24,5 +24,5 @@ public class VehicleQueue {
     public Vehicle peek() {
         return  queue.peek();
     }
-
+    public int Size() { return queue.size(); }
 }

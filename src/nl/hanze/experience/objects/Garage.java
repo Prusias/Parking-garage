@@ -17,34 +17,69 @@ public class Garage {
     private int numberOfFloors;
     private int numberOfRows;
     private int numberOfSpots;
-    private int numberOfOpenSpots;
+    private int numberOfFreeRegularSpots;
+    private int nOfFreeSubSpots;
+    private int nOfFreeResSpots;
+    private int nOfFreeElecSpots;
+    private int nOfFreeMotSpots;
     private int price = 65;
 
-    private int ticketQueue;
-    private int subscriptionQueue;
+//    private int ticketQueue;
+//    private int subscriptionQueue;
 
     //constructors en functies voor constructors start
     public Garage() {
-        ticketQueue = 0;
-        subscriptionQueue = 0;
+//        ticketQueue = 0;
+//        subscriptionQueue = 0;
         localDateTime = LocalDateTime.of(1, 1,1, 3, 0, 0);
     }
     public void initializeGarage() {
         this.numberOfFloors = (int)garageSettings.get("amountOfFloors");
         this.numberOfRows = (int)garageSettings.get("amountOfRows");
         this.numberOfSpots = (int)garageSettings.get("amountOfSpots");
-        this.numberOfOpenSpots = numberOfFloors * numberOfRows * numberOfSpots;
+        int totalSpots = numberOfFloors * numberOfRows * numberOfSpots;
+        nOfFreeSubSpots = (int)getGarageSetting("subscriptionSpots");
+        nOfFreeResSpots = (int)getGarageSetting("reservedSpots");
+        nOfFreeElecSpots = (int)getGarageSetting("electricSpots");
+        nOfFreeMotSpots = (int)getGarageSetting("motorcycleSpots");
+        int neededSpots = nOfFreeSubSpots + nOfFreeResSpots + nOfFreeElecSpots + nOfFreeMotSpots;
+        if (neededSpots > totalSpots){
+            throw new IllegalStateException("Garage - Not enough parking spots available");
+        }
+        numberOfFreeRegularSpots = totalSpots - neededSpots;
+
         parkingSpots = new ParkingSpot[numberOfFloors][numberOfRows][numberOfSpots];
-        createParkspots();
+        createParkingSpots();
     }
 
-    private void createParkspots() {
-        int weight = 1;
+    private void createParkingSpots() {
+        double weight = 0;
+        int count = 0;
         for (int f=0; f<numberOfFloors; f++) {
-            if(f>0) { weight += 2; }
             for (int r=0; r<numberOfRows; r++) {
                 for (int p = 0; p< numberOfSpots; p++) {
-                    parkingSpots[f][r][p] = new ParkingSpot(f, r, p, ParkingSpot.Type.REGULAR, weight);
+                    count++;
+                    //TODO: Add Modifiers
+                    weight = f * 1 + r * 0.7 + p * 0.2;
+                    Vehicle.Type type;
+                    Vehicle.PaymentType paymentType;
+                    if (count <= nOfFreeSubSpots) {
+                        type = Vehicle.Type.CAR;
+                        paymentType = Vehicle.PaymentType.SUBSCRIPTION;
+                    } else if (count <= nOfFreeSubSpots + nOfFreeElecSpots) {
+                        type = Vehicle.Type.ELECTRIC_CAR;
+                        paymentType = Vehicle.PaymentType.TICKET;
+                    } else if (count <= nOfFreeSubSpots + nOfFreeElecSpots + nOfFreeMotSpots) {
+                        type = Vehicle.Type.MOTORCYCLE;
+                        paymentType = Vehicle.PaymentType.TICKET;
+                    } else if (count <= nOfFreeSubSpots + nOfFreeElecSpots + nOfFreeMotSpots + nOfFreeResSpots) {
+                        type = Vehicle.Type.CAR;
+                        paymentType = Vehicle.PaymentType.RESERVATION;
+                    } else {
+                        type = Vehicle.Type.CAR;
+                        paymentType = Vehicle.PaymentType.TICKET;
+                    }
+                    parkingSpots[f][r][p] = new ParkingSpot(f, r, p, type, paymentType, weight);
                 }
             }
         }
@@ -53,12 +88,8 @@ public class Garage {
     //einde constructors en functies
 
 
-    public ParkingSpot getParkingspot(int floor, int row, int place) {
+    public ParkingSpot getParkingSpot(int floor, int row, int place) {
         return parkingSpots[floor][row][place];
-    }
-
-    public int getNumberOfOpenSpots() {
-        return numberOfOpenSpots;
     }
 
     public int getPrice() {
@@ -68,13 +99,13 @@ public class Garage {
         this.price = price;
     }
 
-    public void addToTicketQueue() {
-        ticketQueue++;
-    }
-
-    public void addToSubscriptionQueue() {
-        subscriptionQueue++;
-    }
+//    public void addToTicketQueue() {
+//        ticketQueue++;
+//    }
+//
+//    public void addToSubscriptionQueue() {
+//        subscriptionQueue++;
+//    }
 
     public int getNumberOfFloors() {
         return numberOfFloors;
@@ -84,6 +115,42 @@ public class Garage {
     }
     public int getNumberOfSpots() {
         return numberOfSpots;
+    }
+
+
+    public int getNumberOfFreeRegularSpots() {
+        return numberOfFreeRegularSpots;
+    }
+    public void setNumberOfFreeRegularSpots(int numberOfFreeRegularSpots) {
+        this.numberOfFreeRegularSpots = numberOfFreeRegularSpots;
+    }
+
+    public int getNOfFreeSubSpots() {
+        return nOfFreeSubSpots;
+    }
+    public void setNOfFreeSubSpots(int nOfFreeSubSpots) {
+        this.nOfFreeSubSpots = nOfFreeSubSpots;
+    }
+
+    public int getnOfFreeResSpots() {
+        return nOfFreeResSpots;
+    }
+    public void setnOfFreeResSpots(int nOfFreeResSpots) {
+        this.nOfFreeResSpots = nOfFreeResSpots;
+    }
+
+    public int getNOfFreeElecSpots() {
+        return nOfFreeElecSpots;
+    }
+    public void setNOfFreeElecSpots(int nOfFreeElecSpots) {
+        this.nOfFreeElecSpots = nOfFreeElecSpots;
+    }
+
+    public int getNOfFreeMotSpots() {
+        return nOfFreeMotSpots;
+    }
+    public void setNOfFreeMotSpots(int nOfFreeMotSpots) {
+        this.nOfFreeMotSpots = nOfFreeMotSpots;
     }
 
     public void increaseTime(int minutes ) {
@@ -103,5 +170,6 @@ public class Garage {
     public void setGarageSetting(String key, Object value) {
         garageSettings.put(key, value);
     }
+
 
 }

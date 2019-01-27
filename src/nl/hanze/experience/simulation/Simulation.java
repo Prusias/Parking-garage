@@ -1,6 +1,7 @@
 package nl.hanze.experience.simulation;
 
 import nl.hanze.experience.mvc.*;
+import nl.hanze.experience.objects.ParkingSpot;
 import nl.hanze.experience.objects.Reservation;
 import nl.hanze.experience.objects.Vehicle;
 import nl.hanze.experience.parkinggarage.controllers.SimulationInfoController;
@@ -34,6 +35,7 @@ public class Simulation {
 
     //private SimulationInfoController simulationInfoController;
     private GarageModel garageModel;
+    private ReservationsQueue reservationsQueue;
 
     public Simulation() {
         simulationInfoModel = new SimulationInfoModel();
@@ -43,6 +45,8 @@ public class Simulation {
 
         simulationInfoModel.addView(simulationInfoView);
         simulationInfoView.setController(simulationInfoController);
+
+        reservationsQueue = new ReservationsQueue();
 
         seed = ThreadLocalRandom.current().nextLong();
         random = new Random(seed);
@@ -54,10 +58,14 @@ public class Simulation {
         if (garageModel == null) {
             throw new IllegalStateException("Simulation - garageModel has not been set!");
         }
+
+        garageModel.initializeGarage();
+        //parkingSpotWeightedQueue.Fill(garageModel.getParkingSpots());
+
         simulationThread = new SimulationThread();
         Thread thread = new Thread(simulationThread);
         thread.start();
-        garageModel.initializeGarage();
+
     }
     public void pause() {
         if (simulationThread == null) {
@@ -113,6 +121,10 @@ public class Simulation {
                 simulationInfoModel.setTickCount(tickCount);
                 simulationInfoModel.increaseTime();
                 generateCars();
+                handleReservationsQueue();
+                handleSubscriptionQueue();
+                handleTicketQueue();
+
                 tickCount++;
                 //System.out.println(tickCount);
                 try {
@@ -203,16 +215,21 @@ public class Simulation {
             }
 
             // What is the vehicle type?
-            int regularCarChance = (int)(modifier.getRegularCarModifier() * 100);
-            int electricCarChance = (int)(modifier.getElectricCarModifier() * 100);
-            int motorcycleChance = (int)(modifier.getMotorcycleModifier() * 100);
-            int typeChance = random.nextInt(regularCarChance + electricCarChance + motorcycleChance + 1);
-            if (typeChance > motorcycleChance + electricCarChance) {
-                type = Type.CAR;
-            } else if (typeChance > electricCarChance) {
-                type = Type.ELECTRIC_CAR;
+            // TODO: Remove Sub/Res limit
+            if (paymentType != PaymentType.SUBSCRIPTION && paymentType != paymentType.RESERVATION) {
+                int regularCarChance = (int)(modifier.getRegularCarModifier() * 100);
+                int electricCarChance = (int)(modifier.getElectricCarModifier() * 100);
+                int motorcycleChance = (int)(modifier.getMotorcycleModifier() * 100);
+                int typeChance = random.nextInt(regularCarChance + electricCarChance + motorcycleChance + 1);
+                if (typeChance > motorcycleChance + electricCarChance) {
+                    type = Type.CAR;
+                } else if (typeChance > electricCarChance) {
+                    type = Type.ELECTRIC_CAR;
+                } else {
+                    type = Type.MOTORCYCLE;
+                }
             } else {
-                type = Type.MOTORCYCLE;
+                type = type = Type.CAR;
             }
 
             double deviation = modifier.getParkingDurationModifier();
@@ -236,18 +253,135 @@ public class Simulation {
                     resDuration = resMin;
                 }
 
-                Reservation reservation = new Reservation(vehicle, resDuration, duration);
-                System.out.println("Spawned a " + vehicle.getType() + " Reservation Time left: " + reservation.getTimeOfArrival());
-
+                Reservation reservation = new Reservation(vehicle, simulationThread.tickCount + resDuration, duration);
+                //System.out.println("Spawned a " + vehicle.getType() + " Reservation Time left: " + reservation.getTimeOfArrival());
+                reservationsQueue.add(reservation);
             } else if (paymentType == PaymentType.SUBSCRIPTION) {
-
-
+                garageModel.addToSubscriptionQueue(vehicle);
             } else {
-
+                garageModel.addToTicketQueue(vehicle);
             }
 
-            System.out.println("Spawned a " + vehicle.getType() + " Time left: " + vehicle.getDuration());
+            System.out.println("Spawned a " + vehicle.getType() + " With PaymentType: " + vehicle.getPaymentType() + " Time left: " + vehicle.getDuration());
         }
+    }
+
+    private void handleReservationsQueue() {
+        Reservation reservation = reservationsQueue.peek();
+        if (reservation != null) {
+            if (reservation.getTimeOfArrival() == simulationThread.tickCount) {
+                Vehicle vehicle = reservationsQueue.poll().getVehicle();
+                garageModel.addToTicketQueue(vehicle);
+            }
+        }
+    }
+
+    // TODO: Handle Vehicle.Type
+    private void handleSubscriptionQueue() {
+        Vehicle peek = garageModel.peekVehicleFromSubscriptionQueue();
+        // Is there a vehicle in the queue?
+        if (peek == null) {
+            return;
+        }
+        Vehicle.Type type = peek.getType();
+        ParkingSpot parkingSpot = null;
+        // Check which spot the vehicle will go to
+        if (garageModel.getNumberOfFreeSubscriptionSpots() > 0) {
+            parkingSpot = getFreeParkingSpot(type, PaymentType.SUBSCRIPTION);
+            garageModel.setNumberOfFreeMotorcycleSpots(garageModel.getNumberOfFreeMotorcycleSpots() - 1);
+        }
+        //TODO: Sub cars go to empty ticket queue?
+
+        // Check if there was a free parking spot
+        if (parkingSpot == null) {
+            // There was no free parking spot available
+            return;
+        }
+        ParkingSpot parkingSpotLeft = garageModel.getParkingSpotLeft(parkingSpot);
+        ParkingSpot parkingSpotRight = garageModel.getParkingSpotRight(parkingSpot);
+        if (parkingSpotLeft != null) {
+            parkingSpotLeft.setWeight(parkingSpotLeft.getWeight() + 1);
+        }
+        if (parkingSpotRight != null) {
+            parkingSpotRight.setWeight(parkingSpotRight.getWeight() + 1);
+        }
+
+        Vehicle vehicle = garageModel.pollVehicleFromSubscriptionQueue();
+        parkingSpot.setVehicle(vehicle);
+        garageModel.notifyView();
+    }
+
+    // TODO: Handle Reservations
+    private void handleTicketQueue() {
+        Vehicle peek = garageModel.peekVehicleFromTicketQueue();
+        // Is there a vehicle in the queue?
+        if (peek == null) {
+            return;
+        }
+        Vehicle.Type type = peek.getType();
+        ParkingSpot parkingSpot = null;
+
+        if (type == Type.MOTORCYCLE) {
+            if (garageModel.getNumberOfFreeMotorcycleSpots() > 0) {
+                parkingSpot = getFreeParkingSpot(type, peek.getPaymentType());
+                garageModel.setNumberOfFreeMotorcycleSpots(garageModel.getNumberOfFreeMotorcycleSpots() - 1);
+            } else if (garageModel.getNumberOfFreeRegularSpots() > 0) {
+                parkingSpot = getFreeParkingSpot(Type.CAR, peek.getPaymentType());
+                garageModel.setNumberOfFreeRegularSpots(garageModel.getNumberOfFreeRegularSpots() - 1);
+            }
+        } else if (type == Type.ELECTRIC_CAR) {
+            if (garageModel.getNumberOfFreeElectricSpots() > 0) {
+                parkingSpot = getFreeParkingSpot(type, peek.getPaymentType());
+                garageModel.setNumberOfFreeElectricSpots(garageModel.getNumberOfFreeElectricSpots() - 1);
+            } else if (garageModel.getNumberOfFreeRegularSpots() > 0) {
+                parkingSpot = getFreeParkingSpot(Type.CAR, peek.getPaymentType());
+                garageModel.setNumberOfFreeRegularSpots(garageModel.getNumberOfFreeRegularSpots() - 1);
+            }
+        } else {
+            if (garageModel.getNumberOfFreeRegularSpots() > 0) {
+                parkingSpot = getFreeParkingSpot(Type.CAR, peek.getPaymentType());
+                garageModel.setNumberOfFreeRegularSpots(garageModel.getNumberOfFreeRegularSpots() - 1);
+            }
+        }
+
+        // Check if there was a free parking spot
+        if (parkingSpot == null) {
+            // There was no free parking spot available
+            return;
+        }
+        ParkingSpot parkingSpotLeft = garageModel.getParkingSpotLeft(parkingSpot);
+        ParkingSpot parkingSpotRight = garageModel.getParkingSpotRight(parkingSpot);
+        if (parkingSpotLeft != null) {
+            parkingSpotLeft.setWeight(parkingSpotLeft.getWeight() + 1);
+        }
+        if (parkingSpotRight != null) {
+            parkingSpotRight.setWeight(parkingSpotRight.getWeight() + 1);
+        }
+
+        Vehicle vehicle = garageModel.pollVehicleFromTicketQueue();
+        parkingSpot.setVehicle(vehicle);
+        garageModel.notifyView();
+    }
+
+    private ParkingSpot getFreeParkingSpot(Vehicle.Type type, Vehicle.PaymentType paymentType) {
+        ParkingSpot[][][] parkingSpots = garageModel.getParkingSpots();
+        double  weight = Double.MAX_VALUE;
+        ParkingSpot parkingSpot = null;
+        for (int floor=0; floor < parkingSpots.length; floor++) {
+            for (int row=0; row < parkingSpots[floor].length; row++) {
+                for (int spot=0; spot < parkingSpots[floor][row].length; spot++) {
+                    if (parkingSpots[floor][row][spot].getVehicle() == null) {
+                        if (parkingSpots[floor][row][spot].getType() == type && parkingSpots[floor][row][spot].getPaymentType() == paymentType) {
+                            if (parkingSpots[floor][row][spot].getWeight() < weight) {
+                                parkingSpot = parkingSpots[floor][row][spot];
+                                weight = parkingSpot.getWeight();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return parkingSpot;
     }
 }
 

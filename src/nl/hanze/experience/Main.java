@@ -50,6 +50,10 @@ public class Main {
         garageModel.setGarageSetting("minVehicleDurationInMinutes", 10);
         garageModel.setGarageSetting("maxReservationDurationInMinutes", 240);
         garageModel.setGarageSetting("minReservationDurationInMinutes", 30);
+        garageModel.setGarageSetting("subscriptionSpots", 20);
+        garageModel.setGarageSetting("reservedSpots", 10);
+        garageModel.setGarageSetting("electricSpots", 10);
+        garageModel.setGarageSetting("motorcycleSpots", 10);
         GarageController garageController = new GarageController(garageModel);
         GarageView garageView = new GarageView();
         garageView.setController(garageController);
