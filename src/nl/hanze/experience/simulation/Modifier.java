@@ -20,6 +20,10 @@ public class Modifier {
     private double motorcycleModifier;
     private double parkingDurationModifier;
     private double reservationDurationModifier;
+    private double ticketQueueSizeModifier;
+    private double ticketQueueMaxSize;
+    private double subscriptionQueueSizeModifier;
+    private double subscriptionQueueMaxSize;
 
     /**
      * Initialize Modifier with default values
@@ -28,14 +32,18 @@ public class Modifier {
         weekdayModifier = new double[] { 0.8, 1, 1.1, 1, 1.5, 1.2, 0.5 };
         hourModifier = new double[] { 0.3, 0.2, 0.2, 0.2, 0.3, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1, 1, 1.1, 1.2, 1.1, 1.1, 1, 0.9, 0.8, 0.8, 0.6, 0.5, 0.3};
         baseVehicleModifier = 2;
-        ticketVehicleModifier = 1;
+        ticketVehicleModifier = 3;
         subscriptionVehicleModifier = 0.3;
-        reservationVehicleModifier = 0.3;
+        reservationVehicleModifier = 0.2;
         regularCarModifier = 1;
         electricCarModifier = 0.05;
         motorcycleModifier = 0.05;
         parkingDurationModifier = 3;
         reservationDurationModifier = 2;
+        ticketQueueSizeModifier = 10;
+        ticketQueueMaxSize = 100;
+        subscriptionQueueSizeModifier = 5;
+        subscriptionQueueMaxSize = 100;
     }
 
     /**
@@ -139,5 +147,33 @@ public class Modifier {
     }
     public void setReservationDurationModifier(double reservationDurationModifier) {
         this.reservationDurationModifier = reservationDurationModifier;
+    }
+
+    public double getTicketQueueSizeModifier() {
+        return ticketQueueSizeModifier;
+    }
+    public void setTicketQueueSizeModifier(double ticketQueueSizeModifier) {
+        this.ticketQueueSizeModifier = ticketQueueSizeModifier;
+    }
+
+    public double getTicketQueueMaxSize() {
+        return ticketQueueMaxSize;
+    }
+    public void setTicketQueueMaxSize(double ticketQueueMaxSize) {
+        this.ticketQueueMaxSize = ticketQueueMaxSize;
+    }
+
+    public double getSubscriptionQueueSizeModifier() {
+        return subscriptionQueueSizeModifier;
+    }
+    public void setSubscriptionQueueSizeModifier(double subscriptionQueueSizeModifier) {
+        this.subscriptionQueueSizeModifier = subscriptionQueueSizeModifier;
+    }
+
+    public double getSubscriptionQueueMaxSize() {
+        return subscriptionQueueMaxSize;
+    }
+    public void setSubscriptionQueueMaxSize(double subscriptionQueueMaxSize) {
+        this.subscriptionQueueMaxSize = subscriptionQueueMaxSize;
     }
 }
