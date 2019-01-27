@@ -135,9 +135,9 @@ public class GarageModel extends Model {
     }
 
     public int getSubscriptionQueueSize() {
-        return ticketQueue.Size();
+        return subscriptionQueue.Size();
     }
     public int getTicketQueueSize() {
-        return subscriptionQueue.Size();
+        return ticketQueue.Size();
     }
 }

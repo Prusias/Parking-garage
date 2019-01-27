@@ -200,7 +200,6 @@ public class Simulation {
         double chance = random.nextInt(101) * chanceModifier;
         double neededChance = 100 / modifier.getBaseVehicleModifier();
         if (chance > neededChance) {
-
             // We are spawning a vehicle, Does it have a subscription or a reservation?
             int ticketChance = (int)(modifier.getBaseVehicleModifier() * 100);
             int subscriptionChance = (int)(modifier.getSubscriptionVehicleModifier() * 100);
@@ -213,6 +212,22 @@ public class Simulation {
             } else {
                 paymentType = PaymentType.RESERVATION;
             }
+
+            // Take leaving cars because of queue length into a count
+            if (paymentType == PaymentType.TICKET || paymentType == PaymentType.RESERVATION) {
+                double queueSizeValue = modifier.getTicketQueueSizeModifier() * garageModel.getTicketQueueSize();
+                //System.out.println("Size: " + queueSizeValue + " Max: " + modifier.getTicketQueueMaxSize());
+                if (queueSizeValue > modifier.getTicketQueueMaxSize()) {
+                    return;
+                }
+            }
+            if (paymentType == PaymentType.SUBSCRIPTION) {
+                double queueSizeValue = modifier.getSubscriptionQueueSizeModifier() * garageModel.getSubscriptionQueueSize();
+                if (queueSizeValue > modifier.getSubscriptionQueueMaxSize()) {
+                    return;
+                }
+            }
+
 
             // What is the vehicle type?
             // TODO: Remove Sub/Res limit
@@ -232,6 +247,11 @@ public class Simulation {
                 type = type = Type.CAR;
             }
 
+
+
+
+
+
             double deviation = modifier.getParkingDurationModifier();
             int max = (int)garageModel.getGarageSetting("maxVehicleDurationInMinutes");
             int min = (int)garageModel.getGarageSetting("minVehicleDurationInMinutes");
@@ -244,7 +264,7 @@ public class Simulation {
             Vehicle vehicle = new Vehicle(type, paymentType, duration);
 
             if (paymentType == PaymentType.RESERVATION) {
-                double resDeviation = modifier.getReservationVehicleModifier();
+                double resDeviation = modifier.getReservationDurationModifier();
                 int resMax = (int)garageModel.getGarageSetting("maxReservationDurationInMinutes");
                 int resMin = (int)garageModel.getGarageSetting("minReservationDurationInMinutes");
                 double resStandard = random.nextGaussian();
@@ -288,7 +308,7 @@ public class Simulation {
         // Check which spot the vehicle will go to
         if (garageModel.getNumberOfFreeSubscriptionSpots() > 0) {
             parkingSpot = getFreeParkingSpot(type, PaymentType.SUBSCRIPTION);
-            garageModel.setNumberOfFreeMotorcycleSpots(garageModel.getNumberOfFreeMotorcycleSpots() - 1);
+            garageModel.setNumberOfFreeSubscriptionSpots(garageModel.getNumberOfFreeSubscriptionSpots() - 1);
         }
         //TODO: Sub cars go to empty ticket queue?
 
@@ -323,23 +343,23 @@ public class Simulation {
 
         if (type == Type.MOTORCYCLE) {
             if (garageModel.getNumberOfFreeMotorcycleSpots() > 0) {
-                parkingSpot = getFreeParkingSpot(type, peek.getPaymentType());
+                parkingSpot = getFreeParkingSpot(type, PaymentType.TICKET);
                 garageModel.setNumberOfFreeMotorcycleSpots(garageModel.getNumberOfFreeMotorcycleSpots() - 1);
             } else if (garageModel.getNumberOfFreeRegularSpots() > 0) {
-                parkingSpot = getFreeParkingSpot(Type.CAR, peek.getPaymentType());
+                parkingSpot = getFreeParkingSpot(Type.CAR, PaymentType.TICKET);
                 garageModel.setNumberOfFreeRegularSpots(garageModel.getNumberOfFreeRegularSpots() - 1);
             }
         } else if (type == Type.ELECTRIC_CAR) {
             if (garageModel.getNumberOfFreeElectricSpots() > 0) {
-                parkingSpot = getFreeParkingSpot(type, peek.getPaymentType());
+                parkingSpot = getFreeParkingSpot(type, PaymentType.TICKET);
                 garageModel.setNumberOfFreeElectricSpots(garageModel.getNumberOfFreeElectricSpots() - 1);
             } else if (garageModel.getNumberOfFreeRegularSpots() > 0) {
-                parkingSpot = getFreeParkingSpot(Type.CAR, peek.getPaymentType());
+                parkingSpot = getFreeParkingSpot(Type.CAR, PaymentType.TICKET);
                 garageModel.setNumberOfFreeRegularSpots(garageModel.getNumberOfFreeRegularSpots() - 1);
             }
         } else {
             if (garageModel.getNumberOfFreeRegularSpots() > 0) {
-                parkingSpot = getFreeParkingSpot(Type.CAR, peek.getPaymentType());
+                parkingSpot = getFreeParkingSpot(Type.CAR, PaymentType.TICKET);
                 garageModel.setNumberOfFreeRegularSpots(garageModel.getNumberOfFreeRegularSpots() - 1);
             }
         }
