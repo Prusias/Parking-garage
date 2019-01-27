@@ -21,9 +21,6 @@ public class Main {
      * Initialize the simulation
      */
     public static void main(String[] args) {
-        TestModel testModel = new TestModel();
-        TestView testView = new TestView();
-        TestController testController = new TestController(testModel);
         /*
         GarageModel garageModel = new GarageModel();
         garageModel.createGarage(3,4,22);
@@ -72,7 +69,6 @@ public class Main {
         frame.setJMenuBar(menuBar);
 
         container.add(simulation.getSimulationInfoView());
-        container.add(testView);
         container.add(garageView);
         frame.pack();
         frame.setSize(800,800);
