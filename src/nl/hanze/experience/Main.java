@@ -51,6 +51,9 @@ public class Main {
         garageModel.setGarageSetting("reservedSpots", 10);
         garageModel.setGarageSetting("electricSpots", 10);
         garageModel.setGarageSetting("motorcycleSpots", 10);
+        garageModel.setGarageSetting("ticketQueueSpeed", 5);
+        garageModel.setGarageSetting("subscriptionQueueSpeed", 5);
+        garageModel.setGarageSetting("exitQueueSpeed", 3);
         GarageController garageController = new GarageController(garageModel);
         GarageView garageView = new GarageView();
         garageView.setController(garageController);
