@@ -43,10 +43,10 @@ public class Main {
         garageModel.setGarageSetting("amountOfRows", 5);
         garageModel.setGarageSetting("amountOfSpots", 20);
         garageModel.setGarageSetting("priceInEuro", 0.5f);
-        garageModel.setGarageSetting("averageVehicleDurationInMinutes", 120);
+        garageModel.setGarageSetting("averageVehicleDurationInMinutes", 240);
         garageModel.setGarageSetting("maxVehicleDurationInMinutes", 1440);
         garageModel.setGarageSetting("minVehicleDurationInMinutes", 10);
-        garageModel.setGarageSetting("averageReservationDurationInMinutes", 120);
+        garageModel.setGarageSetting("averageReservationDurationInMinutes", 240);
         garageModel.setGarageSetting("maxReservationDurationInMinutes", 240);
         garageModel.setGarageSetting("minReservationDurationInMinutes", 30);
         garageModel.setGarageSetting("subscriptionSpots", 40);
