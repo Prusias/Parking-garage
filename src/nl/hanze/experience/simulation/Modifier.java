@@ -24,6 +24,7 @@ public class Modifier {
     private double ticketQueueMaxSize;
     private double subscriptionQueueSizeModifier;
     private double subscriptionQueueMaxSize;
+    private double neighbouringParkingSpotWeightModifier;
 
     /**
      * Initialize Modifier with default values
@@ -44,6 +45,7 @@ public class Modifier {
         ticketQueueMaxSize = 100;
         subscriptionQueueSizeModifier = 5;
         subscriptionQueueMaxSize = 100;
+        neighbouringParkingSpotWeightModifier = 1;
     }
 
     /**
@@ -175,5 +177,12 @@ public class Modifier {
     }
     public void setSubscriptionQueueMaxSize(double subscriptionQueueMaxSize) {
         this.subscriptionQueueMaxSize = subscriptionQueueMaxSize;
+    }
+
+    public double getNeighbouringParkingSpotWeightModifier() {
+        return neighbouringParkingSpotWeightModifier;
+    }
+    public void setNeighbouringParkingSpotWeightModifier(double neighbouringParkingSpotWeightModifier) {
+        this.neighbouringParkingSpotWeightModifier = neighbouringParkingSpotWeightModifier;
     }
 }
