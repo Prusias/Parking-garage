@@ -14,7 +14,8 @@ public class Vehicle {
     private Type type;
     private PaymentType paymentType;
     private int duration; //minutes
-    private int timeLeft;
+    private int timeOfLeaving; // tick
+    private ParkingSpot parkingSpot;
 
     public Type getType() {
         return type;
@@ -23,11 +24,11 @@ public class Vehicle {
         return paymentType;
     }
 
-    public int getTimeLeft() {
-        return timeLeft;
+    public int getTimeOfLeaving() {
+        return timeOfLeaving;
     }
-    public void setTimeLeft(int timeLeft) {
-        this.timeLeft = timeLeft;
+    public void setTimeOfLeaving(int timeOfLeaving) {
+        this.timeOfLeaving = timeOfLeaving;
     }
 
     public int getDuration() {
@@ -35,6 +36,13 @@ public class Vehicle {
     }
     public void setDuration(int duration) {
         this.duration = duration;
+    }
+
+    public ParkingSpot getParkingSpot() {
+        return parkingSpot;
+    }
+    public void setParkingSpot(ParkingSpot parkingSpot) {
+        this.parkingSpot = parkingSpot;
     }
 
     public Vehicle(Type type, PaymentType paymentType, int duration) {

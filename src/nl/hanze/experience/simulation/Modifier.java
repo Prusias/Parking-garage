@@ -39,8 +39,8 @@ public class Modifier {
         regularCarModifier = 1;
         electricCarModifier = 0.05;
         motorcycleModifier = 0.05;
-        parkingDurationModifier = 3;
-        reservationDurationModifier = 2;
+        parkingDurationModifier = 1.5;
+        reservationDurationModifier = 1.5;
         ticketQueueSizeModifier = 10;
         ticketQueueMaxSize = 100;
         subscriptionQueueSizeModifier = 5;
