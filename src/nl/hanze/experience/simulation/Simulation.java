@@ -451,7 +451,7 @@ public class Simulation {
                 // Remove the vehicle from the Queue
                 vehicle = timeOfLeavingQueue.poll();
 
-                //TODO: Handle payment
+                //TODO: Handle payment/ done?
                 garageModel.vehiclePay(vehicle);
                 ParkingSpot parkingSpot = vehicle.getParkingSpot();
                 vehicle.setParkingSpot(null);

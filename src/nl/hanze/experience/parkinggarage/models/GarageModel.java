@@ -166,13 +166,11 @@ public class GarageModel extends Model {
 
     public void vehiclePay(Vehicle vehicle) {
         if (vehicle.getPaymentType() != Vehicle.PaymentType.SUBSCRIPTION) {
-            System.out.println("KKKKKKKKKAAAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasssssssssssssss");
             int payingTime;
             payingTime = vehicle.getDuration() / 10;
             if (vehicle.getDuration() % 10 != 0) {
                 payingTime = +1;
             }
-            System.out.println(garage.getPrice());
             garage.addMoney(garage.getPrice() * payingTime);
         }
     }
