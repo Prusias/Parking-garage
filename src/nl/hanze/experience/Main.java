@@ -60,8 +60,12 @@ public class Main {
         GarageView garageView = new GarageView();
         garageView.setController(garageController);
         garageModel.addView(garageView);
-
         simulation.setGarageModel(garageModel);
+
+        VehicleGraphModel vehicleGraphModel = new VehicleGraphModel();
+        VehicleGraphView vehicleGraphView = new VehicleGraphView();
+        vehicleGraphModel.addView(vehicleGraphView);
+        simulation.setVehicleGraphModel(vehicleGraphModel);
 
         JFrame frame = new JFrame();
         frame.setTitle("Garage");
@@ -75,6 +79,7 @@ public class Main {
 
         container.add(simulation.getSimulationInfoView());
         container.add(garageView);
+        container.add(vehicleGraphView);
         frame.pack();
         frame.setSize(800,800);
         frame.setVisible(true);

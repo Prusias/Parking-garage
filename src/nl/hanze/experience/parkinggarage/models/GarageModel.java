@@ -1,7 +1,6 @@
 package nl.hanze.experience.parkinggarage.models;
 
 import nl.hanze.experience.mvc.Model;
-import nl.hanze.experience.mvc.View;
 import nl.hanze.experience.objects.*;
 
 import java.time.LocalDateTime;
@@ -16,16 +15,20 @@ public class GarageModel extends Model {
     private VehicleQueue ticketQueue;
     private VehicleQueue subscriptionQueue;
 
+
+
     public GarageModel() {
         garage = new Garage();
         ticketQueue = new VehicleQueue();
         subscriptionQueue = new VehicleQueue();
+
     }
 
     public void initializeGarage() {
         garage.initializeGarage();
         notifyView();
     }
+
     /*
     public void vehicleToQueue(Vehicle.Type vehicleType, Vehicle.PaymentType paymentType, int duration) {
         switch (paymentType) {
@@ -102,12 +105,12 @@ public class GarageModel extends Model {
         return ticketQueue.peek();
     }
 
-    public int getNumberOfFreeRegularSpots() {
-        return garage.getNumberOfFreeRegularSpots();
+    public int getNumberOfFreeRegularTicketSpots() {
+        return garage.getNumberOfFreeRegularTicketSpots();
     }
 
-    public void setNumberOfFreeRegularSpots(int numberOfFreeRegularSpots) {
-        garage.setNumberOfFreeRegularSpots(numberOfFreeRegularSpots);
+    public void setNumberOfFreeRegularTicketSpots(int numberOfFreeRegularTicketSpots) {
+        garage.setNumberOfFreeRegularTicketSpots(numberOfFreeRegularTicketSpots);
     }
 
     public int getNumberOfFreeSubscriptionSpots() {
@@ -177,5 +180,26 @@ public class GarageModel extends Model {
 
     public double moneyMadeInEuro() {
         return ((double)garage.getMoneyMade())/10;
+    }
+
+    public int getTotalSubVehicles() {
+        return garage.getTotalSubVehicles();
+    }
+    public void setTotalSubVehicles(int totalSubVehicles) {
+        garage.setTotalSubVehicles(totalSubVehicles);
+    }
+
+    public int getTotalResVehicles() {
+        return garage.getTotalResVehicles();
+    }
+    public void setTotalResVehicles(int totalResVehicles) {
+        garage.setTotalResVehicles(totalResVehicles);
+    }
+
+    public int getTotalTicVehicles() {
+        return garage.getTotalTicVehicles();
+    }
+    public void setTotalTicVehicles(int totalTicVehicles) {
+        garage.setTotalTicVehicles(totalTicVehicles);
     }
 }

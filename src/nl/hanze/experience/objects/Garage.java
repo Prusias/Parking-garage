@@ -17,17 +17,23 @@ public class Garage {
     private int numberOfFloors;
     private int numberOfRows;
     private int numberOfSpots;
-    private int numberOfFreeRegularSpots;
+    private int numberOfFreeRegularTicketSpots;
     private int nOfFreeSubSpots;
     private int nOfFreeResSpots;
     private int nOfFreeElecSpots;
     private int nOfFreeMotSpots;
+    private int totalSubVehicles;
+    private int totalResVehicles;
+    private int totalTicVehicles;
     private int price;
     private int moneyMade = 0; // in cents
 
     //constructors en functies voor constructors start
     public Garage() {
-        localDateTime = LocalDateTime.of(1, 1, 1, 3, 0, 0);
+        localDateTime = LocalDateTime.of(2019, 1, 1, 3, 0, 0);
+        totalSubVehicles = 0;
+        totalResVehicles = 0;
+        totalTicVehicles = 0;
     }
 
     public void initializeGarage() {
@@ -44,7 +50,7 @@ public class Garage {
         if (neededSpots > totalSpots) {
             throw new IllegalStateException("Garage - Not enough parking spots available");
         }
-        numberOfFreeRegularSpots = totalSpots - neededSpots;
+        numberOfFreeRegularTicketSpots = totalSpots - neededSpots;
 
         parkingSpots = new ParkingSpot[numberOfFloors][numberOfRows][numberOfSpots];
         createParkingSpots();
@@ -119,12 +125,12 @@ public class Garage {
     }
 
 
-    public int getNumberOfFreeRegularSpots() {
-        return numberOfFreeRegularSpots;
+    public int getNumberOfFreeRegularTicketSpots() {
+        return numberOfFreeRegularTicketSpots;
     }
 
-    public void setNumberOfFreeRegularSpots(int numberOfFreeRegularSpots) {
-        this.numberOfFreeRegularSpots = numberOfFreeRegularSpots;
+    public void setNumberOfFreeRegularTicketSpots(int numberOfFreeRegularTicketSpots) {
+        this.numberOfFreeRegularTicketSpots = numberOfFreeRegularTicketSpots;
     }
 
     public int getNOfFreeSubSpots() {
@@ -188,6 +194,27 @@ public class Garage {
 
     public int calculatePriceInCents(Double priceInEuro) {
         return (int) (priceInEuro * 10);
+    }
+
+    public int getTotalSubVehicles() {
+        return totalSubVehicles;
+    }
+    public void setTotalSubVehicles(int totalSubVehicles) {
+        this.totalSubVehicles = totalSubVehicles;
+    }
+
+    public int getTotalResVehicles() {
+        return totalResVehicles;
+    }
+    public void setTotalResVehicles(int totalResVehicles) {
+        this.totalResVehicles = totalResVehicles;
+    }
+
+    public int getTotalTicVehicles() {
+        return totalTicVehicles;
+    }
+    public void setTotalTicVehicles(int totalTicVehicles) {
+        this.totalTicVehicles = totalTicVehicles;
     }
 }
 

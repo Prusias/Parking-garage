@@ -1,19 +1,18 @@
 package nl.hanze.experience.simulation;
 
-import nl.hanze.experience.mvc.*;
 import nl.hanze.experience.objects.ParkingSpot;
 import nl.hanze.experience.objects.Reservation;
 import nl.hanze.experience.objects.Vehicle;
 import nl.hanze.experience.parkinggarage.controllers.SimulationInfoController;
 import nl.hanze.experience.parkinggarage.models.GarageModel;
+import nl.hanze.experience.parkinggarage.models.VehicleGraphModel;
 import nl.hanze.experience.parkinggarage.models.SimulationInfoModel;
-import nl.hanze.experience.parkinggarage.views.GarageView;
 import nl.hanze.experience.parkinggarage.views.SimulationInfoView;
+
 
 import static nl.hanze.experience.objects.Vehicle.*;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -36,6 +35,7 @@ public class Simulation {
 
     //private SimulationInfoController simulationInfoController;
     private GarageModel garageModel;
+    private VehicleGraphModel vehicleGraphModel;
     private ReservationsQueue reservationsQueue;
     private timeOfLeavingQueue timeOfLeavingQueue;
 
@@ -132,6 +132,9 @@ public class Simulation {
                 handleTicketQueue();
                 System.out.println("TicketQueueSize: " + garageModel.getTicketQueueSize());
                 handleLeavingVehicles();
+                if (tickCount % 60 == 0) {
+                    handleGraphs();
+                }
 
                 tickCount++;
                 //System.out.println(tickCount);
@@ -167,6 +170,10 @@ public class Simulation {
     }
     public void setGarageModel(GarageModel garageModel) {
         this.garageModel = garageModel;
+    }
+
+    public void setVehicleGraphModel(VehicleGraphModel vehicleGraphModel) {
+        this.vehicleGraphModel = vehicleGraphModel;
     }
 
     /**
@@ -324,6 +331,7 @@ public class Simulation {
             if (garageModel.getNumberOfFreeSubscriptionSpots() > 0) {
                 parkingSpot = getFreeParkingSpot(type, PaymentType.SUBSCRIPTION);
                 garageModel.setNumberOfFreeSubscriptionSpots(garageModel.getNumberOfFreeSubscriptionSpots() - 1);
+                garageModel.setTotalSubVehicles(garageModel.getTotalSubVehicles() + 1);
             }
             //TODO: Sub cars go to empty ticket queue?
 
@@ -360,23 +368,29 @@ public class Simulation {
                 if (garageModel.getNumberOfFreeMotorcycleSpots() > 0) {
                     parkingSpot = getFreeParkingSpot(type, PaymentType.TICKET);
                     garageModel.setNumberOfFreeMotorcycleSpots(garageModel.getNumberOfFreeMotorcycleSpots() - 1);
-                } else if (garageModel.getNumberOfFreeRegularSpots() > 0) {
+                } else if (garageModel.getNumberOfFreeRegularTicketSpots() > 0) {
                     parkingSpot = getFreeParkingSpot(Type.CAR, PaymentType.TICKET);
-                    garageModel.setNumberOfFreeRegularSpots(garageModel.getNumberOfFreeRegularSpots() - 1);
+                    garageModel.setNumberOfFreeRegularTicketSpots(garageModel.getNumberOfFreeRegularTicketSpots() - 1);
                 }
             } else if (type == Type.ELECTRIC_CAR) {
                 if (garageModel.getNumberOfFreeElectricSpots() > 0) {
                     parkingSpot = getFreeParkingSpot(type, PaymentType.TICKET);
                     garageModel.setNumberOfFreeElectricSpots(garageModel.getNumberOfFreeElectricSpots() - 1);
-                } else if (garageModel.getNumberOfFreeRegularSpots() > 0) {
+                } else if (garageModel.getNumberOfFreeRegularTicketSpots() > 0) {
                     parkingSpot = getFreeParkingSpot(Type.CAR, PaymentType.TICKET);
-                    garageModel.setNumberOfFreeRegularSpots(garageModel.getNumberOfFreeRegularSpots() - 1);
+                    garageModel.setNumberOfFreeRegularTicketSpots(garageModel.getNumberOfFreeRegularTicketSpots() - 1);
                 }
             } else {
-                if (garageModel.getNumberOfFreeRegularSpots() > 0) {
+                if (garageModel.getNumberOfFreeRegularTicketSpots() > 0) {
                     parkingSpot = getFreeParkingSpot(Type.CAR, PaymentType.TICKET);
-                    garageModel.setNumberOfFreeRegularSpots(garageModel.getNumberOfFreeRegularSpots() - 1);
+                    garageModel.setNumberOfFreeRegularTicketSpots(garageModel.getNumberOfFreeRegularTicketSpots() - 1);
                 }
+            }
+
+            if (peek.getPaymentType() == PaymentType.RESERVATION) {
+                garageModel.setTotalResVehicles(garageModel.getTotalResVehicles() + 1);
+            } else {
+                garageModel.setTotalTicVehicles(garageModel.getTotalTicVehicles() + 1);
             }
 
             // Check if there was a free parking spot
@@ -461,16 +475,19 @@ public class Simulation {
                 // TODO: Remove Sub/Res limit
                 if(parkingSpot.getPaymentType() == PaymentType.SUBSCRIPTION) {
                     garageModel.setNumberOfFreeSubscriptionSpots(garageModel.getNumberOfFreeSubscriptionSpots() + 1);
+                    garageModel.setTotalSubVehicles(garageModel.getTotalSubVehicles() - 1);
                 } else if (parkingSpot.getPaymentType() == PaymentType.RESERVATION) {
                     garageModel.setNumberOfFreeReservedSpots(garageModel.getNumberOfFreeReservedSpots() + 1);
+                    garageModel.setTotalResVehicles(garageModel.getTotalResVehicles() - 1);
                 } else {
                     if(parkingSpot.getType() == Type.MOTORCYCLE) {
                         garageModel.setNumberOfFreeMotorcycleSpots(garageModel.getNumberOfFreeMotorcycleSpots() + 1);
                     } else if (parkingSpot.getType() == Type.ELECTRIC_CAR) {
                         garageModel.setNumberOfFreeElectricSpots(garageModel.getNumberOfFreeElectricSpots() + 1);
                     } else {
-                        garageModel.setNumberOfFreeRegularSpots(garageModel.getNumberOfFreeRegularSpots() + 1) ;
+                        garageModel.setNumberOfFreeRegularTicketSpots(garageModel.getNumberOfFreeRegularTicketSpots() + 1) ;
                     }
+                    garageModel.setTotalTicVehicles(garageModel.getTotalTicVehicles() - 1);
                 }
 
                 System.out.println("Vehicle of Type: " + vehicle.getType() + " and PaymentType " + vehicle.getPaymentType() + " left" );
@@ -479,6 +496,21 @@ public class Simulation {
             // For the next loop
             vehicle = timeOfLeavingQueue.peek();
         }
+    }
+
+    private void handleGraphs() {
+        if (vehicleGraphModel == null) {
+            throw new IllegalStateException("Simulation - vehicleGraphModel not set");
+        }
+
+        vehicleGraphModel.updateTotalVehicleTimeSeries(
+                garageModel.getLocalDateTime(),
+                garageModel.getTotalSubVehicles() + garageModel.getTotalResVehicles() + garageModel.getTotalTicVehicles()
+        );
+        vehicleGraphModel.updateSubscriptionVehicleTimeSeries(garageModel.getLocalDateTime(), garageModel.getTotalSubVehicles());
+        vehicleGraphModel.updateReservationVehicleTimeSeries(garageModel.getLocalDateTime(), garageModel.getTotalResVehicles());
+        vehicleGraphModel.updateTicketVehicleTimeSeries(garageModel.getLocalDateTime(), garageModel.getTotalTicVehicles());
+        vehicleGraphModel.notifyView();
     }
 }
 
