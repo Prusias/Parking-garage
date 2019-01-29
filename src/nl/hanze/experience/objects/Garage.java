@@ -180,5 +180,3 @@ public class Garage {
         return  (int)(priceInEuro * 10);
     }
 
-
-}

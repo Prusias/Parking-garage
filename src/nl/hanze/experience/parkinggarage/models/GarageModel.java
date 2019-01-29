@@ -148,4 +148,3 @@ public class GarageModel extends Model {
         if (vehicle.getDuration() % 10 !=0) {payingTime=+1;}
         garage.addMoney(garage.getPrice() * payingTime);
     }
-}
