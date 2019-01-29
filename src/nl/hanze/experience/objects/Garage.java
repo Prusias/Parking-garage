@@ -39,7 +39,7 @@ public class Garage {
         nOfFreeResSpots = (int) getGarageSetting("reservedSpots");
         nOfFreeElecSpots = (int) getGarageSetting("electricSpots");
         nOfFreeMotSpots = (int) getGarageSetting("motorcycleSpots");
-        this.price = caluclatePriceInCents((double)getGarageSetting("priceInEuro"));
+        this.price = calculatePriceInCents((double)getGarageSetting("priceInEuro"));
         int neededSpots = nOfFreeSubSpots + nOfFreeResSpots + nOfFreeElecSpots + nOfFreeMotSpots;
         if (neededSpots > totalSpots) {
             throw new IllegalStateException("Garage - Not enough parking spots available");
@@ -186,7 +186,7 @@ public class Garage {
         garageSettings.put(key, value);
     }
 
-    public int caluclatePriceInCents(Double priceInEuro) {
+    public int calculatePriceInCents(Double priceInEuro) {
         return (int) (priceInEuro * 10);
     }
 }
