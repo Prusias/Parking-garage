@@ -42,7 +42,7 @@ public class Main {
         garageModel.setGarageSetting("amountOfFloors", 3);
         garageModel.setGarageSetting("amountOfRows", 5);
         garageModel.setGarageSetting("amountOfSpots", 20);
-        garageModel.setGarageSetting("priceInEuro", 0.5f);
+        garageModel.setGarageSetting("priceInEuro", 0.5);
         garageModel.setGarageSetting("averageVehicleDurationInMinutes", 120);
         garageModel.setGarageSetting("maxVehicleDurationInMinutes", 1440);
         garageModel.setGarageSetting("minVehicleDurationInMinutes", 10);

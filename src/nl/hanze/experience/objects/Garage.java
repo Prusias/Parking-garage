@@ -22,15 +22,11 @@ public class Garage {
     private int nOfFreeResSpots;
     private int nOfFreeElecSpots;
     private int nOfFreeMotSpots;
-    private int price = 65;
-
-//    private int ticketQueue;
-//    private int subscriptionQueue;
+    private int price = 0;
+    private int moneyMade = 0; // in cents
 
     //constructors en functies voor constructors start
     public Garage() {
-//        ticketQueue = 0;
-//        subscriptionQueue = 0;
         localDateTime = LocalDateTime.of(1, 1,1, 3, 0, 0);
     }
     public void initializeGarage() {
@@ -42,6 +38,7 @@ public class Garage {
         nOfFreeResSpots = (int)getGarageSetting("reservedSpots");
         nOfFreeElecSpots = (int)getGarageSetting("electricSpots");
         nOfFreeMotSpots = (int)getGarageSetting("motorcycleSpots");
+        //this.price = caluclatePriceInCents((double)getGarageSetting("priceInEuro"));
         int neededSpots = nOfFreeSubSpots + nOfFreeResSpots + nOfFreeElecSpots + nOfFreeMotSpots;
         if (neededSpots > totalSpots){
             throw new IllegalStateException("Garage - Not enough parking spots available");
@@ -160,6 +157,14 @@ public class Garage {
         return localDateTime;
     }
 
+    public void addMoney(int amount) {
+        moneyMade += amount;
+    }
+
+    public int getMoneyMade() {
+        return moneyMade;
+    }
+
     public Object getGarageSetting(String key) {
         if (!garageSettings.containsKey(key)) {
             throw new IllegalStateException("Garage - garageSettings key does not exist");
@@ -171,5 +176,7 @@ public class Garage {
         garageSettings.put(key, value);
     }
 
+    public int caluclatePriceInCents(Double priceInEuro) {
+        return  (int)(priceInEuro * 10);
+    }
 
-}
