@@ -22,7 +22,7 @@ public class Garage {
     private int nOfFreeResSpots;
     private int nOfFreeElecSpots;
     private int nOfFreeMotSpots;
-    private int price = 0;
+    private int price;
     private int moneyMade = 0; // in cents
 
     //constructors en functies voor constructors start
@@ -39,7 +39,7 @@ public class Garage {
         nOfFreeResSpots = (int) getGarageSetting("reservedSpots");
         nOfFreeElecSpots = (int) getGarageSetting("electricSpots");
         nOfFreeMotSpots = (int) getGarageSetting("motorcycleSpots");
-        //this.price = caluclatePriceInCents((double)getGarageSetting("priceInEuro"));
+        this.price = caluclatePriceInCents((double)getGarageSetting("priceInEuro"));
         int neededSpots = nOfFreeSubSpots + nOfFreeResSpots + nOfFreeElecSpots + nOfFreeMotSpots;
         if (neededSpots > totalSpots) {
             throw new IllegalStateException("Garage - Not enough parking spots available");

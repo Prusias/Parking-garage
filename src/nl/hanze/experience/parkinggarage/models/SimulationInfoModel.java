@@ -62,4 +62,7 @@ public class SimulationInfoModel extends Model {
     public int getTicketQueueSize() {
         return simulation.getGarageModel().getTicketQueueSize();
     }
+    public double getMoneyMade() {
+        return simulation.getGarageModel().moneyMadeInEuro();
+    }
 }

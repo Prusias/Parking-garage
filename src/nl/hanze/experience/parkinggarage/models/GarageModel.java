@@ -16,7 +16,8 @@ public class GarageModel extends Model {
     private VehicleQueue ticketQueue;
     private VehicleQueue subscriptionQueue;
 
-    public GarageModel() {garage = new Garage();
+    public GarageModel() {
+        garage = new Garage();
         ticketQueue = new VehicleQueue();
         subscriptionQueue = new VehicleQueue();
     }
@@ -44,28 +45,35 @@ public class GarageModel extends Model {
     public ParkingSpot[][][] getParkingSpots() {
         return garage.parkingSpots;
     }
+
     public ParkingSpot getParkingSpot(int floor, int row, int spot) {
         return garage.getParkingSpot(floor, row, spot);
     }
+
     public int getNumberOfFloors() {
         return garage.getNumberOfFloors();
     }
+
     public int getNumberOfRows() {
         return garage.getNumberOfRows();
     }
+
     public int getNumberOfSpots() {
         return garage.getNumberOfSpots();
     }
+
     public Object getGarageSetting(String key) {
         return garage.getGarageSetting(key);
     }
+
     public void setGarageSetting(String key, Object value) {
         garage.setGarageSetting(key, value);
     }
 
-    public void increaseTime(int minutes ) {
+    public void increaseTime(int minutes) {
         garage.increaseTime(minutes);
     }
+
     public LocalDateTime getLocalDateTime() {
         return garage.getLocalDateTime();
     }
@@ -73,6 +81,7 @@ public class GarageModel extends Model {
     public void addToSubscriptionQueue(Vehicle vehicle) {
         subscriptionQueue.addVehicle(vehicle);
     }
+
     public void addToTicketQueue(Vehicle vehicle) {
         ticketQueue.addVehicle(vehicle);
     }
@@ -80,12 +89,15 @@ public class GarageModel extends Model {
     public Vehicle pollVehicleFromSubscriptionQueue() {
         return subscriptionQueue.poll();
     }
+
     public Vehicle peekVehicleFromSubscriptionQueue() {
         return subscriptionQueue.peek();
     }
+
     public Vehicle pollVehicleFromTicketQueue() {
         return ticketQueue.poll();
     }
+
     public Vehicle peekVehicleFromTicketQueue() {
         return ticketQueue.peek();
     }
@@ -93,30 +105,39 @@ public class GarageModel extends Model {
     public int getNumberOfFreeRegularSpots() {
         return garage.getNumberOfFreeRegularSpots();
     }
+
     public void setNumberOfFreeRegularSpots(int numberOfFreeRegularSpots) {
         garage.setNumberOfFreeRegularSpots(numberOfFreeRegularSpots);
     }
+
     public int getNumberOfFreeSubscriptionSpots() {
         return garage.getNOfFreeSubSpots();
     }
+
     public void setNumberOfFreeSubscriptionSpots(int numberOfFreeSubscriptionSpots) {
         garage.setNOfFreeSubSpots(numberOfFreeSubscriptionSpots);
     }
+
     public int getNumberOfFreeReservedSpots() {
-        return  garage.getnOfFreeResSpots();
+        return garage.getnOfFreeResSpots();
     }
+
     public void setNumberOfFreeReservedSpots(int numberOfFreeReservedSpots) {
         garage.setnOfFreeResSpots(numberOfFreeReservedSpots);
     }
+
     public int getNumberOfFreeElectricSpots() {
-        return  garage.getNOfFreeElecSpots();
+        return garage.getNOfFreeElecSpots();
     }
+
     public void setNumberOfFreeElectricSpots(int numberOfFreeElectricSpots) {
         garage.setNOfFreeElecSpots(numberOfFreeElectricSpots);
     }
+
     public int getNumberOfFreeMotorcycleSpots() {
-        return  garage.getNOfFreeMotSpots();
+        return garage.getNOfFreeMotSpots();
     }
+
     public void setNumberOfFreeMotorcycleSpots(int numberOfFreeMotorcycleSpots) {
         garage.setNOfFreeMotSpots(numberOfFreeMotorcycleSpots);
     }
@@ -127,6 +148,7 @@ public class GarageModel extends Model {
         }
         return garage.getParkingSpot(parkingSpot.getFloor(), parkingSpot.getRow(), parkingSpot.getSpot() - 1);
     }
+
     public ParkingSpot getParkingSpotRight(ParkingSpot parkingSpot) {
         if (parkingSpot.getSpot() == garage.getNumberOfSpots() - 1) {
             return null;
@@ -137,14 +159,25 @@ public class GarageModel extends Model {
     public int getSubscriptionQueueSize() {
         return subscriptionQueue.Size();
     }
+
     public int getTicketQueueSize() {
         return ticketQueue.Size();
     }
 
-    public void vehiclePay(Vehicle vehicle){
-        int payingTime;
-
-        payingTime = vehicle.getDuration() / 10;
-        if (vehicle.getDuration() % 10 !=0) {payingTime=+1;}
-        garage.addMoney(garage.getPrice() * payingTime);
+    public void vehiclePay(Vehicle vehicle) {
+        if (vehicle.getPaymentType() != Vehicle.PaymentType.SUBSCRIPTION) {
+            System.out.println("KKKKKKKKKAAAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasssssssssssssss");
+            int payingTime;
+            payingTime = vehicle.getDuration() / 10;
+            if (vehicle.getDuration() % 10 != 0) {
+                payingTime = +1;
+            }
+            System.out.println(garage.getPrice());
+            garage.addMoney(garage.getPrice() * payingTime);
+        }
     }
+
+    public double moneyMadeInEuro() {
+        return ((double)garage.getMoneyMade())/10;
+    }
+}

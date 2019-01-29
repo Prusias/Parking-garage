@@ -18,22 +18,32 @@ public class SimulationInfoView extends JPanelView {
     private JLabel dateTimeLabel;
     private JLabel subscriptionQueueSize;
     private JLabel ticketQueueSize;
+    private JLabel moneyMade;
 
     public SimulationInfoView() {
         this.setLayout(new FlowLayout(FlowLayout.LEFT));
         this.setMaximumSize( new Dimension(Integer.MAX_VALUE, 100));
         add(new JLabel("Amount of ticks: "));
+
         tickCountLabel = new JLabel("0");
         this.add(tickCountLabel);
+
         add(new JLabel("Time: "));
         dateTimeLabel = new JLabel("00-00 00:00");
         this.add(dateTimeLabel);
+
         add(new JLabel("SubQueue Length: "));
         subscriptionQueueSize = new JLabel("0");
         this.add(subscriptionQueueSize);
+
         add(new JLabel("TicketQueue Length: "));
         ticketQueueSize = new JLabel("0");
         this.add(ticketQueueSize);
+
+        add(new JLabel("Money made:  "));
+        moneyMade = new JLabel("0");
+        this.add(moneyMade);
+
 
 
 //        JButton pauseButton = new JButton("Pause");
@@ -57,6 +67,7 @@ public class SimulationInfoView extends JPanelView {
         dateTimeLabel.setText(simulationInfoModel.getFormattedTime());
         subscriptionQueueSize.setText("" + simulationInfoModel.getSubscriptionQueueSize());
         ticketQueueSize.setText("" + simulationInfoModel.getTicketQueueSize());
+        moneyMade.setText("" + simulationInfoModel.getMoneyMade());
     }
 
 }
