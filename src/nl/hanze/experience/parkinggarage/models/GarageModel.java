@@ -140,4 +140,12 @@ public class GarageModel extends Model {
     public int getTicketQueueSize() {
         return ticketQueue.Size();
     }
+
+    public void vehiclePay(Vehicle vehicle){
+        int payingTime;
+
+        payingTime = vehicle.getDuration() / 10;
+        if (vehicle.getDuration() % 10 !=0) {payingTime=+1;}
+        garage.addMoney(garage.getPrice() * payingTime);
+    }
 }

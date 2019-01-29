@@ -45,8 +45,8 @@ public class SettingModel extends Model {
     }
 
     public String getPriceInEuro() {
-        return Float.toString(
-                (float)simulation.getGarageModel().getGarageSetting("priceInEuro")
+        return Double.toString(
+                (double)simulation.getGarageModel().getGarageSetting("priceInEuro")
         );
     }
     public void setPriceInEuro(String value) {
