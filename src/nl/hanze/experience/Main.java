@@ -50,7 +50,7 @@ public class Main {
         garageModel.setGarageSetting("maxReservationDurationInMinutes", 240);
         garageModel.setGarageSetting("minReservationDurationInMinutes", 30);
         garageModel.setGarageSetting("subscriptionSpots", 40);
-        garageModel.setGarageSetting("reservedSpots", 10);
+        garageModel.setGarageSetting("reservedSpots", 20);
         garageModel.setGarageSetting("electricSpots", 10);
         garageModel.setGarageSetting("motorcycleSpots", 10);
         garageModel.setGarageSetting("ticketQueueSpeed", 5);

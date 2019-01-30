@@ -128,9 +128,9 @@ public class Simulation {
                 generateCars();
                 handleReservationsQueue();
                 handleSubscriptionQueue();
-                System.out.println("SubscriptionQueueSize: " + garageModel.getSubscriptionQueueSize());
+                //System.out.println("SubscriptionQueueSize: " + garageModel.getSubscriptionQueueSize());
                 handleTicketQueue();
-                System.out.println("TicketQueueSize: " + garageModel.getTicketQueueSize());
+                //System.out.println("TicketQueueSize: " + garageModel.getTicketQueueSize());
                 handleLeavingVehicles();
                 if (tickCount % 60 == 0) {
                     handleGraphs();
@@ -299,7 +299,7 @@ public class Simulation {
             }
 
             // By now we know we spawned a car.
-            System.out.println("Spawned a " + vehicle.getType() + " With PaymentType: " + vehicle.getPaymentType() + " Time left: " + vehicle.getDuration());
+            //System.out.println("Spawned a " + vehicle.getType() + " With PaymentType: " + vehicle.getPaymentType() + " Time left: " + vehicle.getDuration());
             generateCars();
         }
     }
@@ -475,10 +475,10 @@ public class Simulation {
                 // TODO: Remove Sub/Res limit
                 if(parkingSpot.getPaymentType() == PaymentType.SUBSCRIPTION) {
                     garageModel.setNumberOfFreeSubscriptionSpots(garageModel.getNumberOfFreeSubscriptionSpots() + 1);
-                    garageModel.setTotalSubVehicles(garageModel.getTotalSubVehicles() - 1);
+
                 } else if (parkingSpot.getPaymentType() == PaymentType.RESERVATION) {
                     garageModel.setNumberOfFreeReservedSpots(garageModel.getNumberOfFreeReservedSpots() + 1);
-                    garageModel.setTotalResVehicles(garageModel.getTotalResVehicles() - 1);
+
                 } else {
                     if(parkingSpot.getType() == Type.MOTORCYCLE) {
                         garageModel.setNumberOfFreeMotorcycleSpots(garageModel.getNumberOfFreeMotorcycleSpots() + 1);
@@ -487,10 +487,17 @@ public class Simulation {
                     } else {
                         garageModel.setNumberOfFreeRegularTicketSpots(garageModel.getNumberOfFreeRegularTicketSpots() + 1) ;
                     }
+                }
+
+                if(vehicle.getPaymentType() == PaymentType.SUBSCRIPTION) {
+                    garageModel.setTotalSubVehicles(garageModel.getTotalSubVehicles() - 1);
+                } else if (vehicle.getPaymentType() == PaymentType.RESERVATION) {
+                    garageModel.setTotalResVehicles(garageModel.getTotalResVehicles() - 1);
+                } else {
                     garageModel.setTotalTicVehicles(garageModel.getTotalTicVehicles() - 1);
                 }
 
-                System.out.println("Vehicle of Type: " + vehicle.getType() + " and PaymentType " + vehicle.getPaymentType() + " left" );
+                //System.out.println("Vehicle of Type: " + vehicle.getType() + " and PaymentType " + vehicle.getPaymentType() + " left" );
                 garageModel.notifyView();
             }
             // For the next loop
@@ -502,14 +509,12 @@ public class Simulation {
         if (vehicleGraphModel == null) {
             throw new IllegalStateException("Simulation - vehicleGraphModel not set");
         }
-
-        vehicleGraphModel.updateTotalVehicleTimeSeries(
+        vehicleGraphModel.updateTimeSeries(
                 garageModel.getLocalDateTime(),
-                garageModel.getTotalSubVehicles() + garageModel.getTotalResVehicles() + garageModel.getTotalTicVehicles()
+                garageModel.getTotalSubVehicles(),
+                garageModel.getTotalResVehicles(),
+                garageModel.getTotalTicVehicles()
         );
-        vehicleGraphModel.updateSubscriptionVehicleTimeSeries(garageModel.getLocalDateTime(), garageModel.getTotalSubVehicles());
-        vehicleGraphModel.updateReservationVehicleTimeSeries(garageModel.getLocalDateTime(), garageModel.getTotalResVehicles());
-        vehicleGraphModel.updateTicketVehicleTimeSeries(garageModel.getLocalDateTime(), garageModel.getTotalTicVehicles());
         vehicleGraphModel.notifyView();
     }
 }
