@@ -5,6 +5,7 @@ import nl.hanze.experience.parkinggarage.models.SimulationInfoModel;
 
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 
 /**
@@ -23,6 +24,7 @@ public class SimulationInfoView extends JPanelView {
     public SimulationInfoView() {
         this.setLayout(new FlowLayout(FlowLayout.LEFT));
         this.setMaximumSize( new Dimension(Integer.MAX_VALUE, 100));
+        this.setBorder(new LineBorder(Color.BLUE));
         add(new JLabel("Amount of ticks: "));
 
         tickCountLabel = new JLabel("0");

@@ -6,6 +6,7 @@ import nl.hanze.experience.objects.Vehicle;
 import nl.hanze.experience.parkinggarage.models.GarageModel;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 
 public class GarageView extends JPanelView {
@@ -16,6 +17,7 @@ public class GarageView extends JPanelView {
     public GarageView() {
         size = new Dimension(0, 0);
         carParkImage = createImage(size.width, size.height);
+        this.setBorder(new LineBorder(Color.RED ));
     }
 
     @Override

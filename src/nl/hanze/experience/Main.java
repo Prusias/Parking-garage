@@ -7,6 +7,7 @@ import nl.hanze.experience.parkinggarage.views.*;
 import nl.hanze.experience.simulation.Simulation;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 
 /**
@@ -70,18 +71,39 @@ public class Main {
         JFrame frame = new JFrame();
         frame.setTitle("Garage");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         Container container = frame.getContentPane();
-        container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
+        //container.setSize(800, 800);
+        //container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
+        container.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
 
         JMenuBar menuBar = new JMenuBar();
         menuBar.add(simulationMenuView);
         frame.setJMenuBar(menuBar);
 
-        container.add(simulation.getSimulationInfoView());
-        container.add(garageView);
-        container.add(vehicleGraphView);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.ipady = 0;
+        c.anchor = GridBagConstraints.PAGE_START;
+        c.weightx = 0;
+        c.gridx = 0;
+        c.gridy = 0;
+        container.add(simulation.getSimulationInfoView(), c);
+        c.ipady = 400;
+        c.ipadx = 800;
+        c.gridx = 0;
+        c.weightx = 0;
+        c.gridy = 1;
+        container.add(garageView, c);
+        c.ipadx = 0;
+        c.ipady = 0;
+        c.gridx = 1;
+        c.weightx = 0.5;
+        c.weighty = 0.5;
+        c.gridy = 1;
+        container.add(vehicleGraphView, c);
         frame.pack();
-        frame.setSize(800,800);
+        //frame.setSize(800, 800);
         frame.setVisible(true);
 
         //TODO: Why does this work here and not elsewhere
