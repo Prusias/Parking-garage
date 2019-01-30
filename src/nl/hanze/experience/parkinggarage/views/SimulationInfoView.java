@@ -8,7 +8,8 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * @author Mike van der Velde
+ * The view class the information over the simulator progress
+ * @author Mike van der Velde and Zein Bseis
  * @version 0.0.4
  * @since 0.0.4
  */
@@ -20,6 +21,9 @@ public class SimulationInfoView extends JPanelView {
     private JLabel ticketQueueSize;
     private JLabel moneyMade;
 
+    /**
+     * Make new simulation information view
+     */
     public SimulationInfoView() {
         this.setLayout(new FlowLayout(FlowLayout.LEFT));
         this.setMaximumSize( new Dimension(Integer.MAX_VALUE, 100));
@@ -55,6 +59,10 @@ public class SimulationInfoView extends JPanelView {
 //        resumeButton.addActionListener(e ->  notifyController(EVENT_ID_RESUME));
     }
 
+    /**
+     * Update the information of the simulation progress
+     * @param model Model with the new information
+     */
     @Override
     public void update(Model model) {
         //TODO: Is this the right exception?

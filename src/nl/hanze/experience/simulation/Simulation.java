@@ -17,7 +17,8 @@ import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * @author Mike van der Velde
+ * The simulation class
+ * @author Mike van der Velde and Zein Bseis
  * @version 0.0.4
  * @since 0.0.4
  */
@@ -39,7 +40,9 @@ public class Simulation {
     private ReservationsQueue reservationsQueue;
     private timeOfLeavingQueue timeOfLeavingQueue;
 
-
+    /**
+     * Make new simulation
+     */
     public Simulation() {
         simulationInfoModel = new SimulationInfoModel();
         simulationInfoModel.setSimulation(this); // In order to let the model interact with the simulation
@@ -58,6 +61,9 @@ public class Simulation {
         modifier = new Modifier();
     }
 
+    /**
+     * Starts the simulation
+     */
     public void start() {
         if (garageModel == null) {
             throw new IllegalStateException("Simulation - garageModel has not been set!");
@@ -71,18 +77,30 @@ public class Simulation {
         thread.start();
 
     }
+
+    /**
+     * Pauses the simulation
+     */
     public void pause() {
         if (simulationThread == null) {
             throw new IllegalStateException("Simulation has never been started");
         }
         simulationThread.pause();
     }
+
+    /**
+     * Resums the simulation if it is paused
+     */
     public void resume() {
         if (simulationThread == null) {
             throw new IllegalStateException("Simulation has never been started");
         }
         simulationThread.resume();
     }
+    /**
+     * Tests if the simualtion is paused
+     * @return boolean with the value of true if simulation is paused
+     */
     public boolean isPaused() {
         if (simulationThread == null) {
             //throw new IllegalStateException("Simulation has never been started");
@@ -90,6 +108,10 @@ public class Simulation {
         }
         return simulationThread.paused;
     }
+    /**
+     * Tests if the simuation is running
+     * @return boolean with the value of true if the simulation is running
+     */
     public boolean hasStarted() {
         if (simulationThread == null) {
             return false;
@@ -97,6 +119,9 @@ public class Simulation {
         return true;
     }
 
+    /**
+     * Manage simulation threads
+     */
     class SimulationThread implements Runnable {
 
         private final Object pauseLock = new Object();
@@ -104,6 +129,9 @@ public class Simulation {
         private volatile boolean paused = false;
         private int tickCount = 0;
 
+        /**
+         * Execute threads in the simulation
+         */
         @Override
         public void run() {
             while(!exit) {
@@ -125,7 +153,7 @@ public class Simulation {
                 simulationInfoModel.setTickCount(tickCount);
                 simulationInfoModel.increaseTime();
                 System.out.println("Tick: " + tickCount);
-                generateCars();
+                generateVehicles();
                 handleReservationsQueue();
                 handleSubscriptionQueue();
                 System.out.println("SubscriptionQueueSize: " + garageModel.getSubscriptionQueueSize());
@@ -147,12 +175,21 @@ public class Simulation {
             }
         }
 
+        /**
+         * Stop the thread
+         */
         public void stop() {
             exit = true;
         }
+        /**
+         * Pause the thread
+         */
         public void pause() {
             paused = true;
         }
+        /**
+         * Resume the thread
+         */
         public void resume() {
             synchronized (pauseLock) {
                 paused = false;
@@ -161,6 +198,10 @@ public class Simulation {
         }
     }
 
+    /**
+     * Get the Simulation information
+     * @return information over the simulation
+     */
     public SimulationInfoView getSimulationInfoView() {
         return simulationInfoView;
     }
@@ -203,7 +244,10 @@ public class Simulation {
         return modifier;
     }
 
-    private void generateCars() {
+    /**
+     * Generates vehicles when the simulation starts
+     */
+    private void generateVehicles() {
         LocalDateTime localDateTime = garageModel.getLocalDateTime();
         int day = localDateTime.getDayOfWeek().getValue();
         int hour = localDateTime.getHour();
@@ -300,10 +344,13 @@ public class Simulation {
 
             // By now we know we spawned a car.
             System.out.println("Spawned a " + vehicle.getType() + " With PaymentType: " + vehicle.getPaymentType() + " Time left: " + vehicle.getDuration());
-            generateCars();
+            generateVehicles();
         }
     }
 
+    /**
+     * Managing the reservations in the queue
+     */
     private void handleReservationsQueue() {
         Reservation reservation = reservationsQueue.peek();
         while (reservation != null) {
@@ -316,6 +363,10 @@ public class Simulation {
     }
 
     // TODO: Handle Vehicle.Type
+
+    /**
+     * Handling the subscription queue
+     */
     private void handleSubscriptionQueue() {
         int count = 0;
         while (count < (int)garageModel.getGarageSetting("subscriptionQueueSpeed")) {
@@ -352,6 +403,10 @@ public class Simulation {
     }
 
     // TODO: Handle Reservations
+
+    /**
+     * handling the ticket queue
+     */
     private void handleTicketQueue() {
         int count = 0;
         while (count < (int)garageModel.getGarageSetting("ticketQueueSpeed")) {
@@ -409,6 +464,11 @@ public class Simulation {
         }
     }
 
+    /**
+     * set the weight for the nabouring parking spot
+     * @param parkingSpot Current parking spot
+     * @param leaving boolean if vehicle in the spot is leaving
+     */
     private void setNeighbouringParkingSpotWeight(ParkingSpot parkingSpot, boolean leaving) {
         ParkingSpot parkingSpotLeft = garageModel.getParkingSpotLeft(parkingSpot);
         ParkingSpot parkingSpotRight = garageModel.getParkingSpotRight(parkingSpot);
@@ -434,6 +494,12 @@ public class Simulation {
         }
     }
 
+    /**
+     * Depending on the vehicle type gets a free parking spot
+     * @param type type of the vehicle
+     * @param paymentType what kind of payment type (subscription, ticket or reservation)
+     * @return A free parking spot
+     */
     private ParkingSpot getFreeParkingSpot(Vehicle.Type type, Vehicle.PaymentType paymentType) {
         ParkingSpot[][][] parkingSpots = garageModel.getParkingSpots();
         double  weight = Double.MAX_VALUE;
@@ -455,6 +521,9 @@ public class Simulation {
         return parkingSpot;
     }
 
+    /**
+     * Handling leaving vehicles
+     */
     private void handleLeavingVehicles() {
         Vehicle vehicle = timeOfLeavingQueue.peek();
         int count = 0;
@@ -498,6 +567,9 @@ public class Simulation {
         }
     }
 
+    /**
+     * Handling the graphs
+     */
     private void handleGraphs() {
         if (vehicleGraphModel == null) {
             throw new IllegalStateException("Simulation - vehicleGraphModel not set");

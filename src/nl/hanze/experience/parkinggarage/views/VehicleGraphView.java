@@ -14,11 +14,20 @@ import org.jfree.data.xy.XYDataset;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * The view for the vehicle graph
+ * @author Mike van der Velde and Zein Bseis
+ * @version 0.0.4
+ * @since 0.0.4
+ */
 public class VehicleGraphView extends JPanelView {
 
     private XYDataset xyDataset;
     private JFreeChart jFreeChart;
 
+    /**
+     * Make new view vehicle graph
+     */
     public VehicleGraphView() {
         this.setSize(400, 400);
 
@@ -37,6 +46,10 @@ public class VehicleGraphView extends JPanelView {
         add(chartPanel);
     }
 
+    /**
+     * update the information in the graph
+     * @param model Model with the new information
+     */
     @Override
     public void update(Model model) {
         VehicleGraphModel vehicleGraphModel = (VehicleGraphModel) model;

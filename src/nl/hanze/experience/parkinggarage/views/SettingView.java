@@ -11,7 +11,8 @@ import java.awt.*;
 import java.util.concurrent.Flow;
 
 /**
- * @author Mike van der Velde
+ * The class for the settings view
+ * @author Mike van der Velde and Zein Bseis
  * @version 0.0.4
  * @since 0.0.4
  */
@@ -34,6 +35,9 @@ public class SettingView extends JFrameView {
     private JTextField priceInEuroInput;
     private JTextField seedInput;
 
+    /**
+     *
+     */
     public SettingView() {
         this.setTitle("Settings");
         this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
