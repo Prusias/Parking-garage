@@ -23,7 +23,7 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class Simulation {
     private SimulationThread simulationThread;
-    private final static int simulationSleepPerTick = 0;
+    private final static int simulationSleepPerTick = 50;
 
     private Random random;
     private long seed;
@@ -416,7 +416,7 @@ public class Simulation {
         if (leaving) {
             weightModifier = weightModifier * -1;
         }
-        for (int i = 1; i <= 4; i++) {
+        for (int i = 1; i <= 6; i++) {
             if (parkingSpotLeft != null) {
                 parkingSpotLeft.setWeight(parkingSpotLeft.getWeight() + weightModifier / i);
                 parkingSpotLeft = garageModel.getParkingSpotLeft(parkingSpotLeft);

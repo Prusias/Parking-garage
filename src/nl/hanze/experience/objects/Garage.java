@@ -37,9 +37,9 @@ public class Garage {
     }
 
     public void initializeGarage() {
-        this.numberOfFloors = (int) garageSettings.get("amountOfFloors");
-        this.numberOfRows = (int) garageSettings.get("amountOfRows");
-        this.numberOfSpots = (int) garageSettings.get("amountOfSpots");
+        this.numberOfFloors = (int) getGarageSetting("amountOfFloors");
+        this.numberOfRows = (int) getGarageSetting("amountOfRows");
+        this.numberOfSpots = (int) getGarageSetting("amountOfSpots");
         int totalSpots = numberOfFloors * numberOfRows * numberOfSpots;
         nOfFreeSubSpots = (int) getGarageSetting("subscriptionSpots");
         nOfFreeResSpots = (int) getGarageSetting("reservedSpots");
@@ -59,12 +59,15 @@ public class Garage {
     private void createParkingSpots() {
         double weight = 0;
         int count = 0;
+        double floorWeight = (double)getGarageSetting("floorWeight");
+        double rowWeight = (double)getGarageSetting("rowWeight");
+        double spotWeight = (double)getGarageSetting("spotWeight");
         for (int f = 0; f < numberOfFloors; f++) {
             for (int r = 0; r < numberOfRows; r++) {
                 for (int p = 0; p < numberOfSpots; p++) {
                     count++;
                     //TODO: Add Modifiers
-                    weight = f * 1 + r * 0.7 + p * 0.2;
+                    weight = f * floorWeight + r * rowWeight + p * spotWeight;
                     Vehicle.Type type;
                     Vehicle.PaymentType paymentType;
                     if (count <= nOfFreeSubSpots) {

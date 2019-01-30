@@ -57,6 +57,10 @@ public class Main {
         garageModel.setGarageSetting("ticketQueueSpeed", 5);
         garageModel.setGarageSetting("subscriptionQueueSpeed", 5);
         garageModel.setGarageSetting("exitQueueSpeed", 3);
+        garageModel.setGarageSetting("floorWeight", 1.5);
+        garageModel.setGarageSetting("rowWeight", .7);
+        garageModel.setGarageSetting("spotWeight", .2);
+
         GarageController garageController = new GarageController(garageModel);
         GarageView garageView = new GarageView();
         garageView.setController(garageController);
