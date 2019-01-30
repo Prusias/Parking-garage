@@ -8,16 +8,26 @@ import nl.hanze.experience.parkinggarage.models.GarageModel;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Class to create a garage view
+ */
 public class GarageView extends JPanelView {
 
     private Dimension size;
     private Image carParkImage;
 
+    /**
+     * Making new garage view
+     */
     public GarageView() {
         size = new Dimension(0, 0);
         carParkImage = createImage(size.width, size.height);
     }
 
+    /**
+     * Updating the information in the garage view
+     * @param model Model that contains the new information
+     */
     @Override
     public void update(Model model) {
         GarageModel garageModel = (GarageModel) model;
@@ -43,6 +53,12 @@ public class GarageView extends JPanelView {
     }
 
     // TODO: Handle SUB Type etc;
+
+    /**
+     * Get the color of the parking spot
+     * @param parkingSpot to know its color
+     * @return Parking spot color
+     */
     private Color getColor(ParkingSpot parkingSpot) {
         // Is the spot reserved?
         if (parkingSpot.getPaymentType() == Vehicle.PaymentType.RESERVATION) {
