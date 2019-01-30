@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 public class VehicleGraphModel extends Model {
 
-    private XYDataset xyDataset;
+    private TimeSeriesCollection xyDataset;
     private TimeSeries totalVehicleTimeSeries;
     private TimeSeries subscriptionVehicleTimeSeries;
     private TimeSeries ticketVehicleTimeSeries;
@@ -29,25 +29,16 @@ public class VehicleGraphModel extends Model {
         xyDataset = dataset;
     }
 
-    public XYDataset getXYDataset() {
+    public TimeSeriesCollection getXYDataset() {
         return xyDataset;
     }
 
-    public void updateTotalVehicleTimeSeries(LocalDateTime localDateTime, int value) {
-        totalVehicleTimeSeries.add(getHour(localDateTime), value);
-    }
-    public void updateSubscriptionVehicleTimeSeries(LocalDateTime localDateTime, int value) {
-        subscriptionVehicleTimeSeries.add(getHour(localDateTime), value);
-    }
-    public void updateTicketVehicleTimeSeries(LocalDateTime localDateTime, int value) {
-        ticketVehicleTimeSeries.add(getHour(localDateTime), value);
-    }
-    public void updateReservationVehicleTimeSeries(LocalDateTime localDateTime, int value) {
-        reservationVehicleTimeSeries.add(getHour(localDateTime), value);
-    }
-
-    private Hour getHour(LocalDateTime localDateTime) {
-        return new Hour(localDateTime.getHour(), localDateTime.getDayOfMonth(), localDateTime.getMonth().getValue(), localDateTime.getYear());
+    public void updateTimeSeries(LocalDateTime localDateTime, int subValue, int ticValue, int resValue) {
+        Hour hour = new Hour(localDateTime.getHour(), localDateTime.getDayOfMonth(), localDateTime.getMonth().getValue(), localDateTime.getYear());
+        totalVehicleTimeSeries.add(hour, subValue + ticValue + resValue);
+        subscriptionVehicleTimeSeries.add(hour, subValue);
+        ticketVehicleTimeSeries.add(hour, ticValue);
+        reservationVehicleTimeSeries.add(hour, resValue);
     }
 
 
