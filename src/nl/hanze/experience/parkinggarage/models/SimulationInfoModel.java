@@ -67,12 +67,12 @@ public class SimulationInfoModel extends Model {
         return simulation.getGarageModel().getTicketQueueSize();
     }
     public double getMoneyMade() {
-        return simulation.getGarageModel().moneyMadeInEuro();
+        return  Math.round(simulation.getGarageModel().moneyMadeInEuro());
     }
 
     public double getPotentialMoney(){
         int avgTimeBlock = (int)simulation.getGarageModel().getGarageSetting("averageVehicleDurationInMinutes") / 10;
-        return simulation.getGarageModel().getAmountOfPayingVehicles() * (simulation.getGarageModel().getPriceInEuro() * avgTimeBlock );
+        return  Math.round(simulation.getGarageModel().getAmountOfPayingVehicles() * (simulation.getGarageModel().getPriceInEuro() * avgTimeBlock ));
 
     }
 }
