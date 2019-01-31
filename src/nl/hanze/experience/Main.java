@@ -40,9 +40,9 @@ public class Main {
         simulationMenuModel.addView(simulationMenuView);
 
         GarageModel garageModel = new GarageModel();
-        garageModel.setGarageSetting("amountOfFloors", 4);
-        garageModel.setGarageSetting("amountOfRows", 10);
-        garageModel.setGarageSetting("amountOfSpots", 20);
+        garageModel.setGarageSetting("amountOfFloors", 3);
+        garageModel.setGarageSetting("amountOfRows", 8);
+        garageModel.setGarageSetting("amountOfSpots", 22);
         garageModel.setGarageSetting("priceInEuro", 0.5);
         garageModel.setGarageSetting("averageVehicleDurationInMinutes", 120);
         garageModel.setGarageSetting("maxVehicleDurationInMinutes", 1440);
@@ -87,27 +87,37 @@ public class Main {
         frame.setJMenuBar(menuBar);
 
         c.fill = GridBagConstraints.HORIZONTAL;
-        c.ipady = 0;
-        c.anchor = GridBagConstraints.PAGE_START;
-        c.weightx = 0;
-        c.gridx = 0;
-        c.gridy = 0;
-        container.add(simulation.getSimulationInfoView(), c);
-        c.ipady = 800;
-        c.ipadx = 600;
-        c.gridx = 0;
-        c.weightx = 0;
-        c.gridy = 1;
-        container.add(garageView, c);
         c.ipadx = 0;
         c.ipady = 0;
+        c.anchor = GridBagConstraints.PAGE_START;
+        c.gridwidth = 2;
+        c.gridx = 0;
+        c.gridy = 0;
+        c.weightx = 0;
+        c.weighty = 0;
+        container.add(simulation.getSimulationInfoView(), c);
+        c.fill = GridBagConstraints.BOTH;
+        c.insets = new Insets(5, 5, 5, 5);
+        c.anchor = GridBagConstraints.CENTER;
+        c.ipadx = 600;
+        c.ipady = 400;
+        c.gridwidth = 1;
+        c.gridx = 0;
+        c.gridy = 1;
+        c.weightx = 0;
+        c.weighty = 0;
+        container.add(garageView, c);
+        c.insets = new Insets(10, 10, 10, 10);
+        c.anchor = GridBagConstraints.CENTER;
+        c.ipadx = 700;
+        c.ipady = 450;
         c.gridx = 1;
-        c.weightx = 0.5;
-        c.weighty = 0.5;
+        c.weightx = 0;
+        c.weighty = 0;
         c.gridy = 1;
         container.add(vehicleGraphView, c);
         frame.pack();
-        //frame.setSize(800, 800);
+        frame.setSize(new Dimension(1500, 600));
         frame.setVisible(true);
 
         //TODO: Why does this work here and not elsewhere

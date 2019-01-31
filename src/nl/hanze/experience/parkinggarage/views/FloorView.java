@@ -11,21 +11,23 @@ import javax.swing.plaf.TabbedPaneUI;
 import java.awt.*;
 
 public class FloorView extends JPanelView {
-
     private Image floorImage;
     private Dimension size;
     private int floor;
 
     public FloorView(int floor) {
+        this.setLayout(new GridLayout(1, 1));
         this.floor = floor;
-        size = new Dimension(800, 600);
-        this.setSize(size);
         this.setBorder(new LineBorder(Color.GREEN ));
     }
 
     @Override
     public void update(Model model) {
         GarageModel garageModel = (GarageModel) model;
+        size = new Dimension(this.getWidth(), this.getHeight());
+        if (this.getWidth() <= 0) {
+            size = new Dimension(1, 1);
+        }
         floorImage = createImage(size.width, size.height);
         Graphics graphics = floorImage.getGraphics();
         for(int row = 0; row < garageModel.getNumberOfRows(); row++) {
@@ -36,7 +38,7 @@ public class FloorView extends JPanelView {
             }
         }
         repaint();
-        this.setSize(size);
+        //this.setSize(size);
     }
 
     /**

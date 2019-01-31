@@ -20,8 +20,8 @@ public class GarageView extends JPanelView {
         this.setLayout(new GridLayout(1, 1));
         jTabbedPane = new JTabbedPane();
         this.add(jTabbedPane);
-        size = new Dimension(800, 600);
-        this.setMaximumSize(size);
+        size = new Dimension(600, 400);
+        //this.setMaximumSize(size);
         this.setBorder(new LineBorder(Color.RED ));
     }
 

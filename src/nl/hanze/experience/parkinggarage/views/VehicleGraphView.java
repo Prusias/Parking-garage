@@ -26,9 +26,8 @@ import java.awt.*;
  * @since 0.0.4
  */
 public class VehicleGraphView extends JPanelView {
-
-    private static final int WIDTH = 300;
-    private static final int HEIGHT = 300;
+    private static final int HEIGHT = 450;
+    private static final int WIDTH = 700;
 
     private TimeSeriesCollection  timeSeriesCollection;
     private JFreeChart jFreeChart;
@@ -38,8 +37,9 @@ public class VehicleGraphView extends JPanelView {
      */
     public VehicleGraphView() {
         this.setAlignmentX(LEFT_ALIGNMENT);
-        this.setAlignmentY(BOTTOM_ALIGNMENT);
-        this.setBorder(new LineBorder(Color.BLACK));
+        this.setAlignmentY(TOP_ALIGNMENT);
+        this.setBorder(new LineBorder(Color.ORANGE));
+        this.setSize(HEIGHT, WIDTH);
 
         timeSeriesCollection = new TimeSeriesCollection();
         jFreeChart = ChartFactory.createTimeSeriesChart("Vehicles in garage",
