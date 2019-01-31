@@ -6,8 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * @author Steven Woudstra
  * @author Mike van der Velde
+ * @author Zein Bseis
+ * @author Steven Woudstra
+ * @author Ivo Gerner
  * @version 0.0.4
  * @since 0.0.4
  */

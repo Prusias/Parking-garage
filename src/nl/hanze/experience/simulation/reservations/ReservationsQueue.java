@@ -7,7 +7,10 @@ import java.util.Comparator;
 
 /**
  * Class to make a reservation queue
- * @author Mike van der Velde and Zein Bseis
+ * @author Mike van der Velde
+ * @author Zein Bseis
+ * @author Steven Woudstra
+ * @author Ivo Gerner
  * @version 0.0.4
  * @since 0.0.4
  */

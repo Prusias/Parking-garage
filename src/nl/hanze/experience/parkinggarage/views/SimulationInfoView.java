@@ -5,12 +5,14 @@ import nl.hanze.experience.parkinggarage.models.SimulationInfoModel;
 
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 
 /**
  * The view class the information over the simulator progress
- * @author Mike van der Velde and Zein Bseis
+ * @author Mike van der Velde
+ *  * @author Zein Bseis
+ *  * @author Steven Woudstra
+ *  * @author Ivo Gerner
  * @version 0.0.4
  * @since 0.0.4
  */
@@ -20,6 +22,7 @@ public class SimulationInfoView extends JPanelView {
     private JLabel dateTimeLabel;
     private JLabel subscriptionQueueSize;
     private JLabel ticketQueueSize;
+    private JLabel vehiclesDrivenPast;
     private JLabel moneyMade;
     private JLabel revenue;
 
@@ -46,6 +49,10 @@ public class SimulationInfoView extends JPanelView {
         add(new JLabel("TicketQueue Length: "));
         ticketQueueSize = new JLabel("0");
         this.add(ticketQueueSize);
+
+        add(new JLabel("Vehicles that drove past: "));
+        vehiclesDrivenPast = new JLabel("0");
+        this.add(vehiclesDrivenPast);
 
         add(new JLabel("Money made:  "));
         moneyMade = new JLabel("0");
@@ -82,6 +89,7 @@ public class SimulationInfoView extends JPanelView {
         dateTimeLabel.setText(simulationInfoModel.getFormattedTime());
         subscriptionQueueSize.setText("" + simulationInfoModel.getSubscriptionQueueSize());
         ticketQueueSize.setText("" + simulationInfoModel.getTicketQueueSize());
+        vehiclesDrivenPast.setText("" + simulationInfoModel.getVehiclesDrivenPast());
         moneyMade.setText(" €" + simulationInfoModel.getMoneyMade() + " (+€"  + simulationInfoModel.getPotentialMoney() + ")");
         revenue.setText("€" + simulationInfoModel.getRevenueYesterday());
     }

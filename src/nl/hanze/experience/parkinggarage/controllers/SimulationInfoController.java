@@ -6,7 +6,10 @@ import nl.hanze.experience.parkinggarage.views.SimulationInfoView;
 
 /**
  * The control class for the simulator information where all the central control for the simulation information happens
- * @author Mike van der Velde and Zein Bseis
+ * @author Mike van der Velde
+ * @author Zein Bseis
+ * @author Steven Woudstra
+ * @author Ivo Gerner
  * @version 0.0.4
  * @since 0.0.4
  */

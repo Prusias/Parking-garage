@@ -4,7 +4,10 @@ import nl.hanze.experience.objects.Vehicle.*;
 
 /**
  * The class for the parking spots
- * @author Mike van der Velde and Zein Bseis
+ * @author Mike van der Velde
+ * @author Zein Bseis
+ * @author Steven Woudstra
+ * @author Ivo Gerner
  * @version 0.0.4
  * @since 0.0.4
  */

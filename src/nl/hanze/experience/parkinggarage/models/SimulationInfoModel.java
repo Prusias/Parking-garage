@@ -7,7 +7,10 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * The simulation information model where all the logical operations of the simulation information are made
- * @author Mike van der Velde and Zein Bseis
+ * @author Mike van der Velde
+ * @author Zein Bseis
+ * @author Steven Woudstra
+ * @author Ivo Gerner
  * @version 0.0.4
  * @since 0.0.4
  */
@@ -78,5 +81,9 @@ public class SimulationInfoModel extends Model {
 
     public double getRevenueYesterday() {
         return simulation.getGarageModel().getRevenueYesterday();
+    }
+
+    public int getVehiclesDrivenPast() {
+        return simulation.getVehiclesDrivenPast();
     }
 }

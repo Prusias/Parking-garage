@@ -8,7 +8,10 @@ import java.time.LocalDateTime;
 
 /**
  * The model class for the vehicle graph where all the logical operation regarding the graph representing the vehicle happen
- * @author Mike van der Velde and Zein Bseis
+ * @author Mike van der Velde
+ * @author Zein Bseis
+ * @author Steven Woudstra
+ * @author Ivo Gerner
  * @version 0.0.4
  * @since 0.0.4
  */

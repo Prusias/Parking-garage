@@ -6,7 +6,10 @@ import nl.hanze.experience.parkinggarage.models.SimulationMenuModel;
 
 /**
  * The control class for the simulation drop down menu where are the central control happens
- * @author Mike van der Velde and Zein Bseis
+ * @author Mike van der Velde
+ * @author Zein Bseis
+ * @author Steven Woudstra
+ * @author Ivo Gerner
  * @version 0.0.4
  * @since 0.0.4
  */

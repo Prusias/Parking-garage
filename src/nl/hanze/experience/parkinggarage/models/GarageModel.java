@@ -9,7 +9,10 @@ import java.util.List;
 
 /**
  * The garage model class where the logical operations regarding the garage
- * @author Mike van der Velde and Zein Bseis
+ * @author Mike van der Velde
+ * @author Zein Bseis
+ * @author Steven Woudstra
+ * @author Ivo Gerner
  * @version 0.0.4
  * @since 0.0.4
  */

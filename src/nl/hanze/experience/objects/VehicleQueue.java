@@ -5,7 +5,10 @@ import java.util.Queue;
 
 /**
  * The class for the vehicle queue
- * @author Mike van der Velde and Zein Bseis
+ * @author Mike van der Velde
+ * @author Zein Bseis
+ * @author Steven Woudstra
+ * @author Ivo Gerner
  * @version 0.0.4
  * @since 0.0.4
  */

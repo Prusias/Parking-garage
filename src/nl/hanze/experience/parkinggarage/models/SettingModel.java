@@ -7,7 +7,10 @@ import java.util.Arrays;
 
 /**
  * The model class for the settings where all the logical operations for the settings are handled
- * @author Mike van der Velde and Zein Bseis
+ * @author Mike van der Velde
+ * @author Zein Bseis
+ * @author Steven Woudstra
+ * @author Ivo Gerner
  * @version 0.0.4
  * @since 0.0.4
  */

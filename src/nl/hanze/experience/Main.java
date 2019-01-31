@@ -9,8 +9,11 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * nl.hanze.experience.Main class for the ParkingGarage
+ * Main class for the ParkingGarage
  * @author Mike van der Velde
+ * @author Zein Bseis
+ * @author Steven Woudstra
+ * @author Ivo Gerner
  * @version 0.0.4
  * @since 0.0.2
  */
@@ -42,14 +45,13 @@ public class Main {
         garageModel.setGarageSetting("amountOfRows", 8);
         garageModel.setGarageSetting("amountOfSpots", 22);
         garageModel.setGarageSetting("priceInEuro", 0.5);
-        garageModel.setGarageSetting("averageVehicleDurationInMinutes", 120);
+        garageModel.setGarageSetting("averageVehicleDurationInMinutes", 240);
         garageModel.setGarageSetting("maxVehicleDurationInMinutes", 1440);
         garageModel.setGarageSetting("minVehicleDurationInMinutes", 10);
-        garageModel.setGarageSetting("averageReservationDurationInMinutes", 120);
+        garageModel.setGarageSetting("averageReservationDurationInMinutes", 240);
         garageModel.setGarageSetting("maxReservationDurationInMinutes", 240);
         garageModel.setGarageSetting("minReservationDurationInMinutes", 30);
         garageModel.setGarageSetting("subscriptionSpots", 40);
-        garageModel.setGarageSetting("reservedSpots", 20);
         garageModel.setGarageSetting("electricSpots", 10);
         garageModel.setGarageSetting("motorcycleSpots", 10);
         garageModel.setGarageSetting("ticketQueueSpeed", 5);
@@ -58,6 +60,11 @@ public class Main {
         garageModel.setGarageSetting("floorWeight", 1.5);
         garageModel.setGarageSetting("rowWeight", .7);
         garageModel.setGarageSetting("spotWeight", .2);
+        garageModel.setGarageSetting("reservationReservedMinutes", 15);
+        garageModel.setGarageSetting("reservationKeptReservedMinutes", 20);
+        garageModel.setGarageSetting("amountOfTicketQueues", 1);
+        garageModel.setGarageSetting("amountOfSubscriptionQueues", 1);
+        garageModel.setGarageSetting("amountOfExitQueues", 1);
 
         GarageController garageController = new GarageController(garageModel);
         GarageView garageView = new GarageView();
@@ -69,6 +76,16 @@ public class Main {
         VehicleGraphView vehicleGraphView = new VehicleGraphView();
         vehicleGraphModel.addView(vehicleGraphView);
         simulation.setVehicleGraphModel(vehicleGraphModel);
+
+        VehiclePieModel vehiclePieModel = new VehiclePieModel();
+        VehiclePieView vehiclePieView = new VehiclePieView();
+        vehiclePieModel.addView(vehiclePieView);
+        simulation.setVehiclePieModel(vehiclePieModel);
+
+        QueueGraphModel queueGraphModel = new QueueGraphModel();
+        QueueGraphView queueGraphView = new QueueGraphView();
+        queueGraphModel.addView(queueGraphView);
+        simulation.setQueueGraphModel(queueGraphModel);
 
         JFrame frame = new JFrame();
         frame.setTitle("Garage");
@@ -117,11 +134,13 @@ public class Main {
         c.gridy = 1;
         TabbedView tabbedView = new TabbedView();
         tabbedView.addPanel(vehicleGraphView, "Vehicles in garage");
+        tabbedView.addPanel(vehiclePieView, "Vehicles types");
+        //tabbedView.addPanel(queueGraphView, "queues in garage")
         container.add(tabbedView, c);
 
         container.setBackground(Color.WHITE);
         frame.pack();
-        frame.setSize(new Dimension(1500, 600));
+        frame.setSize(new Dimension(1600, 650));
         frame.setVisible(true);
 
         //TODO: Why does this work here and not elsewhere

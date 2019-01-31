@@ -7,7 +7,10 @@ import nl.hanze.experience.simulation.Simulation;
 
 /**
  * The model class for the simulator drop down menu where all the logical operation regarding that menu happen
- * @author Mike van der Velde and Zein Bseis
+ * @author Mike van der Velde
+ * @author Zein Bseis
+ * @author Steven Woudstra
+ * @author Ivo Gerner
  * @version 0.0.4
  * @since 0.0.4
  */
