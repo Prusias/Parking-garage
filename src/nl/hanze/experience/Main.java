@@ -1,6 +1,7 @@
 package nl.hanze.experience;
 
-import nl.hanze.experience.parkinggarage.controllers.*;
+import nl.hanze.experience.parkinggarage.controllers.GarageController;
+import nl.hanze.experience.parkinggarage.controllers.SimulationMenuController;
 import nl.hanze.experience.parkinggarage.models.*;
 import nl.hanze.experience.parkinggarage.views.*;
 import nl.hanze.experience.simulation.Simulation;
@@ -134,8 +135,8 @@ public class Main {
         c.gridy = 1;
         TabbedView tabbedView = new TabbedView();
         tabbedView.addPanel(vehicleGraphView, "Vehicles in garage");
-        tabbedView.addPanel(vehiclePieView, "Vehicles types");
-        //tabbedView.addPanel(queueGraphView, "queues in garage")
+        tabbedView.addPanel(vehiclePieView, "Vehicle types in garage");
+        tabbedView.addPanel(queueGraphView, "Queue size");
         container.add(tabbedView, c);
 
         container.setBackground(Color.WHITE);
@@ -143,8 +144,6 @@ public class Main {
         frame.setSize(new Dimension(1600, 650));
         frame.setVisible(true);
 
-        //TODO: Why does this work here and not elsewhere
         simulationMenuModel.setSimulation(simulation);
-        //simulation.start();
     }
 }

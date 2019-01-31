@@ -4,19 +4,18 @@ import nl.hanze.experience.objects.ParkingSpot;
 import nl.hanze.experience.objects.Reservation;
 import nl.hanze.experience.objects.Vehicle;
 import nl.hanze.experience.parkinggarage.controllers.SimulationInfoController;
-import nl.hanze.experience.parkinggarage.models.GarageModel;
-import nl.hanze.experience.parkinggarage.models.VehicleGraphModel;
-import nl.hanze.experience.parkinggarage.models.QueueGraphModel;
-import nl.hanze.experience.parkinggarage.models.SimulationInfoModel;
-import nl.hanze.experience.parkinggarage.models.VehiclePieModel;
+import nl.hanze.experience.parkinggarage.models.*;
 import nl.hanze.experience.parkinggarage.views.SimulationInfoView;
-import nl.hanze.experience.simulation.reservations.*;
-
-import static nl.hanze.experience.objects.Vehicle.*;
+import nl.hanze.experience.simulation.reservations.ReservationTime;
+import nl.hanze.experience.simulation.reservations.ReservationTimeQueue;
+import nl.hanze.experience.simulation.reservations.ReservationsQueue;
 
 import java.time.LocalDateTime;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
+
+import static nl.hanze.experience.objects.Vehicle.PaymentType;
+import static nl.hanze.experience.objects.Vehicle.Type;
 
 /**
  * The simulation class
@@ -687,7 +686,7 @@ public class Simulation {
         );
         vehiclePieModel.notifyView();
 
-        queueGraphModel.updateDataset(garageModel.getTicketQueueSize(),garageModel.getSubscriptionQueueSize());
+        queueGraphModel.updateDataset(garageModel.getTicketQueueSize(),garageModel.getSubscriptionQueueSize(), reservationsQueue.size());
         queueGraphModel.notifyView();
     }
 }

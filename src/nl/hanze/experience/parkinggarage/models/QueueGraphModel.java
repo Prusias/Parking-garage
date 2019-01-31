@@ -1,17 +1,7 @@
 package nl.hanze.experience.parkinggarage.models;
 
-import nl.hanze.experience.mvc.*;
-import nl.hanze.experience.parkinggarage.views.QueueGraphView;
-import org.jfree.data.category.CategoryDataset;
+import nl.hanze.experience.mvc.Model;
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.data.general.Dataset;
-import org.jfree.data.general.DatasetChangeListener;
-import org.jfree.data.general.DatasetGroup;
-import org.jfree.data.xy.XYDataset;
-import org.jfree.data.time.*;
-
-import java.time.LocalDateTime;
-import java.util.List;
 
 public class QueueGraphModel extends Model{
 
@@ -21,14 +11,14 @@ public class QueueGraphModel extends Model{
 
     }
 
-    public void updateDataset(int ticket, int sub) {
+    public void updateDataset(int ticketQueueSize, int subscriptionQueueSize, int reservationQueueSize) {
         set = new DefaultCategoryDataset();
-        set.addValue(ticket, "Ticket", "QueueSize");
-
+        set.addValue(subscriptionQueueSize, "Subscription", "Amount of cars");
+        set.addValue(ticketQueueSize, "TicketQueue", "Amount of cars");
+        set.addValue(reservationQueueSize, "ReservationQueue", "Amount of reservations");
     }
 
     public DefaultCategoryDataset getDataset() {
-
         return set;
     }
 }

@@ -3,27 +3,14 @@ package nl.hanze.experience.parkinggarage.views;
 import nl.hanze.experience.mvc.JPanelView;
 import nl.hanze.experience.mvc.Model;
 import nl.hanze.experience.parkinggarage.models.QueueGraphModel;
-import nl.hanze.experience.parkinggarage.models.VehicleGraphModel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.axis.DateAxis;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartPanel;
-import org.jfree.chart.JFreeChart;
 
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import java.awt.*;
-
-
-import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 
 
@@ -38,17 +25,25 @@ public class QueueGraphView extends JPanelView {
         set = new DefaultCategoryDataset();
         this.setAlignmentX(LEFT_ALIGNMENT);
         this.setAlignmentY(BOTTOM_ALIGNMENT);
-        this.setBorder(new LineBorder(Color.BLACK));
+        this.setBackground(Color.WHITE);
 
         jFreeChart = ChartFactory.createBarChart("Queues Graph",
                 "Queues",
-                "Axis",
+                "Amount of cars",
                 set,
                 PlotOrientation.VERTICAL,
                 true,
                 true,
                 false
         );
+        CategoryPlot plot = jFreeChart.getCategoryPlot();
+        BarRenderer renderer = new BarRenderer();
+        renderer.setSeriesPaint(0, new Color(255, 30, 30));
+        renderer.setSeriesPaint(1, new Color(68, 68, 68));
+        renderer.setSeriesPaint(1, new Color(100, 255, 255));
+        renderer.setShadowVisible(false);
+        plot.setRenderer(renderer);
+        plot.setBackgroundPaint(new Color(255, 255, 255));
         jFreeChart.setAntiAlias(true);
         jFreeChart.setTextAntiAlias(true);
         jFreeChart.setBorderVisible(false);

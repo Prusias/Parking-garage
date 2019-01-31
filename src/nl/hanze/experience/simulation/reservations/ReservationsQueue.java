@@ -2,8 +2,8 @@ package nl.hanze.experience.simulation.reservations;
 
 import nl.hanze.experience.objects.Reservation;
 
-import java.util.PriorityQueue;
 import java.util.Comparator;
+import java.util.PriorityQueue;
 
 /**
  * Class to make a reservation queue
@@ -62,6 +62,9 @@ public class ReservationsQueue {
             }
             return 0;
         }
+    }
+    public int size() {
+        return queue.size();
     }
 }
 
