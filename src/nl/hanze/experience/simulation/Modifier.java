@@ -35,16 +35,16 @@ public class Modifier {
         baseVehicleModifier = 2;
         ticketVehicleModifier = 3;
         subscriptionVehicleModifier = 0.3;
-        reservationVehicleModifier = 0.2;
+        reservationVehicleModifier = 0.1;
         regularCarModifier = 1;
         electricCarModifier = 0.05;
         motorcycleModifier = 0.05;
         parkingDurationModifier = 1.5;
         reservationDurationModifier = 1.5;
-        ticketQueueSizeModifier = 10;
+        ticketQueueSizeModifier = 20;
         ticketQueueMaxSize = 100;
         subscriptionQueueSizeModifier = 5;
-        subscriptionQueueMaxSize = 100;
+        subscriptionQueueMaxSize = 50;
         neighbouringParkingSpotWeightModifier = 1;
     }
 

@@ -75,6 +75,23 @@ public class SettingModel extends Model {
         simulation.getModifier().setHourModifier(hour, modifier);
     }
 
+    public String getBaseVehicleModifier(){
+        return Double.toString(
+                simulation.getModifier().getBaseVehicleModifier());
+    }
+
+    public void setBaseVehicleModifier(String modifier){
+        simulation.getModifier().setBaseVehicleModifier(Double.valueOf(modifier));
+    }
+
+    public String getTicketVehicleModifier(){
+        return Double.toString(
+                simulation.getModifier().getTicketVehicleModifier());
+    }
+
+    public void setTicketVehicleModifier(String modifier){
+        simulation.getModifier().setTicketVehicleModifier(Double.valueOf(modifier));
+    }
     /**
      * Tests if the if the simulation has started
      * @return Boolean that is true if simulation is running

@@ -41,6 +41,9 @@ public class SettingController extends Controller {
             settingModel.setAmountOfSpots(settingView.getAmountOfSpots());
             settingModel.setPriceInEuro(settingView.getPriceInEuro());
             settingModel.setSeed(settingView.getSeed());
+
+            settingModel.setBaseVehicleModifier(settingView.getBaseVehicleModifier());
+            settingModel.setTicketVehicleModifier(settingView.getTicketVehicleModifier());
             String[] weekDayModifiers = settingView.getWeekdayModifiers();
             for (int i = 0; i < 7; i++) {
                 settingModel.setWeekdayModifier(i, Double.valueOf(weekDayModifiers[i]));
