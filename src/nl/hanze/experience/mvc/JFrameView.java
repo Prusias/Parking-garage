@@ -3,6 +3,7 @@ package nl.hanze.experience.mvc;
 import javax.swing.*;
 
 /**
+ * The Java frame view class where views regarding Java frame are defined
  * @author Mike van der Velde
  * @version 0.0.4
  * @since 0.0.4

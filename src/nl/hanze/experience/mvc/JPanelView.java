@@ -3,7 +3,8 @@ package nl.hanze.experience.mvc;
 import javax.swing.*;
 
 /**
- * @author Mike van der Velde
+ * The Java panel view class where views regarding Java panels are defined
+ * @author Mike van der Velde and Zein Bseis
  * @version 0.0.4
  * @since 0.0.4
  */
