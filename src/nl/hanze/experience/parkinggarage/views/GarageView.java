@@ -6,6 +6,7 @@ import nl.hanze.experience.objects.Vehicle;
 import nl.hanze.experience.parkinggarage.models.GarageModel;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.plaf.TabbedPaneUI;
 import java.awt.*;
@@ -19,10 +20,10 @@ public class GarageView extends JPanelView {
     public GarageView() {
         this.setLayout(new GridLayout(1, 1));
         jTabbedPane = new JTabbedPane();
+        jTabbedPane.setBackground(Color.WHITE);
         this.add(jTabbedPane);
         size = new Dimension(600, 400);
-        //this.setMaximumSize(size);
-        this.setBorder(new LineBorder(Color.RED ));
+        this.setBackground(Color.WHITE);
     }
 
     @Override

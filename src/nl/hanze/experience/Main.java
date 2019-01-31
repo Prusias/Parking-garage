@@ -1,13 +1,11 @@
 package nl.hanze.experience;
 
-import nl.hanze.experience.objects.Vehicle;
 import nl.hanze.experience.parkinggarage.controllers.*;
 import nl.hanze.experience.parkinggarage.models.*;
 import nl.hanze.experience.parkinggarage.views.*;
 import nl.hanze.experience.simulation.Simulation;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 
 /**
@@ -96,6 +94,7 @@ public class Main {
         c.weightx = 0;
         c.weighty = 0;
         container.add(simulation.getSimulationInfoView(), c);
+        // GarageView
         c.fill = GridBagConstraints.BOTH;
         c.insets = new Insets(5, 5, 5, 5);
         c.anchor = GridBagConstraints.CENTER;
@@ -107,6 +106,7 @@ public class Main {
         c.weightx = 0;
         c.weighty = 0;
         container.add(garageView, c);
+        // Graphs
         c.insets = new Insets(10, 10, 10, 10);
         c.anchor = GridBagConstraints.CENTER;
         c.ipadx = 700;
@@ -115,7 +115,11 @@ public class Main {
         c.weightx = 0;
         c.weighty = 0;
         c.gridy = 1;
-        container.add(vehicleGraphView, c);
+        TabbedView tabbedView = new TabbedView();
+        tabbedView.addPanel(vehicleGraphView, "Vehicles in garage");
+        container.add(tabbedView, c);
+
+        container.setBackground(Color.WHITE);
         frame.pack();
         frame.setSize(new Dimension(1500, 600));
         frame.setVisible(true);

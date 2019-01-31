@@ -5,6 +5,8 @@ import nl.hanze.experience.parkinggarage.models.SimulationMenuModel;
 
 import javax.swing.*;
 
+import java.awt.*;
+
 import static nl.hanze.experience.parkinggarage.controllers.SimulationMenuController.EventId;
 
 /**
@@ -25,6 +27,7 @@ public class SimulationMenuView extends JMenuView {
      * Make new drop menu in the simlation
      */
     public SimulationMenuView() {
+        this.setBackground(Color.WHITE);
         this.setText("Simulation");
 
         startMenuItem = new JMenuItem("Start");

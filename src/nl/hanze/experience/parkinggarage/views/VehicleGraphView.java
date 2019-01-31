@@ -9,6 +9,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.DateAxis;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.DefaultXYDataset;
 import org.jfree.data.xy.XYDataset;
@@ -16,7 +17,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 /**
@@ -38,8 +39,8 @@ public class VehicleGraphView extends JPanelView {
     public VehicleGraphView() {
         this.setAlignmentX(LEFT_ALIGNMENT);
         this.setAlignmentY(TOP_ALIGNMENT);
-        this.setBorder(new LineBorder(Color.ORANGE));
         this.setSize(HEIGHT, WIDTH);
+        this.setBackground(Color.WHITE);
 
         timeSeriesCollection = new TimeSeriesCollection();
         jFreeChart = ChartFactory.createTimeSeriesChart("Vehicles in garage",
@@ -51,13 +52,21 @@ public class VehicleGraphView extends JPanelView {
                 false
         );
         XYPlot xyPlot = jFreeChart.getXYPlot();
+        XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
+        renderer.setSeriesPaint(0, new Color(255, 159, 15));
+        renderer.setSeriesPaint(1, new Color(255, 30, 30));
+        renderer.setSeriesPaint(2, new Color(68, 68, 68));
+        renderer.setSeriesPaint(3, new Color(100, 255, 255));
+        renderer.setBaseShapesVisible(false);
+        xyPlot.setRenderer(renderer);
+        xyPlot.setBackgroundPaint(new Color(255, 255, 255));
         DateAxis da = (DateAxis) xyPlot.getDomainAxis();
         DateFormat df;
         df = new SimpleDateFormat("MM-dd HH:mm");
         da.setDateFormatOverride(df);
         jFreeChart.setAntiAlias(true);
         jFreeChart.setTextAntiAlias(true);
-        jFreeChart.setBorderVisible(true);
+        jFreeChart.setBorderVisible(false);
         ChartPanel chartPanel = new ChartPanel(jFreeChart);
         chartPanel.setSize(WIDTH, HEIGHT);
         chartPanel.setMaximumDrawHeight(HEIGHT * 2);

@@ -42,6 +42,7 @@ public class SettingView extends JFrameView {
      * Making a new settings view
      */
     public SettingView() {
+        this.setBackground(Color.WHITE);
         new GridLayout(1, 1);
         JTabbedPane tabbedPane = new JTabbedPane();
 

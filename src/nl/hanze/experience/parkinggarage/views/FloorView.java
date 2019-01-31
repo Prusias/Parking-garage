@@ -18,7 +18,7 @@ public class FloorView extends JPanelView {
     public FloorView(int floor) {
         this.setLayout(new GridLayout(1, 1));
         this.floor = floor;
-        this.setBorder(new LineBorder(Color.GREEN ));
+        this.setBackground(Color.WHITE);
     }
 
     @Override
@@ -30,6 +30,8 @@ public class FloorView extends JPanelView {
         }
         floorImage = createImage(size.width, size.height);
         Graphics graphics = floorImage.getGraphics();
+        graphics.setColor(Color.WHITE);
+        graphics.fillRect(0, 0, getSize().width, getSize().height);
         for(int row = 0; row < garageModel.getNumberOfRows(); row++) {
             for(int spot = 0; spot < garageModel.getNumberOfSpots(); spot++) {
                 ParkingSpot parkingSpot = garageModel.getParkingSpot(floor, row, spot);
