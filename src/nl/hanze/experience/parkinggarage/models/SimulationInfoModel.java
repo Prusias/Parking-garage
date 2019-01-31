@@ -75,4 +75,8 @@ public class SimulationInfoModel extends Model {
         return  simulation.getGarageModel().getAmountOfPayingVehicles() * (simulation.getGarageModel().getPriceInEuro() * avgTimeBlock );
 
     }
+
+    public double getRevenueYesterday() {
+        return simulation.getGarageModel().getRevenueYesterday();
+    }
 }

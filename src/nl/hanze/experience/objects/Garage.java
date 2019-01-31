@@ -1,7 +1,9 @@
 package nl.hanze.experience.objects;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * @author Steven Woudstra
@@ -27,6 +29,8 @@ public class Garage {
     private int totalTicVehicles;
     private int price;
     private int moneyMade = 0; // in cents
+    private int moneyMadeUntillYeasterday; //in cents
+    private List<Integer> dailyMoneyLog = new ArrayList<>();
 
     /**
      * Make new garage
@@ -215,6 +219,9 @@ public class Garage {
         garageSettings.put(key, value);
     }
 
+    public List getDailyMoneyLog() {
+        return dailyMoneyLog;
+    }
 
     public int getTotalSubVehicles() {
         return totalSubVehicles;
@@ -235,6 +242,13 @@ public class Garage {
     }
     public void setTotalTicVehicles(int totalTicVehicles) {
         this.totalTicVehicles = totalTicVehicles;
+    }
+
+    public int getMoneyMadeUntillYeasterday() {
+        return moneyMadeUntillYeasterday;
+    }
+    public void setMoneyMadeUntillYeasterday(int money) {
+        moneyMadeUntillYeasterday = money;
     }
 }
 

@@ -24,7 +24,7 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class Simulation {
     private SimulationThread simulationThread;
-    private final static int simulationSleepPerTick = 50;
+    private final static int simulationSleepPerTick = 0;
 
     private Random random;
     private long seed;
@@ -158,6 +158,9 @@ public class Simulation {
                 handleLeavingVehicles();
                 if (tickCount % 60 == 0) {
                     handleGraphs();
+                }
+                if (tickCount % 1440 == 0) {
+                    garageModel.createLogToDailyMonyLog();
                 }
 
                 tickCount++;
