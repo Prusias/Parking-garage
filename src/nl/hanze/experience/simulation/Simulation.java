@@ -588,8 +588,8 @@ public class Simulation {
         vehicleGraphModel.updateTimeSeries(
                 garageModel.getLocalDateTime(),
                 garageModel.getTotalSubVehicles(),
-                garageModel.getTotalResVehicles(),
-                garageModel.getTotalTicVehicles()
+                garageModel.getTotalTicVehicles(),
+                garageModel.getTotalResVehicles()
         );
         vehicleGraphModel.notifyView();
 
