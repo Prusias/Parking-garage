@@ -7,6 +7,7 @@ import nl.hanze.experience.parkinggarage.controllers.SimulationInfoController;
 import nl.hanze.experience.parkinggarage.models.GarageModel;
 import nl.hanze.experience.parkinggarage.models.VehicleGraphModel;
 import nl.hanze.experience.parkinggarage.models.SimulationInfoModel;
+import nl.hanze.experience.parkinggarage.models.VehiclePieModel;
 import nl.hanze.experience.parkinggarage.views.SimulationInfoView;
 
 
@@ -36,6 +37,7 @@ public class Simulation {
     //private SimulationInfoController simulationInfoController;
     private GarageModel garageModel;
     private VehicleGraphModel vehicleGraphModel;
+    private VehiclePieModel vehiclePieModel;
     private ReservationsQueue reservationsQueue;
     private timeOfLeavingQueue timeOfLeavingQueue;
 
@@ -207,6 +209,9 @@ public class Simulation {
 
     public void setVehicleGraphModel(VehicleGraphModel vehicleGraphModel) {
         this.vehicleGraphModel = vehicleGraphModel;
+    }
+    public void setVehiclePieModel(VehiclePieModel vehiclePieModel) {
+        this.vehiclePieModel = vehiclePieModel;
     }
 
     /**
@@ -574,6 +579,9 @@ public class Simulation {
         if (vehicleGraphModel == null) {
             throw new IllegalStateException("Simulation - vehicleGraphModel not set");
         }
+        if (vehiclePieModel == null) {
+            throw new IllegalStateException("Simulation - vehiclePieModel not set");
+        }
         vehicleGraphModel.updateTimeSeries(
                 garageModel.getLocalDateTime(),
                 garageModel.getTotalSubVehicles(),
@@ -581,6 +589,15 @@ public class Simulation {
                 garageModel.getTotalTicVehicles()
         );
         vehicleGraphModel.notifyView();
+
+        vehiclePieModel.updatePieDataset(
+                garageModel.getTotalTicVehicles(),
+                0,
+                0,
+                garageModel.getTotalSubVehicles(),
+                garageModel.getTotalResVehicles()
+        );
+        vehiclePieModel.notifyView();
     }
 }
 

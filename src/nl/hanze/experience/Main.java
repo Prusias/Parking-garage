@@ -70,6 +70,11 @@ public class Main {
         vehicleGraphModel.addView(vehicleGraphView);
         simulation.setVehicleGraphModel(vehicleGraphModel);
 
+        VehiclePieModel vehiclePieModel = new VehiclePieModel();
+        VehiclePieView vehiclePieView = new VehiclePieView();
+        vehiclePieModel.addView(vehiclePieView);
+        simulation.setVehiclePieModel(vehiclePieModel);
+
         JFrame frame = new JFrame();
         frame.setTitle("Garage");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -117,11 +122,12 @@ public class Main {
         c.gridy = 1;
         TabbedView tabbedView = new TabbedView();
         tabbedView.addPanel(vehicleGraphView, "Vehicles in garage");
+        tabbedView.addPanel(vehiclePieView, "Vehicles types");
         container.add(tabbedView, c);
 
         container.setBackground(Color.WHITE);
         frame.pack();
-        frame.setSize(new Dimension(1500, 600));
+        frame.setSize(new Dimension(1600, 650));
         frame.setVisible(true);
 
         //TODO: Why does this work here and not elsewhere
