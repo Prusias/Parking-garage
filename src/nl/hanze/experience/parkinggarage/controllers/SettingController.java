@@ -59,6 +59,23 @@ public class SettingController extends Controller {
             settingModel.setSubscriptionQueueSizeModifier(settingView.getSubscriptionQueueSizeModifier());
             settingModel.setSubscriptionQueueMaxSize(settingView.getSubscriptionQueueMaxSize());
             settingModel.setNeighbouringParkingSpotWeightModifier(settingView.getNeighbouringParkingSpotWeightModifier());
+
+            settingModel.setSubscriptionSpots(settingView.getSubscriptionSpots());
+            settingModel.setElectricSpots(settingView.getElectricSpots());
+            settingModel.setMotorcycleSpots(settingView.getMotorcycleSpots());
+            settingModel.setFloorWeight(settingView.getFloorWeight());
+            settingModel.setRowWeight(settingView.getFloorWeight());
+            settingModel.setSpotWeight(settingView.getSpotWeight());
+            settingModel.setTicketQueueSpeed(settingView.getTicketQueueSpeed());
+            settingModel.setSubscriptionQueueSpeed(settingView.getSubscriptionQueueSpeed());
+            settingModel.setExitQueueSpeed(settingView.getExitQueueSpeed());
+            settingModel.setAverageVehicleDurationInMinutes(settingView.getAverageVehicleDurationInMinutes());
+            settingModel.setMaxVehicleDurationInMinutes(settingView.getMaxVehicleDurationInMinutes());
+            settingModel.setMinVehicleDurationInMinutes(settingView.getMinVehicleDurationInMinutes());
+            settingModel.setAverageReservationDurationInMinutes(settingView.getAverageReservationDurationInMinutes());
+            settingModel.setMaxReservationDurationInMinutes(settingView.getMaxReservationDurationInMinutes());
+            settingModel.setMinReservationDurationInMinutes(settingView.getMinReservationDurationInMinutes());
+
             String[] weekDayModifiers = settingView.getWeekdayModifiers();
             for (int i = 0; i < 7; i++) {
                 settingModel.setWeekdayModifier(i, Double.valueOf(weekDayModifiers[i]));

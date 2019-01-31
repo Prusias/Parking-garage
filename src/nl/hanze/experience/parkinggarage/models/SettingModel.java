@@ -203,6 +203,144 @@ public class SettingModel extends Model {
     public void setNeighbouringParkingSpotWeightModifier(String modifier){
         simulation.getModifier().setNeighbouringParkingSpotWeightModifier(Double.valueOf(modifier));
     }
+
+    public String getSubscriptionSpots() {
+        return Integer.toString(
+                (int)simulation.getGarageModel().getGarageSetting("subscriptionSpots")
+        );
+    }
+    public void setSubscriptionSpots(String value) {
+        simulation.getGarageModel().setGarageSetting("subscriptionSpots", Integer.valueOf(value));
+    }
+
+    public String getElectricSpots() {
+        return Integer.toString(
+                (int)simulation.getGarageModel().getGarageSetting("electricSpots")
+        );
+    }
+    public void setElectricSpots(String value) {
+        simulation.getGarageModel().setGarageSetting("electricSpots", Integer.valueOf(value));
+    }
+
+    public String getMotorcycleSpots() {
+        return Integer.toString(
+                (int)simulation.getGarageModel().getGarageSetting("motorcycleSpots")
+        );
+    }
+    public void setMotorcycleSpots(String value) {
+        simulation.getGarageModel().setGarageSetting("motorcycleSpots", Integer.valueOf(value));
+    }
+
+    public String getFloorWeight() {
+        return Double.toString(
+                (double)simulation.getGarageModel().getGarageSetting("floorWeight")
+        );
+    }
+    public void setFloorWeight(String value) {
+        simulation.getGarageModel().setGarageSetting("floorWeight", Double.valueOf(value));
+    }
+
+    public String getRowWeight() {
+        return Double.toString(
+                (double)simulation.getGarageModel().getGarageSetting("rowWeight")
+        );
+    }
+    public void setRowWeight(String value) {
+        simulation.getGarageModel().setGarageSetting("rowWeight", Double.valueOf(value));
+    }
+
+    public String getSpotWeight() {
+        return Double.toString(
+                (double)simulation.getGarageModel().getGarageSetting("spotWeight")
+        );
+    }
+    public void setSpotWeight(String value) {
+        simulation.getGarageModel().setGarageSetting("spotWeight", Double.valueOf(value));
+    }
+
+    public String getTicketQueueSpeed() {
+        return Integer.toString(
+                (int)simulation.getGarageModel().getGarageSetting("ticketQueueSpeed")
+        );
+    }
+    public void setTicketQueueSpeed(String value) {
+        simulation.getGarageModel().setGarageSetting("ticketQueueSpeed", Integer.valueOf(value));
+    }
+
+    public String getSubscriptionQueueSpeed() {
+        return Integer.toString(
+                (int)simulation.getGarageModel().getGarageSetting("subscriptionQueueSpeed")
+        );
+    }
+    public void setSubscriptionQueueSpeed(String value) {
+        simulation.getGarageModel().setGarageSetting("ticketQueueSpeed", Integer.valueOf(value));
+    }
+
+    public String getExitQueueSpeed() {
+        return Integer.toString(
+                (int)simulation.getGarageModel().getGarageSetting("exitQueueSpeed")
+        );
+    }
+    public void setExitQueueSpeed(String value) {
+        simulation.getGarageModel().setGarageSetting("exitQueueSpeed", Integer.valueOf(value));
+    }
+
+    public String getAverageVehicleDurationInMinutes() {
+        return Integer.toString(
+                (int)simulation.getGarageModel().getGarageSetting("averageVehicleDurationInMinutes")
+        );
+    }
+    public void setAverageVehicleDurationInMinutes(String value) {
+        simulation.getGarageModel().setGarageSetting("averageVehicleDurationInMinutes", Integer.valueOf(value));
+    }
+
+    public String getMaxVehicleDurationInMinutes() {
+        return Integer.toString(
+                (int)simulation.getGarageModel().getGarageSetting("maxVehicleDurationInMinutes")
+        );
+    }
+    public void setMaxVehicleDurationInMinutes(String value) {
+        simulation.getGarageModel().setGarageSetting("maxVehicleDurationInMinutes", Integer.valueOf(value));
+    }
+
+    public String getMinVehicleDurationInMinutes() {
+        return Integer.toString(
+                (int)simulation.getGarageModel().getGarageSetting("minVehicleDurationInMinutes")
+        );
+    }
+    public void setMinVehicleDurationInMinutes(String value) {
+        simulation.getGarageModel().setGarageSetting("minVehicleDurationInMinutes", Integer.valueOf(value));
+    }
+
+    public String getAverageReservationDurationInMinutes() {
+        return Integer.toString(
+                (int)simulation.getGarageModel().getGarageSetting("averageReservationDurationInMinutes")
+        );
+    }
+    public void setAverageReservationDurationInMinutes(String value) {
+        simulation.getGarageModel().setGarageSetting("averageReservationDurationInMinutes", Integer.valueOf(value));
+    }
+
+    public String getMaxReservationDurationInMinutes() {
+        return Integer.toString(
+                (int)simulation.getGarageModel().getGarageSetting("maxReservationDurationInMinutes")
+        );
+    }
+    public void setMaxReservationDurationInMinutes(String value) {
+        simulation.getGarageModel().setGarageSetting("maxReservationDurationInMinutes", Integer.valueOf(value));
+    }
+
+    public String getMinReservationDurationInMinutes() {
+        return Integer.toString(
+                (int)simulation.getGarageModel().getGarageSetting("minReservationDurationInMinutes")
+        );
+    }
+    public void setMinReservationDurationInMinutes(String value) {
+        simulation.getGarageModel().setGarageSetting("minReservationDurationInMinutes", Integer.valueOf(value));
+    }
+
+
+
     /**
      * Tests if the if the simulation has started
      * @return Boolean that is true if simulation is running

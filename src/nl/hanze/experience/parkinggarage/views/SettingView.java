@@ -28,8 +28,8 @@ public class SettingView extends JFrameView {
     private JPanel initSettings;
 
     private JPanel panel;
+    private JPanel modPanel;
     private JPanel advPanel;
-    private JPanel initPanel;
 
     private JTabbedPane tabbedPane;
 
@@ -55,13 +55,13 @@ public class SettingView extends JFrameView {
     private JTextField neighbouringParkingSPotWeightModifier;
 
     private JTextField averageVehicleDurationInMinutes;
-    private JTextField maxVehicleDUrationinMinutes;
-    private JTextField minVehicleDUrationInMinutes;
+    private JTextField maxVehicleDurationInMinutes;
+    private JTextField minVehicleDurationInMinutes;
     private JTextField averageReservationDurationInMinutes;
-    private JTextField minReservationDurationInMinutes;
     private JTextField maxReservationDurationInMinutes;
+    private JTextField minReservationDurationInMinutes;
 
-    private JTextField ticketQueueSPeed;
+    private JTextField ticketQueueSpeed;
     private JTextField subscriptionQueueSpeed;
     private JTextField exitQueueSpeed;
 
@@ -70,7 +70,6 @@ public class SettingView extends JFrameView {
     private JTextField spotWeight;
 
     private JTextField subscriptionSpots;
-    private JTextField reservedSpots;
     private JTextField electricSpots;
     private JTextField motorcycleSpots;
 
@@ -91,18 +90,18 @@ public class SettingView extends JFrameView {
         this.setBackground(Color.WHITE);
         new GridLayout(1, 1);
         panel = new JPanel();
+        modPanel = new JPanel();
         advPanel = new JPanel();
-        initPanel = new JPanel();
         tabbedPane = new JTabbedPane();
 
 
         tabbedPane.addTab("Settings", panel);
         tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
 
-        tabbedPane.addTab("Advanced", advPanel);
+        tabbedPane.addTab("Modifiers", modPanel);
         tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
 
-        tabbedPane.addTab("Initial Values", initPanel);
+        tabbedPane.addTab("Advanced", advPanel);
         tabbedPane.setMnemonicAt(2, KeyEvent.VK_3);
 
         tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
@@ -115,6 +114,7 @@ public class SettingView extends JFrameView {
 
         container = this.getContentPane();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        modPanel.setLayout(new BoxLayout(modPanel, BoxLayout.Y_AXIS));
         advPanel.setLayout(new BoxLayout(advPanel, BoxLayout.Y_AXIS));
 
         container.add(tabbedPane);
@@ -122,10 +122,13 @@ public class SettingView extends JFrameView {
         // Add the JPanel for the simulation settings
         GridLayout simulationSettingsGridLayout = new GridLayout(0, 2);
         GridLayout advancedSettingsGridLayout = new GridLayout(0,2);
+        GridLayout initSettingsGridLayout = new GridLayout(0,2);
         simulationSettingsGridLayout.setHgap(10);
         simulationSettingsGridLayout.setVgap(10);
         advancedSettingsGridLayout.setHgap(10);
         advancedSettingsGridLayout.setVgap(10);
+        initSettingsGridLayout.setHgap(10);
+        initSettingsGridLayout.setVgap(10);
 
         simulationSettings = new JPanel();
         advancedSettings = new JPanel();
@@ -133,14 +136,19 @@ public class SettingView extends JFrameView {
 
         simulationSettings.setLayout(simulationSettingsGridLayout);
         advancedSettings.setLayout(advancedSettingsGridLayout);
+        initSettings.setLayout(initSettingsGridLayout);
 
        // simulationSettings.setSize(600, 160);
         simulationSettings.setBorder(new EmptyBorder(10, 10, 10, 10));
         advancedSettings.setBorder(new EmptyBorder(10, 10, 10, 10));
+        initSettings.setBorder(new EmptyBorder(10, 10, 10, 10));
+
         panel.add(simulationSettings);
-        advPanel.add(advancedSettings);
+        modPanel.add(advancedSettings);
+        advPanel.add(initSettings);
 
         panel.add(new JSeparator());
+        modPanel.add(new JSeparator());
         advPanel.add(new JSeparator());
 
         // Add the JPanel for weekday modifiers
@@ -184,7 +192,11 @@ public class SettingView extends JFrameView {
 
         advButtons = new JPanel();
         buttons.setLayout(new FlowLayout(FlowLayout.LEFT));
-        advPanel.add(advButtons);
+        modPanel.add(advButtons);
+
+        initButtons = new JPanel();
+        buttons.setLayout(new FlowLayout(FlowLayout.LEFT));
+        advPanel.add(initButtons);
 
         addFields();
 
@@ -194,8 +206,12 @@ public class SettingView extends JFrameView {
         JButton advSaveButton = new JButton("Save");
         advButtons.add(advSaveButton);
 
+        JButton initSaveButton = new JButton("Save");
+        initButtons.add(initSaveButton);
+
         saveButton.addActionListener(e -> notifyController(EventId.SAVE));
         advSaveButton.addActionListener(e -> notifyController(EventId.SAVE));
+        initSaveButton.addActionListener(e -> notifyController(EventId.SAVE));
 
         this.pack();
 
@@ -231,6 +247,23 @@ public class SettingView extends JFrameView {
         subscriptionQueueSizeModifier.setText(settingModel.getSubscriptionQueueSizeModifier());
         subscriptionQueueMaxSize.setText(settingModel.getSubscriptionQueueMaxSize());
         neighbouringParkingSPotWeightModifier.setText(settingModel.getNeighbouringParkingSpotWeightModifier());
+
+        subscriptionSpots.setText(settingModel.getSubscriptionSpots());
+        electricSpots.setText(settingModel.getElectricSpots());
+        motorcycleSpots.setText(settingModel.getMotorcycleSpots());
+        floorWeight.setText(settingModel.getFloorWeight());
+        rowWeight.setText(settingModel.getRowWeight());
+        spotWeight.setText(settingModel.getSpotWeight());
+        ticketQueueSpeed.setText(settingModel.getTicketQueueSpeed());
+        subscriptionQueueSpeed.setText(settingModel.getSubscriptionQueueSpeed());
+        exitQueueSpeed.setText(settingModel.getExitQueueSpeed());
+        averageVehicleDurationInMinutes.setText(settingModel.getAverageVehicleDurationInMinutes());
+        maxVehicleDurationInMinutes.setText(settingModel.getMaxVehicleDurationInMinutes());
+        minVehicleDurationInMinutes.setText(settingModel.getMinVehicleDurationInMinutes());
+        averageReservationDurationInMinutes.setText(settingModel.getAverageReservationDurationInMinutes());
+        maxReservationDurationInMinutes.setText(settingModel.getMaxReservationDurationInMinutes());
+        minReservationDurationInMinutes.setText(settingModel.getMinReservationDurationInMinutes());
+
         for (int i = 0; i < 7; i++) {
             weekdayModifiersInput[i].setText(settingModel.getWeekdayModifier(i));
         }
@@ -243,6 +276,15 @@ public class SettingView extends JFrameView {
             amountOfSpotsInput.setEnabled(false);
             priceInEuroInput.setEnabled(false);
             seedInput.setEnabled(false);
+            subscriptionSpots.setEnabled(false);
+            electricSpots.setEnabled(false);
+            motorcycleSpots.setEnabled(false);
+            floorWeight.setEnabled(false);
+            rowWeight.setEnabled(false);
+            spotWeight.setEnabled(false);
+            ticketQueueSpeed.setEnabled(false);
+            subscriptionQueueSpeed.setEnabled(false);
+            exitQueueSpeed.setEnabled(false);
         }
     }
 
@@ -346,9 +388,74 @@ public class SettingView extends JFrameView {
         neighbouringParkingSPotWeightModifier = new JTextField(8);
         advancedSettings.add(neighbouringParkingSPotWeightModifier);
 
+        initSettings.add(new JLabel("Amount of spots available for subscriptions:"));
+        subscriptionSpots = new JTextField(8);
+        initSettings.add(subscriptionSpots);
 
+        initSettings.add(new JLabel("Amount of spots available for electric vehicles:"));
+        electricSpots = new JTextField(8);
+        initSettings.add(electricSpots);
 
+        initSettings.add(new JLabel("Amount of spots available for motorcylces:"));
+        motorcycleSpots = new JTextField(8);
+        initSettings.add(motorcycleSpots);
 
+        initSettings.add(new JSeparator());
+        initSettings.add(new JSeparator());
+
+        initSettings.add(new JLabel("Desirability to go up a floor, lower values are more desirable:"));
+        floorWeight = new JTextField(8);
+        initSettings.add(floorWeight);
+
+        initSettings.add(new JLabel("Desirability to the next row, lower values are more desirable:"));
+        rowWeight = new JTextField(8);
+        initSettings.add(rowWeight);
+
+        initSettings.add(new JLabel("Desirability to park inbetween two cars, higher values are more desirable:"));
+        spotWeight = new JTextField(8);
+        initSettings.add(spotWeight);
+
+        initSettings.add(new JSeparator());
+        initSettings.add(new JSeparator());
+
+        initSettings.add(new JLabel("Speed normal queues are handled:"));
+        ticketQueueSpeed = new JTextField(8);
+        initSettings.add(ticketQueueSpeed);
+
+        initSettings.add(new JLabel("Speed subscription queues are handled:"));
+        subscriptionQueueSpeed = new JTextField(8);
+        initSettings.add(subscriptionQueueSpeed);
+
+        initSettings.add(new JLabel("Speed exit queues are handled:"));
+        exitQueueSpeed = new JTextField(8);
+        initSettings.add(exitQueueSpeed);
+
+        initSettings.add(new JSeparator());
+        initSettings.add(new JSeparator());
+
+        initSettings.add(new JLabel("Average stay of a vehicle:"));
+        averageVehicleDurationInMinutes = new JTextField(8);
+        initSettings.add(averageVehicleDurationInMinutes);
+
+        initSettings.add(new JLabel("Maximum stay of a vehicle:"));
+        maxVehicleDurationInMinutes = new JTextField(8);
+        initSettings.add(maxVehicleDurationInMinutes);
+
+        initSettings.add(new JLabel("Minimum stay of a vehicle:"));
+        minVehicleDurationInMinutes = new JTextField(8);
+        initSettings.add(minVehicleDurationInMinutes);
+
+        initSettings.add(new JLabel("Average stay of a vehicle with a reservation:"));
+        averageReservationDurationInMinutes = new JTextField(8);
+        initSettings.add(averageReservationDurationInMinutes);
+
+        initSettings.add(new JLabel("Maximum stay of a vehicle with a reservation:"));
+        maxReservationDurationInMinutes = new JTextField(8);
+        initSettings.add(maxReservationDurationInMinutes);
+
+        initSettings.add(new JLabel("Minimum stay of a vehicle with a reservation:"));
+        minReservationDurationInMinutes = new JTextField(8);
+        initSettings.add(minReservationDurationInMinutes);
     }
 
     public String getAmountOfFloors() {return amountOfFloorsInput.getText();}
@@ -371,6 +478,23 @@ public class SettingView extends JFrameView {
     public String getSubscriptionQueueSizeModifier() {return subscriptionQueueSizeModifier.getText();}
     public String getSubscriptionQueueMaxSize() {return subscriptionQueueMaxSize.getText();}
     public String getNeighbouringParkingSpotWeightModifier() {return neighbouringParkingSPotWeightModifier.getText();}
+
+    public String getSubscriptionSpots() {return subscriptionSpots.getText();}
+    public String getElectricSpots() {return electricSpots.getText();}
+    public String getMotorcycleSpots() {return motorcycleSpots.getText();}
+    public String getFloorWeight() {return floorWeight.getText();}
+    public String getRowWeight() {return rowWeight.getText();}
+    public String getSpotWeight() {return spotWeight.getText();}
+    public String getTicketQueueSpeed() {return ticketQueueSpeed.getText();}
+    public String getSubscriptionQueueSpeed() {return subscriptionQueueSpeed.getText();}
+    public String getExitQueueSpeed() {return exitQueueSpeed.getText();}
+    public String getAverageVehicleDurationInMinutes() {return averageVehicleDurationInMinutes.getText();}
+    public String getMaxVehicleDurationInMinutes() {return maxVehicleDurationInMinutes.getText();}
+    public String getMinVehicleDurationInMinutes() {return minVehicleDurationInMinutes.getText();}
+    public String getAverageReservationDurationInMinutes() {return averageReservationDurationInMinutes.getText();}
+    public String getMaxReservationDurationInMinutes() {return maxReservationDurationInMinutes.getText();}
+    public String getMinReservationDurationInMinutes() {return minReservationDurationInMinutes.getText();}
+
     public String[] getWeekdayModifiers() {
         String[] output = new String[7];
         for (int i = 0; i < 7; i++) {
