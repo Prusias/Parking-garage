@@ -1,7 +1,9 @@
 package nl.hanze.experience.objects;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * @author Steven Woudstra
@@ -19,7 +21,6 @@ public class Garage {
     private int numberOfSpots;
     private int numberOfFreeRegularTicketSpots;
     private int nOfFreeSubSpots;
-    private int nOfFreeResSpots;
     private int nOfFreeElecSpots;
     private int nOfFreeMotSpots;
     private int totalSubVehicles;
@@ -27,6 +28,8 @@ public class Garage {
     private int totalTicVehicles;
     private int price;
     private int moneyMade = 0; // in cents
+    private int moneyMadeUntillYeasterday; //in cents
+    private List<Integer> dailyMoneyLog = new ArrayList<>();
 
     /**
      * Make new garage
@@ -48,11 +51,10 @@ public class Garage {
         this.numberOfSpots = (int) getGarageSetting("amountOfSpots");
         int totalSpots = numberOfFloors * numberOfRows * numberOfSpots;
         nOfFreeSubSpots = (int) getGarageSetting("subscriptionSpots");
-        nOfFreeResSpots = (int) getGarageSetting("reservedSpots");
         nOfFreeElecSpots = (int) getGarageSetting("electricSpots");
         nOfFreeMotSpots = (int) getGarageSetting("motorcycleSpots");
         this.price = (int) ((Double)getGarageSetting("priceInEuro") * 100);
-        int neededSpots = nOfFreeSubSpots + nOfFreeResSpots + nOfFreeElecSpots + nOfFreeMotSpots;
+        int neededSpots = nOfFreeSubSpots + nOfFreeElecSpots + nOfFreeMotSpots;
         if (neededSpots > totalSpots) {
             throw new IllegalStateException("Garage - Not enough parking spots available");
         }
@@ -88,9 +90,6 @@ public class Garage {
                     } else if (count <= nOfFreeSubSpots + nOfFreeElecSpots + nOfFreeMotSpots) {
                         type = Vehicle.Type.MOTORCYCLE;
                         paymentType = Vehicle.PaymentType.TICKET;
-                    } else if (count <= nOfFreeSubSpots + nOfFreeElecSpots + nOfFreeMotSpots + nOfFreeResSpots) {
-                        type = Vehicle.Type.CAR;
-                        paymentType = Vehicle.PaymentType.RESERVATION;
                     } else {
                         type = Vehicle.Type.CAR;
                         paymentType = Vehicle.PaymentType.TICKET;
@@ -152,14 +151,6 @@ public class Garage {
         this.nOfFreeSubSpots = nOfFreeSubSpots;
     }
 
-    public int getnOfFreeResSpots() {
-        return nOfFreeResSpots;
-    }
-
-    public void setnOfFreeResSpots(int nOfFreeResSpots) {
-        this.nOfFreeResSpots = nOfFreeResSpots;
-    }
-
     public int getNOfFreeElecSpots() {
         return nOfFreeElecSpots;
     }
@@ -215,6 +206,9 @@ public class Garage {
         garageSettings.put(key, value);
     }
 
+    public List getDailyMoneyLog() {
+        return dailyMoneyLog;
+    }
 
     public int getTotalSubVehicles() {
         return totalSubVehicles;
@@ -235,6 +229,13 @@ public class Garage {
     }
     public void setTotalTicVehicles(int totalTicVehicles) {
         this.totalTicVehicles = totalTicVehicles;
+    }
+
+    public int getMoneyMadeUntillYeasterday() {
+        return moneyMadeUntillYeasterday;
+    }
+    public void setMoneyMadeUntillYeasterday(int money) {
+        moneyMadeUntillYeasterday = money;
     }
 }
 

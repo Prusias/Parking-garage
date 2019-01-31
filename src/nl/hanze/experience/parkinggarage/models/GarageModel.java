@@ -3,7 +3,9 @@ package nl.hanze.experience.parkinggarage.models;
 import nl.hanze.experience.mvc.Model;
 import nl.hanze.experience.objects.*;
 
+import java.awt.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * The garage model class where the logical operations regarding the garage
@@ -163,14 +165,6 @@ public class GarageModel extends Model {
         garage.setNOfFreeSubSpots(numberOfFreeSubscriptionSpots);
     }
 
-    public int getNumberOfFreeReservedSpots() {
-        return garage.getnOfFreeResSpots();
-    }
-
-    public void setNumberOfFreeReservedSpots(int numberOfFreeReservedSpots) {
-        garage.setnOfFreeResSpots(numberOfFreeReservedSpots);
-    }
-
     public int getNumberOfFreeElectricSpots() {
         return garage.getNOfFreeElecSpots();
     }
@@ -275,5 +269,24 @@ public class GarageModel extends Model {
 
     public double getPriceInEuro() {
         return calculatePriceInEuro(garage.getPrice());
+    }
+    public List getDailyMoneyLog() {
+        return garage.getDailyMoneyLog();
+    }
+
+    public double getRevenueYesterday() {
+        if (getDailyMoneyLog().size() > 0) {
+            return calculatePriceInEuro((int) getDailyMoneyLog().get(getDailyMoneyLog().size() - 1));
+        }
+        return 0;
+    }
+
+    public void createLogToDailyMonyLog() {
+        if (getDailyMoneyLog().size()>0) {
+            getDailyMoneyLog().add(garage.getMoneyMade() - garage.getMoneyMadeUntillYeasterday());
+        }else {
+            getDailyMoneyLog().add(garage.getMoneyMade());
+        }
+        garage.setMoneyMadeUntillYeasterday(garage.getMoneyMade());
     }
 }

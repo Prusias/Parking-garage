@@ -25,6 +25,7 @@ public class Modifier {
     private double subscriptionQueueSizeModifier;
     private double subscriptionQueueMaxSize;
     private double neighbouringParkingSpotWeightModifier;
+    private double reservationNoShowModifier;
 
     /**
      * Initialize Modifier with default values
@@ -33,9 +34,9 @@ public class Modifier {
         weekdayModifier = new double[] { 0.8, 1, 1.1, 1, 1.5, 1.2, 0.5 };
         hourModifier = new double[] { 0.3, 0.2, 0.2, 0.2, 0.3, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1, 1, 1.1, 1.2, 1.1, 1.1, 1, 0.9, 0.8, 0.8, 0.6, 0.5, 0.3};
         baseVehicleModifier = 2;
-        ticketVehicleModifier = 3;
+        ticketVehicleModifier = 1;
         subscriptionVehicleModifier = 0.3;
-        reservationVehicleModifier = 0.2;
+        reservationVehicleModifier = 0.25;
         regularCarModifier = 1;
         electricCarModifier = 0.05;
         motorcycleModifier = 0.05;
@@ -46,6 +47,7 @@ public class Modifier {
         subscriptionQueueSizeModifier = 5;
         subscriptionQueueMaxSize = 100;
         neighbouringParkingSpotWeightModifier = 1;
+        reservationNoShowModifier = 0.2;
     }
 
     /**
@@ -198,5 +200,12 @@ public class Modifier {
     }
     public void setNeighbouringParkingSpotWeightModifier(double neighbouringParkingSpotWeightModifier) {
         this.neighbouringParkingSpotWeightModifier = neighbouringParkingSpotWeightModifier;
+    }
+
+    public double getReservationNoShowModifier() {
+        return reservationNoShowModifier;
+    }
+    public void setReservationNoShowModifier(double reservationNoShowModifier) {
+        this.reservationNoShowModifier = reservationNoShowModifier;
     }
 }

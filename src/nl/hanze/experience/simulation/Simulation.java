@@ -5,7 +5,6 @@ import nl.hanze.experience.objects.Reservation;
 import nl.hanze.experience.objects.Vehicle;
 import nl.hanze.experience.parkinggarage.controllers.SimulationInfoController;
 import nl.hanze.experience.parkinggarage.models.GarageModel;
-import nl.hanze.experience.parkinggarage.models.QueueGraphModel;
 import nl.hanze.experience.parkinggarage.models.VehicleGraphModel;
 import nl.hanze.experience.parkinggarage.models.SimulationInfoModel;
 import nl.hanze.experience.parkinggarage.views.SimulationInfoView;
@@ -37,7 +36,6 @@ public class Simulation {
     //private SimulationInfoController simulationInfoController;
     private GarageModel garageModel;
     private VehicleGraphModel vehicleGraphModel;
-    private QueueGraphModel queueGraphModel;
     private ReservationsQueue reservationsQueue;
     private timeOfLeavingQueue timeOfLeavingQueue;
 
@@ -209,9 +207,6 @@ public class Simulation {
 
     public void setVehicleGraphModel(VehicleGraphModel vehicleGraphModel) {
         this.vehicleGraphModel = vehicleGraphModel;
-    }
-    public void setQueueGraphModel(QueueGraphModel queueGraphModel) {
-        this.queueGraphModel = queueGraphModel;
     }
 
     /**
@@ -578,10 +573,6 @@ public class Simulation {
     private void handleGraphs() {
         if (vehicleGraphModel == null) {
             throw new IllegalStateException("Simulation - vehicleGraphModel not set");
-
-        }
-        if (queueGraphModel == null) {
-            throw new IllegalStateException("Simulation - queueGraphModel not set");
         }
         vehicleGraphModel.updateTimeSeries(
                 garageModel.getLocalDateTime(),
@@ -590,8 +581,6 @@ public class Simulation {
                 garageModel.getTotalTicVehicles()
         );
         vehicleGraphModel.notifyView();
-        queueGraphModel.updateDataset(garageModel.getTicketQueueSize(),garageModel.getSubscriptionQueueSize());
-        queueGraphModel.notifyView();
     }
 }
 
