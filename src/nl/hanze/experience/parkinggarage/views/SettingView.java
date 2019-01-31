@@ -8,6 +8,7 @@ import nl.hanze.experience.parkinggarage.models.SettingModel;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.util.concurrent.Flow;
 
 /**
@@ -19,6 +20,8 @@ public class SettingView extends JFrameView {
 
     private Container container;
     private JPanel simulationSettings;
+
+    private JTabbedPane tabbedPane;
 
     private JPanel weekdayModifiers;
     private JTextField[] weekdayModifiersInput;
@@ -35,6 +38,28 @@ public class SettingView extends JFrameView {
     private JTextField seedInput;
 
     public SettingView() {
+        new GridLayout(1, 1);
+        JTabbedPane tabbedPane = new JTabbedPane();
+
+        JComponent panel1 = makeTextPanel("Settings");
+        tabbedPane.addTab("Settings", panel1);
+        tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
+
+        JComponent panel2 = makeTextPanel("Advanced Settings");
+        tabbedPane.addTab("Advanced Settings", panel2);
+        tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
+
+//        private static void createAndShowGUI(){
+//            JFrame frame = new JFrame("Settings");
+//            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//
+//            frame.add(new SettingView(), BorderLayout.CENTER);
+//
+//            frame.pack();
+//            frame.setVisible(true);
+//        }
+
+
         this.setTitle("Settings");
         this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         this.setSize(600, 600);
@@ -67,14 +92,14 @@ public class SettingView extends JFrameView {
         weekdayModifiers.setBorder(new EmptyBorder(10, 10, 10, 10));
         //TODO: Why won't this left-align?
         container.add(new JPanel(new FlowLayout(FlowLayout.LEFT)).add(
-                new JLabel("Modifiers for each day of the week from monday till sunday:", SwingConstants.LEFT)
+                new JLabel("Modifiers for each day of the week:", SwingConstants.LEFT)
         ));
         container.add(weekdayModifiers);
 
         container.add(new JSeparator());
 
         // Add the JPanel for hour modifiers
-        GridLayout hourModifiersGridLayout = new GridLayout(0, 8);
+        GridLayout hourModifiersGridLayout = new GridLayout(0, 16);
         hourModifiersGridLayout.setHgap(2);
         hourModifiersGridLayout.setVgap(2);
 
@@ -84,7 +109,7 @@ public class SettingView extends JFrameView {
         hourModifiers.setBorder(new EmptyBorder(10, 10, 10, 10));
         //TODO: Why won't this left-align?
         container.add(new JPanel(new FlowLayout(FlowLayout.LEFT)).add(
-                new JLabel("Modifiers for each hour of the day from 0:00 till 7:00, 8:00 till 16:00, 17:00 till 23:00:", SwingConstants.LEFT)
+                new JLabel("Modifiers for each hour of the day:", SwingConstants.LEFT)
         ));
         container.add(hourModifiers);
 
@@ -101,6 +126,11 @@ public class SettingView extends JFrameView {
         buttons.add(saveButton);
 
         saveButton.addActionListener(e -> notifyController(EventId.SAVE));
+
+
+        add(tabbedPane);
+
+        tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 
         this.pack();
 
@@ -133,36 +163,42 @@ public class SettingView extends JFrameView {
     }
 
     private void addFields() {
-        simulationSettings.add(new JLabel("Amount of floors the garage has."));
-        amountOfFloorsInput = new JTextField(30);
-        simulationSettings.add(amountOfFloorsInput);
+        String[] weekday = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
 
-        simulationSettings.add(new JLabel("Amount of rows each floor has."));
-        amountOfRowsInput = new JTextField(30);
-        simulationSettings.add(amountOfRowsInput);
-
-        simulationSettings.add(new JLabel("Amount of parking spots each row has."));
-        amountOfSpotsInput = new JTextField(30);
-        simulationSettings.add(amountOfSpotsInput);
-
-        simulationSettings.add(new JLabel("The price of parking per 10 minutes in €."));
-        priceInEuroInput = new JTextField(30);
-        simulationSettings.add(priceInEuroInput);
-
-        simulationSettings.add(new JSeparator());
-        simulationSettings.add(new JSeparator());
-
-        simulationSettings.add(new JLabel("Seed for the simulation"));
+        simulationSettings.add(new JLabel("Simulation seed:"));
         seedInput = new JTextField(30);
         simulationSettings.add(seedInput);
 
+        simulationSettings.add(new JSeparator());
+        simulationSettings.add(new JSeparator());
+
+        simulationSettings.add(new JLabel("Number of floors:"));
+        amountOfFloorsInput = new JTextField(8);
+        simulationSettings.add(amountOfFloorsInput);
+
+        simulationSettings.add(new JLabel("Number of rows:"));
+        amountOfRowsInput = new JTextField(8);
+        simulationSettings.add(amountOfRowsInput);
+
+        simulationSettings.add(new JLabel("Number of parking spots:"));
+        amountOfSpotsInput = new JTextField(8);
+        simulationSettings.add(amountOfSpotsInput);
+
+        simulationSettings.add(new JLabel("The price per 10 minutes in €:"));
+        priceInEuroInput = new JTextField(8);
+        simulationSettings.add(priceInEuroInput);
+
         weekdayModifiersInput = new JTextField[7];
+        for (int i = 0; i < 7; i++) {
+            weekdayModifiers.add(new JLabel(weekday[i], SwingConstants.LEFT));
+        }
         for (int i = 0; i < 7; i++) {
             weekdayModifiersInput[i] = new JTextField(5);
             weekdayModifiers.add(weekdayModifiersInput[i]);
         }
         hourModifiersInput = new JTextField[24];
         for (int i = 0; i < 24; i++) {
+            hourModifiers.add(new JLabel(i+":00", SwingConstants.RIGHT));
             hourModifiersInput[i] = new JTextField(5);
             hourModifiers.add(hourModifiersInput[i]);
         }
@@ -188,4 +224,12 @@ public class SettingView extends JFrameView {
         return output;
     }
 
+    protected JComponent makeTextPanel(String text){
+        JPanel panel = new JPanel(false);
+        JLabel filler = new JLabel(text);
+        filler.setHorizontalAlignment(JLabel.CENTER);
+        panel.setLayout(new GridLayout(1,1));
+        panel.add(filler);
+        return panel;
+    }
 }
