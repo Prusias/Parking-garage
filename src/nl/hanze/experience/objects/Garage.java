@@ -51,7 +51,7 @@ public class Garage {
         nOfFreeResSpots = (int) getGarageSetting("reservedSpots");
         nOfFreeElecSpots = (int) getGarageSetting("electricSpots");
         nOfFreeMotSpots = (int) getGarageSetting("motorcycleSpots");
-        this.price = calculatePriceInCents((Double)getGarageSetting("priceInEuro"));
+        this.price = (int) ((Double)getGarageSetting("priceInEuro") * 100);
         int neededSpots = nOfFreeSubSpots + nOfFreeResSpots + nOfFreeElecSpots + nOfFreeMotSpots;
         if (neededSpots > totalSpots) {
             throw new IllegalStateException("Garage - Not enough parking spots available");
@@ -108,12 +108,11 @@ public class Garage {
         return parkingSpots[floor][row][place];
     }
 
-    public double getPriceInEuro() {
-        return (double)price / 100;
-    }
-
     public void setPrice(int price) {
         this.price = price;
+    }
+    public int getPrice() {
+        return price;
     }
 
 //    public void addToTicketQueue() {
@@ -197,6 +196,10 @@ public class Garage {
         moneyMade += amount;
     }
 
+    /**
+     * Gives te omount of moneymade in cents
+     * @return money made in cents
+     */
     public int getMoneyMade() {
         return moneyMade;
     }
@@ -212,18 +215,6 @@ public class Garage {
         garageSettings.put(key, value);
     }
 
-    /**
-     * Calculate the prise of a parking spot in cents
-     * @param priceInEuro The price of a parking spot in euros
-     * @return
-     */
-    public int calculatePriceInCents(double priceInEuro) {
-        return (int) (priceInEuro * 100);
-
-    }
-    public int calculatePriceInCents(Double priceInEuro) {
-        return (int) (priceInEuro * 10);
-    }
 
     public int getTotalSubVehicles() {
         return totalSubVehicles;
