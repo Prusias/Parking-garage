@@ -163,14 +163,6 @@ public class GarageModel extends Model {
         garage.setNOfFreeSubSpots(numberOfFreeSubscriptionSpots);
     }
 
-    public int getNumberOfFreeReservedSpots() {
-        return garage.getnOfFreeResSpots();
-    }
-
-    public void setNumberOfFreeReservedSpots(int numberOfFreeReservedSpots) {
-        garage.setnOfFreeResSpots(numberOfFreeReservedSpots);
-    }
-
     public int getNumberOfFreeElectricSpots() {
         return garage.getNOfFreeElecSpots();
     }

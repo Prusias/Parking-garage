@@ -1,4 +1,4 @@
-package nl.hanze.experience.simulation;
+package nl.hanze.experience.simulation.reservations;
 
 import nl.hanze.experience.objects.Reservation;
 

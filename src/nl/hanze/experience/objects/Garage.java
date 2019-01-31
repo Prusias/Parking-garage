@@ -19,7 +19,6 @@ public class Garage {
     private int numberOfSpots;
     private int numberOfFreeRegularTicketSpots;
     private int nOfFreeSubSpots;
-    private int nOfFreeResSpots;
     private int nOfFreeElecSpots;
     private int nOfFreeMotSpots;
     private int totalSubVehicles;
@@ -48,11 +47,10 @@ public class Garage {
         this.numberOfSpots = (int) getGarageSetting("amountOfSpots");
         int totalSpots = numberOfFloors * numberOfRows * numberOfSpots;
         nOfFreeSubSpots = (int) getGarageSetting("subscriptionSpots");
-        nOfFreeResSpots = (int) getGarageSetting("reservedSpots");
         nOfFreeElecSpots = (int) getGarageSetting("electricSpots");
         nOfFreeMotSpots = (int) getGarageSetting("motorcycleSpots");
         this.price = (int) ((Double)getGarageSetting("priceInEuro") * 100);
-        int neededSpots = nOfFreeSubSpots + nOfFreeResSpots + nOfFreeElecSpots + nOfFreeMotSpots;
+        int neededSpots = nOfFreeSubSpots + nOfFreeElecSpots + nOfFreeMotSpots;
         if (neededSpots > totalSpots) {
             throw new IllegalStateException("Garage - Not enough parking spots available");
         }
@@ -88,9 +86,6 @@ public class Garage {
                     } else if (count <= nOfFreeSubSpots + nOfFreeElecSpots + nOfFreeMotSpots) {
                         type = Vehicle.Type.MOTORCYCLE;
                         paymentType = Vehicle.PaymentType.TICKET;
-                    } else if (count <= nOfFreeSubSpots + nOfFreeElecSpots + nOfFreeMotSpots + nOfFreeResSpots) {
-                        type = Vehicle.Type.CAR;
-                        paymentType = Vehicle.PaymentType.RESERVATION;
                     } else {
                         type = Vehicle.Type.CAR;
                         paymentType = Vehicle.PaymentType.TICKET;
@@ -150,14 +145,6 @@ public class Garage {
 
     public void setNOfFreeSubSpots(int nOfFreeSubSpots) {
         this.nOfFreeSubSpots = nOfFreeSubSpots;
-    }
-
-    public int getnOfFreeResSpots() {
-        return nOfFreeResSpots;
-    }
-
-    public void setnOfFreeResSpots(int nOfFreeResSpots) {
-        this.nOfFreeResSpots = nOfFreeResSpots;
     }
 
     public int getNOfFreeElecSpots() {
