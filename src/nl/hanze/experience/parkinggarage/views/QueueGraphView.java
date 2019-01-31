@@ -37,10 +37,10 @@ public class QueueGraphView extends JPanelView {
                 false
         );
         CategoryPlot plot = jFreeChart.getCategoryPlot();
-        BarRenderer renderer = new BarRenderer();
+        BarRenderer renderer = (BarRenderer) plot.getRenderer();
         renderer.setSeriesPaint(0, new Color(255, 30, 30));
         renderer.setSeriesPaint(1, new Color(68, 68, 68));
-        renderer.setSeriesPaint(1, new Color(100, 255, 255));
+        renderer.setSeriesPaint(2, new Color(100, 255, 255));
         renderer.setShadowVisible(false);
         plot.setRenderer(renderer);
         plot.setBackgroundPaint(new Color(255, 255, 255));

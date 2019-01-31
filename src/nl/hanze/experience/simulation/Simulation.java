@@ -679,8 +679,8 @@ public class Simulation {
 
         vehiclePieModel.updatePieDataset(
                 garageModel.getTotalTicVehicles(),
-                0,
-                0,
+                (int)garageModel.getGarageSetting("electricSpots") - garageModel.getNumberOfFreeElectricSpots(),
+                (int)garageModel.getGarageSetting("motorcycleSpots") - garageModel.getNumberOfFreeMotorcycleSpots(),
                 garageModel.getTotalSubVehicles(),
                 garageModel.getTotalResVehicles()
         );

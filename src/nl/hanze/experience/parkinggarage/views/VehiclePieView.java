@@ -35,12 +35,21 @@ public class VehiclePieView extends JPanelView {
         this.setAlignmentX(LEFT_ALIGNMENT);
         this.setAlignmentY(TOP_ALIGNMENT);
         this.setSize(HEIGHT, WIDTH);
+
         jFreeChart = ChartFactory.createPieChart("Vehicle types in garage",
                 defaultPieDataset,
                 true,
                 true,
                 false
         );
+        PiePlot plot = (PiePlot) jFreeChart.getPlot();
+        plot.setSectionPaint("Cars with a subscription", new Color(255, 30, 30));
+        plot.setSectionPaint("Cars with a reservation", new Color(100, 255, 255));
+        plot.setSectionPaint("Cars with a ticket", new Color(168, 168, 168));
+        plot.setSectionPaint("Electric cars with a ticket", new Color(10, 100, 0));
+        plot.setSectionPaint("Motorcycles with a ticket", new Color(255, 155, 50));
+        plot.setLabelGenerator(null);
+        plot.setBackgroundPaint(new Color(255, 255, 255));
         jFreeChart.setAntiAlias(true);
         jFreeChart.setTextAntiAlias(true);
         jFreeChart.setBorderVisible(false);

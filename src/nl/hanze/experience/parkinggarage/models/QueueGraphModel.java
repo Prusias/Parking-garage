@@ -13,9 +13,9 @@ public class QueueGraphModel extends Model{
 
     public void updateDataset(int ticketQueueSize, int subscriptionQueueSize, int reservationQueueSize) {
         set = new DefaultCategoryDataset();
-        set.addValue(subscriptionQueueSize, "Subscription", "Amount of cars");
-        set.addValue(ticketQueueSize, "TicketQueue", "Amount of cars");
-        set.addValue(reservationQueueSize, "ReservationQueue", "Amount of reservations");
+        set.addValue(subscriptionQueueSize, "Amount of cars with a subscription", "");
+        set.addValue(ticketQueueSize, "Amount of cars with a ticket", "");
+        set.addValue(reservationQueueSize, "Amount of reservations", "");
     }
 
     public DefaultCategoryDataset getDataset() {
