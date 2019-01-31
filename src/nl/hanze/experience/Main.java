@@ -59,7 +59,9 @@ public class Main {
         garageModel.setGarageSetting("spotWeight", .2);
         garageModel.setGarageSetting("reservationReservedMinutes", 15);
         garageModel.setGarageSetting("reservationKeptReservedMinutes", 20);
-
+        garageModel.setGarageSetting("amountOfTicketQueues", 1);
+        garageModel.setGarageSetting("amountOfSubscriptionQueues", 1);
+        garageModel.setGarageSetting("amountOfExitQueues", 1);
 
         GarageController garageController = new GarageController(garageModel);
         GarageView garageView = new GarageView();

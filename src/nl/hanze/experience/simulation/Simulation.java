@@ -153,13 +153,11 @@ public class Simulation {
                 }
                 simulationInfoModel.setTickCount(tickCount);
                 simulationInfoModel.increaseTime();
-                System.out.println("Tick: " + tickCount);
+                //System.out.println("Tick: " + tickCount);
                 generateVehicles();
                 handleReservationsQueue();
                 handleSubscriptionQueue();
-                //System.out.println("SubscriptionQueueSize: " + garageModel.getSubscriptionQueueSize());
                 handleTicketQueue();
-                //System.out.println("TicketQueueSize: " + garageModel.getTicketQueueSize());
                 handleLeavingVehicles();
                 if (tickCount % 60 == 0) {
                     handleGraphs();
@@ -378,7 +376,6 @@ public class Simulation {
         // Now we check for spots that need reserving
         ReservationTime reservationTime = reservationsTimeParkingSpotQueue.peek();
         while (reservationTime != null) {
-            System.out.println("loop2");
             if (reservationTime.getTime() <= simulationThread.tickCount) {
                 reservationTime =  reservationsTimeParkingSpotQueue.poll();
                 ParkingSpot parkingSpot = getNewReservationParkingSpot();
@@ -395,7 +392,6 @@ public class Simulation {
         // Now we check for reservations that didn't show up
         reservationTime = reservationTimeShowedUpQueue.peek();
         while (reservationTime != null) {
-            System.out.println("loop3");
             if (reservationTime.getTime() <= simulationThread.tickCount) {
                 reservationTime = reservationTimeShowedUpQueue.poll();
                 ParkingSpot parkingSpot = reservationTime.getReservation().getVehicle().getParkingSpot();
@@ -417,7 +413,7 @@ public class Simulation {
      */
     private void handleSubscriptionQueue() {
         int count = 0;
-        while (count < (int)garageModel.getGarageSetting("subscriptionQueueSpeed")) {
+        while (count < (int)garageModel.getGarageSetting("subscriptionQueueSpeed")  * (int)garageModel.getGarageSetting("amountOfSubscriptionQueues")) {
             count++;
             Vehicle peek = garageModel.peekVehicleFromSubscriptionQueue();
             // Is there a vehicle in the queue?
@@ -456,7 +452,7 @@ public class Simulation {
      */
     private void handleTicketQueue() {
         int count = 0;
-        while (count < (int)garageModel.getGarageSetting("ticketQueueSpeed")) {
+        while (count < (int)garageModel.getGarageSetting("ticketQueueSpeed") * (int)garageModel.getGarageSetting("amountOfTicketQueues")) {
             count++;
             Vehicle peek = garageModel.peekVehicleFromTicketQueue();
             // Is there a vehicle in the queue?
@@ -599,7 +595,7 @@ public class Simulation {
     private void handleLeavingVehicles() {
         Vehicle vehicle = timeOfLeavingQueue.peek();
         int count = 0;
-        while (count < (int)garageModel.getGarageSetting("ticketQueueSpeed") && vehicle != null) {
+        while (count < (int)garageModel.getGarageSetting("exitQueueSpeed") * (int)garageModel.getGarageSetting("amountOfExitQueues") && vehicle != null) {
             count++;
             if (vehicle.getTimeOfLeaving() <= simulationThread.tickCount) {
                 // Is it time for the vehicle to leave?
