@@ -40,8 +40,8 @@ public class Main {
         simulationMenuModel.addView(simulationMenuView);
 
         GarageModel garageModel = new GarageModel();
-        garageModel.setGarageSetting("amountOfFloors", 3);
-        garageModel.setGarageSetting("amountOfRows", 5);
+        garageModel.setGarageSetting("amountOfFloors", 4);
+        garageModel.setGarageSetting("amountOfRows", 10);
         garageModel.setGarageSetting("amountOfSpots", 20);
         garageModel.setGarageSetting("priceInEuro", 0.5);
         garageModel.setGarageSetting("averageVehicleDurationInMinutes", 120);
@@ -93,8 +93,8 @@ public class Main {
         c.gridx = 0;
         c.gridy = 0;
         container.add(simulation.getSimulationInfoView(), c);
-        c.ipady = 400;
-        c.ipadx = 800;
+        c.ipady = 800;
+        c.ipadx = 600;
         c.gridx = 0;
         c.weightx = 0;
         c.gridy = 1;
