@@ -174,12 +174,16 @@ public class GarageModel extends Model {
             if (vehicle.getDuration() % 10 != 0) {
                 payingTime = +1;
             }
-            garage.addMoney(garage.getPrice() * payingTime);
+            garage.addMoney((int) (getPriceInEuro() * 100) * payingTime);
         }
     }
 
     public double moneyMadeInEuro() {
-        return ((double)garage.getMoneyMade())/10;
+        return ((double)garage.getMoneyMade())/100;
+    }
+
+    public double getPriceInEuro() {
+        return garage.getPriceInEuro();
     }
 
     public int getTotalSubVehicles() {
@@ -201,5 +205,9 @@ public class GarageModel extends Model {
     }
     public void setTotalTicVehicles(int totalTicVehicles) {
         garage.setTotalTicVehicles(totalTicVehicles);
+    }
+
+    public int getAmountOfPayingVehicles() {
+        return garage.getTotalResVehicles() + garage.getTotalTicVehicles();
     }
 }

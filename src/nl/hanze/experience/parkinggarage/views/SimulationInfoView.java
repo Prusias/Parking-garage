@@ -69,7 +69,8 @@ public class SimulationInfoView extends JPanelView {
         dateTimeLabel.setText(simulationInfoModel.getFormattedTime());
         subscriptionQueueSize.setText("" + simulationInfoModel.getSubscriptionQueueSize());
         ticketQueueSize.setText("" + simulationInfoModel.getTicketQueueSize());
-        moneyMade.setText("" + simulationInfoModel.getMoneyMade());
+        moneyMade.setText(" €" + simulationInfoModel.getMoneyMade() + " (€"  + simulationInfoModel.getPotentialMoney() + ")");
+
     }
 
 }
