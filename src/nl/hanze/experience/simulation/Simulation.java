@@ -25,7 +25,7 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class Simulation {
     private SimulationThread simulationThread;
-    private final static int simulationSleepPerTick = 50;
+    private final static int simulationSleepPerTick = 0;
 
     private Random random;
     private long seed;
@@ -164,6 +164,9 @@ public class Simulation {
                 if (tickCount % 60 == 0) {
                     handleGraphs();
                 }
+                if (tickCount % 1440 == 0) {
+                    garageModel.createLogToDailyMonyLog();
+                }
 
                 tickCount++;
                 //System.out.println(tickCount);
@@ -273,7 +276,7 @@ public class Simulation {
                 paymentType = PaymentType.RESERVATION;
             }
 
-            // Take leaving cars because of queue length into a count
+            // Take leaving cars because of queue length into account
             if (paymentType == PaymentType.TICKET || paymentType == PaymentType.RESERVATION) {
                 double queueSizeValue = modifier.getTicketQueueSizeModifier() * garageModel.getTicketQueueSize();
                 //System.out.println("Size: " + queueSizeValue + " Max: " + modifier.getTicketQueueMaxSize());
@@ -311,7 +314,7 @@ public class Simulation {
             int max = (int)garageModel.getGarageSetting("maxVehicleDurationInMinutes");
             int min = (int)garageModel.getGarageSetting("minVehicleDurationInMinutes");
             double standard = random.nextGaussian();
-            int duration = (int)((standard * (deviation * 100)) + average);
+            int duration = (int)(standard * deviation * average + average);
             if (duration < min) {
                 duration = min;
             } else if (duration > max) {
@@ -331,7 +334,7 @@ public class Simulation {
                 int resMax = (int)garageModel.getGarageSetting("maxReservationDurationInMinutes");
                 int resMin = (int)garageModel.getGarageSetting("minReservationDurationInMinutes");
                 double resStandard = random.nextGaussian();
-                int resDuration = (int)((resStandard * (resDeviation * 100)) + resAverage);
+                int resDuration = (int)(resStandard * resDeviation * resAverage + resAverage);
                 if (resDuration < resMin) {
                     resDuration = resMin;
                 } else if (resDuration > resMax) {
@@ -634,7 +637,7 @@ public class Simulation {
                     garageModel.setTotalTicVehicles(garageModel.getTotalTicVehicles() - 1);
                 }
 
-                //System.out.println("Vehicle of Type: " + vehicle.getType() + " and PaymentType " + vehicle.getPaymentType() + " left" );
+//                System.out.println("Vehicle of Type: " + vehicle.getType() + " and PaymentType " + vehicle.getPaymentType() + " left." );
                 garageModel.notifyView();
             }
             // For the next loop

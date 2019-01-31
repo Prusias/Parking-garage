@@ -75,6 +75,131 @@ public class SettingModel extends Model {
         simulation.getModifier().setHourModifier(hour, modifier);
     }
 
+    public String getBaseVehicleModifier(){
+        return Double.toString(
+                simulation.getModifier().getBaseVehicleModifier());
+    }
+
+    public void setBaseVehicleModifier(String modifier){
+        simulation.getModifier().setBaseVehicleModifier(Double.valueOf(modifier));
+    }
+
+    public String getTicketVehicleModifier(){
+        return Double.toString(
+                simulation.getModifier().getTicketVehicleModifier());
+    }
+
+    public void setTicketVehicleModifier(String modifier){
+        simulation.getModifier().setTicketVehicleModifier(Double.valueOf(modifier));
+    }
+
+    public String getSubscriptionVehicleModifier(){
+        return Double.toString(
+                simulation.getModifier().getSubscriptionVehicleModifier());
+    }
+
+    public void setSubscriptionVehicleModifier(String modifier){
+        simulation.getModifier().setSubscriptionVehicleModifier(Double.valueOf(modifier));
+    }
+
+    public String getReservationVehicleModifier(){
+        return Double.toString(
+                simulation.getModifier().getReservationVehicleModifier());
+    }
+
+    public void setReservationVehicleModifier(String modifier){
+        simulation.getModifier().setReservationVehicleModifier(Double.valueOf(modifier));
+    }
+
+    public String getRegularCarModifier(){
+        return Double.toString(
+                simulation.getModifier().getRegularCarModifier());
+    }
+
+    public void setRegularCarModifier(String modifier){
+        simulation.getModifier().setRegularCarModifier(Double.valueOf(modifier));
+    }
+
+    public String getElectricCarModifier(){
+        return Double.toString(
+                simulation.getModifier().getElectricCarModifier());
+    }
+
+    public void setElectricCarModifier(String modifier){
+        simulation.getModifier().setElectricCarModifier(Double.valueOf(modifier));
+    }
+
+    public String getMotorcycleModifier(){
+        return Double.toString(
+                simulation.getModifier().getMotorcycleModifier());
+    }
+
+    public void setMotorcycleModifier(String modifier){
+        simulation.getModifier().setMotorcycleModifier(Double.valueOf(modifier));
+    }
+
+    public String getParkingDurationModifier(){
+        return Double.toString(
+                simulation.getModifier().getParkingDurationModifier());
+    }
+
+    public void setParkingDurationModifier(String modifier){
+        simulation.getModifier().setParkingDurationModifier(Double.valueOf(modifier));
+    }
+
+    public String getReservationDurationModifier(){
+        return Double.toString(
+                simulation.getModifier().getReservationDurationModifier());
+    }
+
+    public void setReservationDurationModifier(String modifier){
+        simulation.getModifier().setReservationDurationModifier(Double.valueOf(modifier));
+    }
+
+    public String getTicketQueueSizeModifier(){
+        return Double.toString(
+                simulation.getModifier().getTicketQueueSizeModifier());
+    }
+
+    public void setTicketQueueSizeModifier(String modifier){
+        simulation.getModifier().setTicketQueueSizeModifier(Double.valueOf(modifier));
+    }
+
+    public String getTicketQueueMaxSize(){
+        return Double.toString(
+                simulation.getModifier().getTicketQueueMaxSize());
+    }
+
+    public void setTicketQueueMaxSize(String modifier){
+        simulation.getModifier().setTicketQueueMaxSize(Double.valueOf(modifier));
+    }
+
+    public String getSubscriptionQueueSizeModifier(){
+        return Double.toString(
+                simulation.getModifier().getSubscriptionQueueSizeModifier());
+    }
+
+    public void setSubscriptionQueueSizeModifier(String modifier){
+        simulation.getModifier().setSubscriptionQueueSizeModifier(Double.valueOf(modifier));
+    }
+
+    public String getSubscriptionQueueMaxSize(){
+        return Double.toString(
+                simulation.getModifier().getSubscriptionQueueMaxSize());
+    }
+
+    public void setSubscriptionQueueMaxSize(String modifier){
+        simulation.getModifier().setSubscriptionQueueMaxSize(Double.valueOf(modifier));
+    }
+
+    public String getNeighbouringParkingSpotWeightModifier(){
+        return Double.toString(
+                simulation.getModifier().getNeighbouringParkingSpotWeightModifier());
+    }
+
+    public void setNeighbouringParkingSpotWeightModifier(String modifier){
+        simulation.getModifier().setNeighbouringParkingSpotWeightModifier(Double.valueOf(modifier));
+    }
     /**
      * Tests if the if the simulation has started
      * @return Boolean that is true if simulation is running

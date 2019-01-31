@@ -21,6 +21,7 @@ public class SimulationInfoView extends JPanelView {
     private JLabel subscriptionQueueSize;
     private JLabel ticketQueueSize;
     private JLabel moneyMade;
+    private JLabel revenue;
 
     /**
      * Make new simulation information view
@@ -50,6 +51,10 @@ public class SimulationInfoView extends JPanelView {
         moneyMade = new JLabel("0");
         this.add(moneyMade);
 
+        add(new JLabel("Revenue Yesterday:  "));
+        revenue = new JLabel("0");
+        this.add(revenue);
+
 
 
 //        JButton pauseButton = new JButton("Pause");
@@ -78,7 +83,7 @@ public class SimulationInfoView extends JPanelView {
         subscriptionQueueSize.setText("" + simulationInfoModel.getSubscriptionQueueSize());
         ticketQueueSize.setText("" + simulationInfoModel.getTicketQueueSize());
         moneyMade.setText(" €" + simulationInfoModel.getMoneyMade() + " (+€"  + simulationInfoModel.getPotentialMoney() + ")");
-
+        revenue.setText("€" + simulationInfoModel.getRevenueYesterday());
     }
 
 }
