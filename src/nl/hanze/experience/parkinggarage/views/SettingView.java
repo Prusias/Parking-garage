@@ -45,9 +45,11 @@ public class SettingView extends JFrameView {
         tabbedPane.addTab("Settings", panel1);
         tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
 
-        JComponent panel2 = makeTextPanel("Advanced Settings");
-        tabbedPane.addTab("Advanced Settings", panel2);
+        JComponent panel2 = makeTextPanel("Advanced");
+        tabbedPane.addTab("Advanced", panel2);
         tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
+
+        add(tabbedPane);
 
 //        private static void createAndShowGUI(){
 //            JFrame frame = new JFrame("Settings");
@@ -128,7 +130,7 @@ public class SettingView extends JFrameView {
         saveButton.addActionListener(e -> notifyController(EventId.SAVE));
 
 
-        add(tabbedPane);
+
 
         tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 
