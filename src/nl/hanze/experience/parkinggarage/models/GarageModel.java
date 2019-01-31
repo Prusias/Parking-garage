@@ -6,7 +6,8 @@ import nl.hanze.experience.objects.*;
 import java.time.LocalDateTime;
 
 /**
- * @author Mike van der Velde
+ * The garage model class where the logical operations regarding the garage
+ * @author Mike van der Velde and Zein Bseis
  * @version 0.0.4
  * @since 0.0.4
  */
@@ -16,7 +17,9 @@ public class GarageModel extends Model {
     private VehicleQueue subscriptionQueue;
 
 
-
+    /**
+     * Make a new garage model
+     */
     public GarageModel() {
         garage = new Garage();
         ticketQueue = new VehicleQueue();
@@ -24,6 +27,9 @@ public class GarageModel extends Model {
 
     }
 
+    /**
+     * Initialize The garage
+     */
     public void initializeGarage() {
         garage.initializeGarage();
         notifyView();
@@ -45,6 +51,10 @@ public class GarageModel extends Model {
     }
     */
 
+    /**
+     *
+     * @return
+     */
     public ParkingSpot[][][] getParkingSpots() {
         return garage.parkingSpots;
     }

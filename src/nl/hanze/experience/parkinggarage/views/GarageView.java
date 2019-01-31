@@ -11,6 +11,9 @@ import java.awt.*;
 
 /**
  * Class to create a garage view
+ * @author Mike van der Velde and Zein Bseis
+ * @version 0.0.4
+ * @since 0.0.4
  */
 public class GarageView extends JPanelView {
 
@@ -109,6 +112,10 @@ public class GarageView extends JPanelView {
 
     }
 
+    /**
+     * Paints a specific component
+     * @param g a component to paint
+     */
     protected void paintComponent(Graphics g) {
         if (carParkImage == null) {
             return;
@@ -123,6 +130,15 @@ public class GarageView extends JPanelView {
             g.drawImage(carParkImage, 0, 0, currentSize.width, currentSize.height, null);
         }
     }
+
+    /**
+     * Draw a place
+     * @param graphics What to draw
+     * @param color The color of the component being drawn
+     * @param floor Which floor in the component at
+     * @param row Which row in the component at
+     * @param spot Which specific spot is the component at
+     */
     private void drawPlace(Graphics graphics, Color color, int floor, int row, int spot) {
         graphics.setColor(color);
         graphics.fillRect(
