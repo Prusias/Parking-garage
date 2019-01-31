@@ -70,6 +70,11 @@ public class Main {
         vehicleGraphModel.addView(vehicleGraphView);
         simulation.setVehicleGraphModel(vehicleGraphModel);
 
+        QueueGraphModel queueGraphModel = new QueueGraphModel();
+        QueueGraphView queueGraphView = new QueueGraphView();
+        queueGraphModel.addView(queueGraphView);
+        simulation.setQueueGraphModel(queueGraphModel);
+
         JFrame frame = new JFrame();
         frame.setTitle("Garage");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -118,6 +123,10 @@ public class Main {
         TabbedView tabbedView = new TabbedView();
         tabbedView.addPanel(vehicleGraphView, "Vehicles in garage");
         container.add(tabbedView, c);
+
+
+        //tabbedView.addPanel(queueGraphView, "queues in garage");
+
 
         container.setBackground(Color.WHITE);
         frame.pack();
