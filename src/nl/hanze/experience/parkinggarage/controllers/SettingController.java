@@ -44,6 +44,18 @@ public class SettingController extends Controller {
 
             settingModel.setBaseVehicleModifier(settingView.getBaseVehicleModifier());
             settingModel.setTicketVehicleModifier(settingView.getTicketVehicleModifier());
+            settingModel.setSubscriptionVehicleModifier(settingView.getSubscriptionVehicleModifier());
+            settingModel.setReservationVehicleModifier(settingView.getReservationVehicleModifier());
+            settingModel.setRegularCarModifier(settingView.getRegularCarModifier());
+            settingModel.setElectricCarModifier(settingView.getElectricCarModifier());
+            settingModel.setMotorcycleModifier(settingView.getMotorcycleModifier());
+            settingModel.setParkingDurationModifier(settingView.getParkingDurationModifier());
+            settingModel.setReservationDurationModifier(settingView.getReservationDurationModifier());
+            settingModel.setTicketQueueSizeModifier(settingView.getTicketQueueSizeModifier());
+            settingModel.setTicketQueueMaxSize(settingView.getTicketQueueMaxSize());
+            settingModel.setSubscriptionQueueSizeModifier(settingView.getSubscriptionQueueSizeModifier());
+            settingModel.setSubscriptionQueueMaxSize(settingView.getSubscriptionQueueMaxSize());
+            settingModel.setNeighbouringParkingSpotWeightModifier(settingView.getNeighbouringParkingSpotWeightModifier());
             String[] weekDayModifiers = settingView.getWeekdayModifiers();
             for (int i = 0; i < 7; i++) {
                 settingModel.setWeekdayModifier(i, Double.valueOf(weekDayModifiers[i]));

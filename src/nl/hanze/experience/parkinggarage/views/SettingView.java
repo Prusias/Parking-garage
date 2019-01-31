@@ -216,6 +216,18 @@ public class SettingView extends JFrameView {
 
         baseVehicleModifier.setText(settingModel.getBaseVehicleModifier());
         ticketVehicleModifier.setText(settingModel.getTicketVehicleModifier());
+        subscriptionVehicleModifier.setText(settingModel.getSubscriptionVehicleModifier());
+        reservationVehicleModifier.setText(settingModel.getReservationVehicleModifier());
+        regularCarModifier.setText(settingModel.getRegularCarModifier());
+        electricCarModifier.setText(settingModel.getElectricCarModifier());
+        motorcyleModifier.setText(settingModel.getMotorcycleModifier());
+        parkingDurationModifier.setText(settingModel.getParkingDurationModifier());
+        reservationDurationModifier.setText(settingModel.getReservationDurationModifier());
+        ticketQueueSizeModifier.setText(settingModel.getTicketQueueSizeModifier());
+        ticketQueueMaxSize.setText(settingModel.getTicketQueueMaxSize());
+        subscriptionQueueSizeModifier.setText(settingModel.getSubscriptionQueueSizeModifier());
+        subscriptionQueueMaxSize.setText(settingModel.getSubscriptionQueueMaxSize());
+        neighbouringParkingSPotWeightModifier.setText(settingModel.getNeighbouringParkingSpotWeightModifier());
         for (int i = 0; i < 7; i++) {
             weekdayModifiersInput[i].setText(settingModel.getWeekdayModifier(i));
         }
@@ -341,8 +353,21 @@ public class SettingView extends JFrameView {
     public String getAmountOfSpots() {return amountOfSpotsInput.getText();}
     public String getPriceInEuro() {return priceInEuroInput.getText();}
     public String getSeed() {return seedInput.getText();}
+
     public String getBaseVehicleModifier(){return baseVehicleModifier.getText();}
     public String getTicketVehicleModifier(){return ticketVehicleModifier.getText();}
+    public String getSubscriptionVehicleModifier() {return subscriptionVehicleModifier.getText();}
+    public String getReservationVehicleModifier() {return reservationVehicleModifier.getText();}
+    public String getRegularCarModifier() {return regularCarModifier.getText();}
+    public String getElectricCarModifier() {return electricCarModifier.getText();}
+    public String getMotorcycleModifier() {return motorcyleModifier.getText();}
+    public String getParkingDurationModifier() {return parkingDurationModifier.getText();}
+    public String getReservationDurationModifier() {return reservationDurationModifier.getText();}
+    public String getTicketQueueSizeModifier() {return ticketQueueSizeModifier.getText();}
+    public String getTicketQueueMaxSize() {return ticketQueueMaxSize.getText();}
+    public String getSubscriptionQueueSizeModifier() {return subscriptionQueueSizeModifier.getText();}
+    public String getSubscriptionQueueMaxSize() {return subscriptionQueueMaxSize.getText();}
+    public String getNeighbouringParkingSpotWeightModifier() {return neighbouringParkingSPotWeightModifier.getText();}
     public String[] getWeekdayModifiers() {
         String[] output = new String[7];
         for (int i = 0; i < 7; i++) {
