@@ -220,7 +220,7 @@ public class GarageModel extends Model {
             if (vehicle.getDuration() % 10 != 0) {
                 payingTime = +1;
             }
-            garage.addMoney((int) (getPriceInEuro() * 100) * payingTime);
+            garage.addMoney(garage.getPrice() * payingTime);
         }
     }
 
@@ -228,13 +228,7 @@ public class GarageModel extends Model {
      * Total amount of money made in Euros
      * @return Double variable of the amount of money made
      */
-    public double moneyMadeInEuro() {
-        return ((double)garage.getMoneyMade())/100;
-    }
 
-    public double getPriceInEuro() {
-        return garage.getPriceInEuro();
-    }
 
     public int getTotalSubVehicles() {
         return garage.getTotalSubVehicles();
@@ -259,5 +253,27 @@ public class GarageModel extends Model {
 
     public int getAmountOfPayingVehicles() {
         return garage.getTotalResVehicles() + garage.getTotalTicVehicles();
+    }
+
+    /**
+     * Calculate the prise of a parking spot in cents
+     * @param priceInEuro The price of a parking spot in euros
+     * @return
+     */
+    public int calculatePriceInCents(double priceInEuro) {
+        return (int)(priceInEuro * 100);
+
+    }
+
+    public double calculatePriceInEuro(int cents) {
+        return (double) cents / 100D;
+    }
+
+    public double moneyMadeInEuro() {
+        return calculatePriceInEuro(garage.getMoneyMade());
+    }
+
+    public double getPriceInEuro() {
+        return calculatePriceInEuro(garage.getPrice());
     }
 }
