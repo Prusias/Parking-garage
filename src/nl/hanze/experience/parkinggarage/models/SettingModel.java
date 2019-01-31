@@ -6,7 +6,8 @@ import nl.hanze.experience.simulation.Simulation;
 import java.util.Arrays;
 
 /**
- * @author Mike van der Velde
+ * The model class for the settings where all the logical operations for the settings are handled
+ * @author Mike van der Velde and Zein Bseis
  * @version 0.0.4
  * @since 0.0.4
  */
@@ -74,6 +75,10 @@ public class SettingModel extends Model {
         simulation.getModifier().setHourModifier(hour, modifier);
     }
 
+    /**
+     * Tests if the if the simulation has started
+     * @return Boolean that is true if simulation is running
+     */
     public boolean simulationHasStarted() {
         return simulation.hasStarted();
     }

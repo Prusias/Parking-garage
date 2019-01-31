@@ -3,7 +3,8 @@ package nl.hanze.experience.mvc;
 import java.util.ArrayList;
 
 /**
- * @author Mike van der Velde
+ * The abstract model class for the simulation
+ * @author Mike van der Velde and Zein Bseis
  * @version 0.0.4
  * @since 0.0.4
  */

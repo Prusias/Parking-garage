@@ -3,7 +3,8 @@ package nl.hanze.experience.objects;
 import nl.hanze.experience.objects.Vehicle.*;
 
 /**
- * @author Mike van der Velde
+ * The class for the parking spots
+ * @author Mike van der Velde and Zein Bseis
  * @version 0.0.4
  * @since 0.0.4
  */
@@ -55,6 +56,15 @@ public class ParkingSpot {
         this.weight = weight;
     }
 
+    /**
+     * Make new parking spot
+     * @param floor Which floor is the parking sport at
+     * @param row Which row is the parking spot in
+     * @param spot The spot's number
+     * @param type What type of spot it is (cars, electric car or motorcycle)
+     * @param paymentType The payment type for this spot (is it a reservation, subscription or ticket spot)
+     * @param weight How attractive the parking spot is
+     */
     public ParkingSpot(int floor, int row, int spot, Type type, PaymentType paymentType, double weight) {
         this.floor = floor;
         this.row = row;

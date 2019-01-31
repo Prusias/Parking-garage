@@ -6,7 +6,8 @@ import nl.hanze.experience.objects.*;
 import java.time.LocalDateTime;
 
 /**
- * @author Mike van der Velde
+ * The garage model class where the logical operations regarding the garage
+ * @author Mike van der Velde and Zein Bseis
  * @version 0.0.4
  * @since 0.0.4
  */
@@ -16,7 +17,9 @@ public class GarageModel extends Model {
     private VehicleQueue subscriptionQueue;
 
 
-
+    /**
+     * Make a new garage model
+     */
     public GarageModel() {
         garage = new Garage();
         ticketQueue = new VehicleQueue();
@@ -24,6 +27,9 @@ public class GarageModel extends Model {
 
     }
 
+    /**
+     * Initialize The garage
+     */
     public void initializeGarage() {
         garage.initializeGarage();
         notifyView();
@@ -45,6 +51,10 @@ public class GarageModel extends Model {
     }
     */
 
+    /**
+     *Get parking spots
+     * @return A three dimensional array of parking spots
+     */
     public ParkingSpot[][][] getParkingSpots() {
         return garage.parkingSpots;
     }
@@ -73,6 +83,10 @@ public class GarageModel extends Model {
         garage.setGarageSetting(key, value);
     }
 
+    /**
+     * Increase the current time in the garage
+     * @param minutes Amount of minutes to increase the time by
+     */
     public void increaseTime(int minutes) {
         garage.increaseTime(minutes);
     }
@@ -81,30 +95,58 @@ public class GarageModel extends Model {
         return garage.getLocalDateTime();
     }
 
+    /**
+     * Add a vehicle to the queue where vehicle have subscriptions
+     * @param vehicle To add to the queue
+     */
     public void addToSubscriptionQueue(Vehicle vehicle) {
         subscriptionQueue.addVehicle(vehicle);
     }
 
+    /**
+     * Add a vehicle to the queue where vehicle have tickets but no subscription
+     * @param vehicle To add to the ticketed queue
+     */
     public void addToTicketQueue(Vehicle vehicle) {
         ticketQueue.addVehicle(vehicle);
     }
 
+    /**
+     * Poll one vehicle from the top of the subscription queue
+     * @return The vehicle of the top of subscription queue the queue
+     */
     public Vehicle pollVehicleFromSubscriptionQueue() {
         return subscriptionQueue.poll();
     }
 
+    /**
+     * See which vehicle is on the top of the subscription queue without deleting it
+     * @return vehicle that is on the top of the the subscription queue
+     */
     public Vehicle peekVehicleFromSubscriptionQueue() {
         return subscriptionQueue.peek();
     }
 
+    /**
+     * Polls out a ticketed vehicle from the top of the ti
+     * @return The vehicle on the top of the ticketed vehicles queue
+     */
     public Vehicle pollVehicleFromTicketQueue() {
         return ticketQueue.poll();
     }
 
+    /**
+     * See which vehicle is on the top of the ticketed vehicles queue without deleting it
+     * @return vehicle that is on the top of the ticketed vehicles queue
+     */
     public Vehicle peekVehicleFromTicketQueue() {
         return ticketQueue.peek();
     }
 
+    /**
+     * Get the number of regular ticketed parking spots
+     * @return Integer of the number of regular ticketed parking spots
+     */
     public int getNumberOfFreeRegularTicketSpots() {
         return garage.getNumberOfFreeRegularTicketSpots();
     }
@@ -167,6 +209,10 @@ public class GarageModel extends Model {
         return ticketQueue.Size();
     }
 
+    /**
+     * Determines how much should a vehicle pay for parking
+     * @param vehicle To determine payment amount of
+     */
     public void vehiclePay(Vehicle vehicle) {
         if (vehicle.getPaymentType() != Vehicle.PaymentType.SUBSCRIPTION) {
             int payingTime;
@@ -174,12 +220,20 @@ public class GarageModel extends Model {
             if (vehicle.getDuration() % 10 != 0) {
                 payingTime = +1;
             }
-            garage.addMoney(garage.getPrice() * payingTime);
+            garage.addMoney((int) (getPriceInEuro() * 100) * payingTime);
         }
     }
 
+    /**
+     * Total amount of money made in Euros
+     * @return Double variable of the amount of money made
+     */
     public double moneyMadeInEuro() {
-        return ((double)garage.getMoneyMade())/10;
+        return ((double)garage.getMoneyMade())/100;
+    }
+
+    public double getPriceInEuro() {
+        return garage.getPriceInEuro();
     }
 
     public int getTotalSubVehicles() {
@@ -201,5 +255,9 @@ public class GarageModel extends Model {
     }
     public void setTotalTicVehicles(int totalTicVehicles) {
         garage.setTotalTicVehicles(totalTicVehicles);
+    }
+
+    public int getAmountOfPayingVehicles() {
+        return garage.getTotalResVehicles() + garage.getTotalTicVehicles();
     }
 }

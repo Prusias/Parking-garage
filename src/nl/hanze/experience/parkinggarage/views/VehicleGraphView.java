@@ -19,6 +19,12 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 
+/**
+ * The view for the vehicle graph
+ * @author Mike van der Velde and Zein Bseis
+ * @version 0.0.4
+ * @since 0.0.4
+ */
 public class VehicleGraphView extends JPanelView {
 
     private static final int WIDTH = 300;
@@ -27,6 +33,9 @@ public class VehicleGraphView extends JPanelView {
     private TimeSeriesCollection  timeSeriesCollection;
     private JFreeChart jFreeChart;
 
+    /**
+     * Make new view vehicle graph
+     */
     public VehicleGraphView() {
         this.setAlignmentX(LEFT_ALIGNMENT);
         this.setAlignmentY(BOTTOM_ALIGNMENT);
@@ -56,6 +65,10 @@ public class VehicleGraphView extends JPanelView {
         add(chartPanel);
     }
 
+    /**
+     * update the information in the graph
+     * @param model Model with the new information
+     */
     @Override
     public void update(Model model) {
         VehicleGraphModel vehicleGraphModel = (VehicleGraphModel) model;

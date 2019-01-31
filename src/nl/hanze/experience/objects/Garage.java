@@ -28,6 +28,9 @@ public class Garage {
     private int price;
     private int moneyMade = 0; // in cents
 
+    /**
+     * Make new garage
+     */
     //constructors en functies voor constructors start
     public Garage() {
         localDateTime = LocalDateTime.of(2019, 1, 1, 3, 0, 0);
@@ -36,6 +39,9 @@ public class Garage {
         totalTicVehicles = 0;
     }
 
+    /**
+     * Initialize the garage with all the needed values
+     */
     public void initializeGarage() {
         this.numberOfFloors = (int) getGarageSetting("amountOfFloors");
         this.numberOfRows = (int) getGarageSetting("amountOfRows");
@@ -45,7 +51,7 @@ public class Garage {
         nOfFreeResSpots = (int) getGarageSetting("reservedSpots");
         nOfFreeElecSpots = (int) getGarageSetting("electricSpots");
         nOfFreeMotSpots = (int) getGarageSetting("motorcycleSpots");
-        this.price = calculatePriceInCents((double)getGarageSetting("priceInEuro"));
+        this.price = calculatePriceInCents((Double)getGarageSetting("priceInEuro"));
         int neededSpots = nOfFreeSubSpots + nOfFreeResSpots + nOfFreeElecSpots + nOfFreeMotSpots;
         if (neededSpots > totalSpots) {
             throw new IllegalStateException("Garage - Not enough parking spots available");
@@ -56,6 +62,9 @@ public class Garage {
         createParkingSpots();
     }
 
+    /**
+     * Create parking spots in the garage
+     */
     private void createParkingSpots() {
         double weight = 0;
         int count = 0;
@@ -99,8 +108,8 @@ public class Garage {
         return parkingSpots[floor][row][place];
     }
 
-    public int getPrice() {
-        return price;
+    public double getPriceInEuro() {
+        return (double)price / 100;
     }
 
     public void setPrice(int price) {
@@ -168,6 +177,10 @@ public class Garage {
         this.nOfFreeMotSpots = nOfFreeMotSpots;
     }
 
+    /**
+     * Increase the time in the garage
+     * @param minutes Amount of minutes to increase the time with
+     */
     public void increaseTime(int minutes) {
         localDateTime = localDateTime.plusMinutes(minutes);
     }
@@ -176,6 +189,10 @@ public class Garage {
         return localDateTime;
     }
 
+    /**
+     * Add money to the amount of money made
+     * @param amount
+     */
     public void addMoney(int amount) {
         moneyMade += amount;
     }
@@ -195,6 +212,15 @@ public class Garage {
         garageSettings.put(key, value);
     }
 
+    /**
+     * Calculate the prise of a parking spot in cents
+     * @param priceInEuro The price of a parking spot in euros
+     * @return
+     */
+    public int calculatePriceInCents(double priceInEuro) {
+        return (int) (priceInEuro * 100);
+
+    }
     public int calculatePriceInCents(Double priceInEuro) {
         return (int) (priceInEuro * 10);
     }

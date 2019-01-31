@@ -2,7 +2,7 @@ package nl.hanze.experience.simulation;
 
 /**
  * Class used to contain modifiers for the simulation
- * @author Mike van der Velde
+ * @author Mike van der Velde and Zein Bseis
  * @version 0.0.4
  * @since 0.0.4
  */
@@ -80,17 +80,31 @@ public class Modifier {
     public void setHourModifier(int hour, double modifier) {
         hourModifier[hour] = modifier;
     }
-
+    /**
+     * Get the modifier for a day of the week
+     * @return double modifier
+     */
     public double[] getWeekdayModifier() {
         return weekdayModifier;
     }
+    /**
+     * Get the modifier for an hour on a day of the week
+     * @return double modifier
+     */
     public double[] getHourModifier() {
         return hourModifier;
     }
-
+    /**
+     * Get the modifier for base vehicle
+     * @return double modifier
+     */
     public double getBaseVehicleModifier() {
         return baseVehicleModifier;
     }
+    /**
+     * Set the modifier for the base vehicle
+     * @param baseVehicleModifier double modifier
+     */
     public void setBaseVehicleModifier(double baseVehicleModifier) {
         this.baseVehicleModifier = baseVehicleModifier;
     }

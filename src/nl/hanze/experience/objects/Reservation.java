@@ -1,7 +1,8 @@
 package nl.hanze.experience.objects;
 
 /**
- * @author Mike van der Velde
+ * The reservation class where vehicle
+ * @author Mike van der Velde and Zein Bseis
  * @version 0.0.4
  * @since 0.0.4
  */
@@ -21,6 +22,12 @@ public class Reservation {
         return duration;
     }
 
+    /**
+     * Make new reservation
+     * @param vehicle The vehicle that will have a reservation
+     * @param timeOfArrival Time of arrival of the vehicle
+     * @param duration How long is the vehicle going to stay
+     */
     public Reservation(Vehicle vehicle, int timeOfArrival, int duration) {
         this.vehicle = vehicle;
         this.timeOfArrival = timeOfArrival;
