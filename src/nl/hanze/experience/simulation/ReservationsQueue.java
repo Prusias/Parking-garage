@@ -6,29 +6,49 @@ import java.util.PriorityQueue;
 import java.util.Comparator;
 
 /**
- * @author Mike van der Velde
+ * Class to make a reservation queue
+ * @author Mike van der Velde and Zein Bseis
  * @version 0.0.4
  * @since 0.0.4
  */
 public class ReservationsQueue {
     private PriorityQueue<Reservation> queue;
-
+    /**
+     * make new reservation queue
+     */
     public ReservationsQueue() {
         ReservationComparator comparator = new ReservationComparator();
         queue = new PriorityQueue<>(999, comparator);
     }
 
+    /**
+     * Add reservation to the reservation queue
+     * @param reservation
+     */
     public void add(Reservation reservation) {
         queue.add(reservation);
     }
+    /**
+     * Poll a reservation of the reservation queue
+     * @return Polled reservation from the reservation queue
+     */
     public Reservation poll() {
         return queue.poll();
     }
+    /**
+     * Shows the reservation at the top in the reservation queue
+     * @return The reservation on the top in the reservation queue
+     */
     public Reservation peek() {
         return  queue.peek();
     }
-
     private class ReservationComparator implements Comparator<Reservation> {
+        /**
+         * Compare two reservations's time of arrival with each other
+         * @param x Reservation to compare
+         * @param y Reservation to compare
+         * @return 1 if x arrives after y, -1 if x arrives before y and 0 if they arrive together
+         */
         @Override
         public int compare(Reservation x, Reservation y) {
             if (x.getTimeOfArrival() < y.getTimeOfArrival()) {

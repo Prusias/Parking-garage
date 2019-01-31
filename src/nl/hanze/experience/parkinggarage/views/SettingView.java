@@ -11,7 +11,8 @@ import java.awt.*;
 import java.util.concurrent.Flow;
 
 /**
- * @author Mike van der Velde
+ * The class for the settings view
+ * @author Mike van der Velde and Zein Bseis
  * @version 0.0.4
  * @since 0.0.4
  */
@@ -34,6 +35,9 @@ public class SettingView extends JFrameView {
     private JTextField priceInEuroInput;
     private JTextField seedInput;
 
+    /**
+     * Making a new settings view
+     */
     public SettingView() {
         this.setTitle("Settings");
         this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -106,6 +110,10 @@ public class SettingView extends JFrameView {
 
     }
 
+    /**
+     * Update the information in the settings view
+     * @param model Model That contains new information
+     */
     @Override
     public void update(Model model) {
         if (!(model instanceof SettingModel)) {
@@ -132,6 +140,9 @@ public class SettingView extends JFrameView {
         }
     }
 
+    /**
+     * Adding fields to the settings view
+     */
     private void addFields() {
         simulationSettings.add(new JLabel("Amount of floors the garage has."));
         amountOfFloorsInput = new JTextField(30);
