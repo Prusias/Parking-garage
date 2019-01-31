@@ -1,20 +1,25 @@
 package nl.hanze.experience.parkinggarage.views;
 
-import nl.hanze.experience.mvc.*;
-import nl.hanze.experience.objects.ParkingSpot;
-import nl.hanze.experience.objects.Vehicle;
+import nl.hanze.experience.mvc.JPanelView;
+import nl.hanze.experience.mvc.Model;
 import nl.hanze.experience.parkinggarage.models.GarageModel;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
-import javax.swing.plaf.TabbedPaneUI;
 import java.awt.*;
 
+/**
+ * The view for the vehicle graph
+ * @author Mike van der Velde
+ * @author Zein Bseis
+ * @author Steven Woudstra
+ * @author Ivo Gerner
+ * @version 0.0.4
+ * @since 0.0.4
+ */
 public class GarageView extends JPanelView {
 
     private JTabbedPane jTabbedPane;
-    private FloorView[] floorViews;
+    private JPanelView[] floorViews;
     private Dimension size;
 
     public GarageView() {
@@ -34,7 +39,7 @@ public class GarageView extends JPanelView {
             initPanels(garageModel.getNumberOfFloors());
         }
 
-        for(int floor = 0; floor < garageModel.getNumberOfFloors(); floor++) {
+        for(int floor = 0; floor < garageModel.getNumberOfFloors() + 1; floor++) {
             floorViews[floor].update(garageModel);
         }
         // Create a new car park image if the size has changed.
@@ -47,7 +52,14 @@ public class GarageView extends JPanelView {
     }
 
     private void initPanels(int numberOfFloors) {
-        floorViews = new FloorView[numberOfFloors];
+        floorViews = new JPanelView[numberOfFloors + 1];
+        floorViews[numberOfFloors] = new AllFloorView();
+        JScrollPane scrollPane = new JScrollPane(floorViews[numberOfFloors],
+                ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED
+        );
+        jTabbedPane.addTab(("All Floors"), null, scrollPane);
+//        jTabbedPane.addTab(("All Floors"), null, floorViews[numberOfFloors]);
         for(int floor = 0; floor < numberOfFloors; floor++) {
             floorViews[floor] = new FloorView(floor);
             jTabbedPane.addTab(("Floor: " + (floor + 1)), null, floorViews[floor]);

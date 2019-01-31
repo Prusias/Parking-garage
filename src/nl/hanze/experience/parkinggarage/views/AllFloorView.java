@@ -17,14 +17,12 @@ import java.awt.*;
  * @version 0.0.4
  * @since 0.0.4
  */
-public class FloorView extends JPanelView {
+public class AllFloorView extends JPanelView {
     private Image floorImage;
     private Dimension size;
-    private int floor;
 
-    public FloorView(int floor) {
+    public AllFloorView() {
         this.setLayout(new GridLayout(1, 1));
-        this.floor = floor;
         this.setBackground(Color.WHITE);
     }
 
@@ -39,15 +37,18 @@ public class FloorView extends JPanelView {
         Graphics graphics = floorImage.getGraphics();
         graphics.setColor(Color.WHITE);
         graphics.fillRect(0, 0, getSize().width, getSize().height);
-        for(int row = 0; row < garageModel.getNumberOfRows(); row++) {
-            for(int spot = 0; spot < garageModel.getNumberOfSpots(); spot++) {
-                ParkingSpot parkingSpot = garageModel.getParkingSpot(floor, row, spot);
-                Color color = getColor(parkingSpot);
-                drawPlace(graphics, color, row, spot);
+        int numberOfSpots = garageModel.getNumberOfSpots();
+        for(int floor = 0; floor < garageModel.getNumberOfFloors(); floor++) {
+            for(int row = 0; row < garageModel.getNumberOfRows(); row++) {
+                for(int spot = 0; spot < numberOfSpots; spot++) {
+                    ParkingSpot parkingSpot = garageModel.getParkingSpot(floor, row, spot);
+                    Color color = getColor(parkingSpot);
+                    drawPlace(graphics, color, floor, row, spot, numberOfSpots);
+                }
             }
         }
         repaint();
-        //this.setSize(size);
+        this.setPreferredSize(size);
     }
 
     /**
@@ -114,20 +115,20 @@ public class FloorView extends JPanelView {
                 return new Color(68, 68, 68);
             }
         }
-
-
     }
 
     // TODO: Dynamic size?
-    private void drawPlace(Graphics graphics, Color color, int row, int spot) {
+    private void drawPlace(Graphics graphics, Color color, int floor, int row, int spot, int numberOfSpots) {
         int paddingX = 20;
         int paddingY = 20;
         int spotWidth = 20;
         int spotHeight = 10;
         int spacing = 80;
+        // 2 * 11 * 20 + 20
+        int floorHeight = floor * ((numberOfSpots + 1) * spotHeight);
 
         int x = (1 + (int)Math.floor(row * 0.5)) * spacing + (row % 2) * spotWidth - spacing + paddingX;
-        int y = spot * spotHeight + paddingY;
+        int y = (floor >= 1 ? floorHeight : 0) + spot * spotHeight + paddingY;
         int width = spotWidth - 1;
         int height = spotHeight - 1;
 

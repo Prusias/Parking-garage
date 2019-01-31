@@ -6,10 +6,13 @@ import nl.hanze.experience.parkinggarage.models.VehiclePieModel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.labels.PieSectionLabelGenerator;
+import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
 import org.jfree.chart.plot.PiePlot;
 import org.jfree.data.general.DefaultPieDataset;
 
 import java.awt.*;
+import java.text.DecimalFormat;
 
 /**
  * The view for the vehicle graph
@@ -48,7 +51,19 @@ public class VehiclePieView extends JPanelView {
         plot.setSectionPaint("Cars with a ticket", new Color(168, 168, 168));
         plot.setSectionPaint("Electric cars with a ticket", new Color(10, 100, 0));
         plot.setSectionPaint("Motorcycles with a ticket", new Color(255, 155, 50));
-        plot.setLabelGenerator(null);
+        plot.setExplodePercent("Cars with a subscription",0.05);
+        plot.setExplodePercent("Cars with a reservation", 0.05);
+        plot.setExplodePercent("Cars with a ticket", 0.05);
+        plot.setExplodePercent("Electric cars with a ticket", 0.05);
+        plot.setExplodePercent("Motorcycles with a ticket", 0.05);
+        plot.setSimpleLabels(true);
+        PieSectionLabelGenerator gen = new StandardPieSectionLabelGenerator(
+                //"{0}: {1} ({2})", new DecimalFormat("0"), new DecimalFormat("0%"));
+                "{2}", new DecimalFormat("0"), new DecimalFormat("0%"));
+        plot.setLabelGenerator(gen);
+        plot.setLabelBackgroundPaint(Color.WHITE);
+
+        // plot.setLabelGenerator(null);
         plot.setBackgroundPaint(new Color(255, 255, 255));
         jFreeChart.setAntiAlias(true);
         jFreeChart.setTextAntiAlias(true);

@@ -117,7 +117,7 @@ public class Main {
         c.insets = new Insets(5, 5, 5, 5);
         c.anchor = GridBagConstraints.CENTER;
         c.ipadx = 600;
-        c.ipady = 400;
+        c.ipady = 650;
         c.gridwidth = 1;
         c.gridx = 0;
         c.gridy = 1;
@@ -141,7 +141,7 @@ public class Main {
 
         container.setBackground(Color.WHITE);
         frame.pack();
-        frame.setSize(new Dimension(1600, 650));
+        frame.setSize(new Dimension(1600, 900));
         frame.setVisible(true);
 
         simulationMenuModel.setSimulation(simulation);
