@@ -362,6 +362,7 @@ public class Simulation {
                 return;
             }
             Vehicle.Type type = peek.getType();
+            PaymentType paymentType = peek.getPaymentType();
             ParkingSpot parkingSpot = null;
 
             if (type == Type.MOTORCYCLE) {
@@ -376,6 +377,14 @@ public class Simulation {
                 if (garageModel.getNumberOfFreeElectricSpots() > 0) {
                     parkingSpot = getFreeParkingSpot(type, PaymentType.TICKET);
                     garageModel.setNumberOfFreeElectricSpots(garageModel.getNumberOfFreeElectricSpots() - 1);
+                } else if (garageModel.getNumberOfFreeRegularTicketSpots() > 0) {
+                    parkingSpot = getFreeParkingSpot(Type.CAR, PaymentType.TICKET);
+                    garageModel.setNumberOfFreeRegularTicketSpots(garageModel.getNumberOfFreeRegularTicketSpots() - 1);
+                }
+            }else  if (paymentType == PaymentType.RESERVATION) {
+                if (garageModel.getNumberOfFreeReservedSpots() > 0) {
+                    parkingSpot = getFreeParkingSpot(type, paymentType);
+                    garageModel.setNumberOfFreeReservedSpots(garageModel.getNumberOfFreeReservedSpots() - 1);
                 } else if (garageModel.getNumberOfFreeRegularTicketSpots() > 0) {
                     parkingSpot = getFreeParkingSpot(Type.CAR, PaymentType.TICKET);
                     garageModel.setNumberOfFreeRegularTicketSpots(garageModel.getNumberOfFreeRegularTicketSpots() - 1);
