@@ -6,7 +6,8 @@ import nl.hanze.experience.parkinggarage.views.SettingView;
 import nl.hanze.experience.simulation.Simulation;
 
 /**
- * @author Mike van der Velde
+ * The model class for the simulator drop down menu where all the logical operation regarding that menu happen
+ * @author Mike van der Velde and Zein Bseis
  * @version 0.0.4
  * @since 0.0.4
  */
@@ -18,6 +19,9 @@ public class SimulationMenuModel extends Model {
         this.simulation = simulation;
     }
 
+    /**
+     * The option that starts the simulation
+     */
     public void startSimulation() {
         if (simulation == null) {
             throw new IllegalStateException("Simulation has not been set");
@@ -25,6 +29,10 @@ public class SimulationMenuModel extends Model {
         simulation.start();
         notifyView();
     }
+
+    /**
+     * the option to pause the simulation
+     */
     public void pauseSimulation() {
         if (simulation == null) {
             throw new IllegalStateException("Simulation has not been set");
@@ -32,6 +40,10 @@ public class SimulationMenuModel extends Model {
         simulation.pause();
         notifyView();
     }
+
+    /**
+     * the option to resume the simulation
+     */
     public void resumeSimulation() {
         if (simulation == null) {
             throw new IllegalStateException("Simulation has not been set");
@@ -39,6 +51,10 @@ public class SimulationMenuModel extends Model {
         simulation.resume();
         notifyView();
     }
+
+    /**
+     * The settings option in the drop down menu
+     */
     public void openSettings() {
         if (settingView == null) {
             SettingModel settingModel = new SettingModel();
@@ -53,9 +69,19 @@ public class SimulationMenuModel extends Model {
         notifyView();
     }
 
+    /**
+     * Tests if the simulation is paused
+     * @return Boolean with true if the simulation is paused
+     */
     public boolean simulationIsPaused() {
         return simulation.isPaused();
     }
+
+    /**
+     * Tests if the simulation has already started
+     * @return Boolean if simulation is running
+     */
     public boolean simulationHasStarted() { return simulation.hasStarted(); }
+
 
 }

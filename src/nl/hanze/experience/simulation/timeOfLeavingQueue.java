@@ -6,29 +6,56 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 
 /**
- * @author Mike van der Velde
+ * A class for the time of the leaving vehicles queue
+ * @author Mike van der Velde and Zein Bseis
  * @version 0.0.4
  * @since 0.0.4
  */
 public class timeOfLeavingQueue {
     private PriorityQueue<Vehicle> queue;
 
+    /**
+     * Make new leaving queue
+     */
     public timeOfLeavingQueue() {
         VehicleComparator comparator = new VehicleComparator();
         queue = new PriorityQueue<Vehicle>(999, comparator);
     }
 
+    /**
+     * Add vehicle to the leaving queue
+     * @param vehicle The vehicle that is leaving
+     */
     public void add(Vehicle vehicle) {
         queue.add(vehicle);
     }
+
+    /**
+     * Poll a vehicle out of the top of the queue
+     * @return
+     */
     public Vehicle poll() {
         return queue.poll();
     }
+
+    /**
+     * Show the vehicle on the top of the array without polling it
+     * @return
+     */
     public Vehicle peek() {
         return  queue.peek();
     }
 
+    /**
+     * A class to compare vehicles leaving time to decide who should be leaving first
+     */
     private class VehicleComparator implements Comparator<Vehicle> {
+        /**
+         * Compare two vehicle's leaving time
+         * @param x vehicle to compare
+         * @param y vehicle to compare
+         * @return 1 if x leaving after y, -1 if x leaving before y and 0 if they leave together
+         */
         @Override
         public int compare(Vehicle x, Vehicle y) {
             if (x.getTimeOfLeaving() < y.getTimeOfLeaving()) {

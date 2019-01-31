@@ -3,7 +3,8 @@ package nl.hanze.experience.objects;
 import java.net.PasswordAuthentication;
 
 /**
- * @author Mike van der Velde
+ * The class for vehicles in the simulation
+ * @author Mike van der Velde and Zein Bseis
  * @version 0.0.4
  * @since 0.0.4
  */
@@ -45,6 +46,12 @@ public class Vehicle {
         this.parkingSpot = parkingSpot;
     }
 
+    /**
+     * Make new vehicle
+     * @param type What type of a vehicle it is
+     * @param paymentType What kind of a payment (subscription, ticket or reservation)
+     * @param duration How long is the vehicle going to stay
+     */
     public Vehicle(Type type, PaymentType paymentType, int duration) {
         this.type = type;
         this.paymentType = paymentType;

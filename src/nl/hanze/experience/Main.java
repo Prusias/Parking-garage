@@ -1,6 +1,5 @@
 package nl.hanze.experience;
 
-import nl.hanze.experience.objects.Vehicle;
 import nl.hanze.experience.parkinggarage.controllers.*;
 import nl.hanze.experience.parkinggarage.models.*;
 import nl.hanze.experience.parkinggarage.views.*;
@@ -40,9 +39,9 @@ public class Main {
 
         GarageModel garageModel = new GarageModel();
         garageModel.setGarageSetting("amountOfFloors", 3);
-        garageModel.setGarageSetting("amountOfRows", 5);
-        garageModel.setGarageSetting("amountOfSpots", 20);
-        garageModel.setGarageSetting("priceInEuro", 0.5f);
+        garageModel.setGarageSetting("amountOfRows", 8);
+        garageModel.setGarageSetting("amountOfSpots", 22);
+        garageModel.setGarageSetting("priceInEuro", 0.5);
         garageModel.setGarageSetting("averageVehicleDurationInMinutes", 240);
         garageModel.setGarageSetting("maxVehicleDurationInMinutes", 1440);
         garageModel.setGarageSetting("minVehicleDurationInMinutes", 10);
@@ -50,33 +49,85 @@ public class Main {
         garageModel.setGarageSetting("maxReservationDurationInMinutes", 240);
         garageModel.setGarageSetting("minReservationDurationInMinutes", 30);
         garageModel.setGarageSetting("subscriptionSpots", 40);
-        garageModel.setGarageSetting("reservedSpots", 10);
+        garageModel.setGarageSetting("reservedSpots", 20);
         garageModel.setGarageSetting("electricSpots", 10);
         garageModel.setGarageSetting("motorcycleSpots", 10);
         garageModel.setGarageSetting("ticketQueueSpeed", 5);
         garageModel.setGarageSetting("subscriptionQueueSpeed", 5);
         garageModel.setGarageSetting("exitQueueSpeed", 3);
+        garageModel.setGarageSetting("floorWeight", 1.5);
+        garageModel.setGarageSetting("rowWeight", .7);
+        garageModel.setGarageSetting("spotWeight", .2);
+
         GarageController garageController = new GarageController(garageModel);
         GarageView garageView = new GarageView();
         garageView.setController(garageController);
         garageModel.addView(garageView);
-
         simulation.setGarageModel(garageModel);
+
+        VehicleGraphModel vehicleGraphModel = new VehicleGraphModel();
+        VehicleGraphView vehicleGraphView = new VehicleGraphView();
+        vehicleGraphModel.addView(vehicleGraphView);
+        simulation.setVehicleGraphModel(vehicleGraphModel);
+
+        VehiclePieModel vehiclePieModel = new VehiclePieModel();
+        VehiclePieView vehiclePieView = new VehiclePieView();
+        vehiclePieModel.addView(vehiclePieView);
+        simulation.setVehiclePieModel(vehiclePieModel);
 
         JFrame frame = new JFrame();
         frame.setTitle("Garage");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         Container container = frame.getContentPane();
-        container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
+        //container.setSize(800, 800);
+        //container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
+        container.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
 
         JMenuBar menuBar = new JMenuBar();
         menuBar.add(simulationMenuView);
         frame.setJMenuBar(menuBar);
 
-        container.add(simulation.getSimulationInfoView());
-        container.add(garageView);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.ipadx = 0;
+        c.ipady = 0;
+        c.anchor = GridBagConstraints.PAGE_START;
+        c.gridwidth = 2;
+        c.gridx = 0;
+        c.gridy = 0;
+        c.weightx = 0;
+        c.weighty = 0;
+        container.add(simulation.getSimulationInfoView(), c);
+        // GarageView
+        c.fill = GridBagConstraints.BOTH;
+        c.insets = new Insets(5, 5, 5, 5);
+        c.anchor = GridBagConstraints.CENTER;
+        c.ipadx = 600;
+        c.ipady = 400;
+        c.gridwidth = 1;
+        c.gridx = 0;
+        c.gridy = 1;
+        c.weightx = 0;
+        c.weighty = 0;
+        container.add(garageView, c);
+        // Graphs
+        c.insets = new Insets(10, 10, 10, 10);
+        c.anchor = GridBagConstraints.CENTER;
+        c.ipadx = 700;
+        c.ipady = 450;
+        c.gridx = 1;
+        c.weightx = 0;
+        c.weighty = 0;
+        c.gridy = 1;
+        TabbedView tabbedView = new TabbedView();
+        tabbedView.addPanel(vehicleGraphView, "Vehicles in garage");
+        tabbedView.addPanel(vehiclePieView, "Vehicles types");
+        container.add(tabbedView, c);
+
+        container.setBackground(Color.WHITE);
         frame.pack();
-        frame.setSize(800,800);
+        frame.setSize(new Dimension(1600, 650));
         frame.setVisible(true);
 
         //TODO: Why does this work here and not elsewhere

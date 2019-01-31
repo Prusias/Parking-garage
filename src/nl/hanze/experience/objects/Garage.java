@@ -1,7 +1,9 @@
 package nl.hanze.experience.objects;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * @author Steven Woudstra
@@ -17,50 +19,68 @@ public class Garage {
     private int numberOfFloors;
     private int numberOfRows;
     private int numberOfSpots;
-    private int numberOfFreeRegularSpots;
+    private int numberOfFreeRegularTicketSpots;
     private int nOfFreeSubSpots;
     private int nOfFreeResSpots;
     private int nOfFreeElecSpots;
     private int nOfFreeMotSpots;
-    private int price = 65;
+    private int totalSubVehicles;
+    private int totalResVehicles;
+    private int totalTicVehicles;
+    private int price;
+    private int moneyMade = 0; // in cents
+    private int moneyMadeUntillYeasterday; //in cents
+    private List<Integer> dailyMoneyLog = new ArrayList<>();
 
-//    private int ticketQueue;
-//    private int subscriptionQueue;
-
+    /**
+     * Make new garage
+     */
     //constructors en functies voor constructors start
     public Garage() {
-//        ticketQueue = 0;
-//        subscriptionQueue = 0;
-        localDateTime = LocalDateTime.of(1, 1,1, 3, 0, 0);
+        localDateTime = LocalDateTime.of(2019, 1, 1, 3, 0, 0);
+        totalSubVehicles = 0;
+        totalResVehicles = 0;
+        totalTicVehicles = 0;
     }
+
+    /**
+     * Initialize the garage with all the needed values
+     */
     public void initializeGarage() {
-        this.numberOfFloors = (int)garageSettings.get("amountOfFloors");
-        this.numberOfRows = (int)garageSettings.get("amountOfRows");
-        this.numberOfSpots = (int)garageSettings.get("amountOfSpots");
+        this.numberOfFloors = (int) getGarageSetting("amountOfFloors");
+        this.numberOfRows = (int) getGarageSetting("amountOfRows");
+        this.numberOfSpots = (int) getGarageSetting("amountOfSpots");
         int totalSpots = numberOfFloors * numberOfRows * numberOfSpots;
-        nOfFreeSubSpots = (int)getGarageSetting("subscriptionSpots");
-        nOfFreeResSpots = (int)getGarageSetting("reservedSpots");
-        nOfFreeElecSpots = (int)getGarageSetting("electricSpots");
-        nOfFreeMotSpots = (int)getGarageSetting("motorcycleSpots");
+        nOfFreeSubSpots = (int) getGarageSetting("subscriptionSpots");
+        nOfFreeResSpots = (int) getGarageSetting("reservedSpots");
+        nOfFreeElecSpots = (int) getGarageSetting("electricSpots");
+        nOfFreeMotSpots = (int) getGarageSetting("motorcycleSpots");
+        this.price = (int) ((Double)getGarageSetting("priceInEuro") * 100);
         int neededSpots = nOfFreeSubSpots + nOfFreeResSpots + nOfFreeElecSpots + nOfFreeMotSpots;
-        if (neededSpots > totalSpots){
+        if (neededSpots > totalSpots) {
             throw new IllegalStateException("Garage - Not enough parking spots available");
         }
-        numberOfFreeRegularSpots = totalSpots - neededSpots;
+        numberOfFreeRegularTicketSpots = totalSpots - neededSpots;
 
         parkingSpots = new ParkingSpot[numberOfFloors][numberOfRows][numberOfSpots];
         createParkingSpots();
     }
 
+    /**
+     * Create parking spots in the garage
+     */
     private void createParkingSpots() {
         double weight = 0;
         int count = 0;
-        for (int f=0; f<numberOfFloors; f++) {
-            for (int r=0; r<numberOfRows; r++) {
-                for (int p = 0; p< numberOfSpots; p++) {
+        double floorWeight = (double)getGarageSetting("floorWeight");
+        double rowWeight = (double)getGarageSetting("rowWeight");
+        double spotWeight = (double)getGarageSetting("spotWeight");
+        for (int f = 0; f < numberOfFloors; f++) {
+            for (int r = 0; r < numberOfRows; r++) {
+                for (int p = 0; p < numberOfSpots; p++) {
                     count++;
                     //TODO: Add Modifiers
-                    weight = f * 1 + r * 0.7 + p * 0.2;
+                    weight = f * floorWeight + r * rowWeight + p * spotWeight;
                     Vehicle.Type type;
                     Vehicle.PaymentType paymentType;
                     if (count <= nOfFreeSubSpots) {
@@ -92,11 +112,11 @@ public class Garage {
         return parkingSpots[floor][row][place];
     }
 
-    public int getPrice() {
-        return price;
-    }
     public void setPrice(int price) {
         this.price = price;
+    }
+    public int getPrice() {
+        return price;
     }
 
 //    public void addToTicketQueue() {
@@ -110,24 +130,28 @@ public class Garage {
     public int getNumberOfFloors() {
         return numberOfFloors;
     }
+
     public int getNumberOfRows() {
         return numberOfRows;
     }
+
     public int getNumberOfSpots() {
         return numberOfSpots;
     }
 
 
-    public int getNumberOfFreeRegularSpots() {
-        return numberOfFreeRegularSpots;
+    public int getNumberOfFreeRegularTicketSpots() {
+        return numberOfFreeRegularTicketSpots;
     }
-    public void setNumberOfFreeRegularSpots(int numberOfFreeRegularSpots) {
-        this.numberOfFreeRegularSpots = numberOfFreeRegularSpots;
+
+    public void setNumberOfFreeRegularTicketSpots(int numberOfFreeRegularTicketSpots) {
+        this.numberOfFreeRegularTicketSpots = numberOfFreeRegularTicketSpots;
     }
 
     public int getNOfFreeSubSpots() {
         return nOfFreeSubSpots;
     }
+
     public void setNOfFreeSubSpots(int nOfFreeSubSpots) {
         this.nOfFreeSubSpots = nOfFreeSubSpots;
     }
@@ -135,6 +159,7 @@ public class Garage {
     public int getnOfFreeResSpots() {
         return nOfFreeResSpots;
     }
+
     public void setnOfFreeResSpots(int nOfFreeResSpots) {
         this.nOfFreeResSpots = nOfFreeResSpots;
     }
@@ -142,6 +167,7 @@ public class Garage {
     public int getNOfFreeElecSpots() {
         return nOfFreeElecSpots;
     }
+
     public void setNOfFreeElecSpots(int nOfFreeElecSpots) {
         this.nOfFreeElecSpots = nOfFreeElecSpots;
     }
@@ -149,15 +175,37 @@ public class Garage {
     public int getNOfFreeMotSpots() {
         return nOfFreeMotSpots;
     }
+
     public void setNOfFreeMotSpots(int nOfFreeMotSpots) {
         this.nOfFreeMotSpots = nOfFreeMotSpots;
     }
 
-    public void increaseTime(int minutes ) {
+    /**
+     * Increase the time in the garage
+     * @param minutes Amount of minutes to increase the time with
+     */
+    public void increaseTime(int minutes) {
         localDateTime = localDateTime.plusMinutes(minutes);
     }
+
     public LocalDateTime getLocalDateTime() {
         return localDateTime;
+    }
+
+    /**
+     * Add money to the amount of money made
+     * @param amount
+     */
+    public void addMoney(int amount) {
+        moneyMade += amount;
+    }
+
+    /**
+     * Gives te omount of moneymade in cents
+     * @return money made in cents
+     */
+    public int getMoneyMade() {
+        return moneyMade;
     }
 
     public Object getGarageSetting(String key) {
@@ -171,5 +219,36 @@ public class Garage {
         garageSettings.put(key, value);
     }
 
+    public List getDailyMoneyLog() {
+        return dailyMoneyLog;
+    }
 
+    public int getTotalSubVehicles() {
+        return totalSubVehicles;
+    }
+    public void setTotalSubVehicles(int totalSubVehicles) {
+        this.totalSubVehicles = totalSubVehicles;
+    }
+
+    public int getTotalResVehicles() {
+        return totalResVehicles;
+    }
+    public void setTotalResVehicles(int totalResVehicles) {
+        this.totalResVehicles = totalResVehicles;
+    }
+
+    public int getTotalTicVehicles() {
+        return totalTicVehicles;
+    }
+    public void setTotalTicVehicles(int totalTicVehicles) {
+        this.totalTicVehicles = totalTicVehicles;
+    }
+
+    public int getMoneyMadeUntillYeasterday() {
+        return moneyMadeUntillYeasterday;
+    }
+    public void setMoneyMadeUntillYeasterday(int money) {
+        moneyMadeUntillYeasterday = money;
+    }
 }
+

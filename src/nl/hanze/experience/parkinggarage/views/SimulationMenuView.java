@@ -5,10 +5,13 @@ import nl.hanze.experience.parkinggarage.models.SimulationMenuModel;
 
 import javax.swing.*;
 
+import java.awt.*;
+
 import static nl.hanze.experience.parkinggarage.controllers.SimulationMenuController.EventId;
 
 /**
- * @author Mike van der Velde
+ * The view for the simulator drop menu
+ * @author Mike van der Velde and Zein Bseis
  * @version 0.0.4
  * @since 0.0.4
  *
@@ -20,7 +23,11 @@ public class SimulationMenuView extends JMenuView {
     private JMenuItem pauseMenuItem;
     private JMenuItem resumeMenuItem;
 
+    /**
+     * Make new drop menu in the simlation
+     */
     public SimulationMenuView() {
+        this.setBackground(Color.WHITE);
         this.setText("Simulation");
 
         startMenuItem = new JMenuItem("Start");
@@ -51,6 +58,10 @@ public class SimulationMenuView extends JMenuView {
         this.add(quitMenuItem);
     }
 
+    /**
+     * updates the information in the menu
+     * @param model Model that contains the information
+     */
     @Override
     public void update(Model model) {
         if (!(model instanceof SimulationMenuModel)) {

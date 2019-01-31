@@ -6,7 +6,8 @@ import nl.hanze.experience.simulation.Simulation;
 import java.time.format.DateTimeFormatter;
 
 /**
- * @author Mike van der Velde
+ * The simulation information model where all the logical operations of the simulation information are made
+ * @author Mike van der Velde and Zein Bseis
  * @version 0.0.4
  * @since 0.0.4
  */
@@ -23,6 +24,9 @@ public class SimulationInfoModel extends Model {
         //notifyView(); increaseTime is called directly after this function, So we don't want to update the view twice.
     }
 
+    /**
+     * Increases the time in the simulation by one minute
+     */
     public void increaseTime() {
         simulation.getGarageModel().increaseTime(1);
         notifyView();
@@ -61,5 +65,18 @@ public class SimulationInfoModel extends Model {
     }
     public int getTicketQueueSize() {
         return simulation.getGarageModel().getTicketQueueSize();
+    }
+    public double getMoneyMade() {
+        return  simulation.getGarageModel().moneyMadeInEuro();
+    }
+
+    public double getPotentialMoney(){
+        int avgTimeBlock = (int)simulation.getGarageModel().getGarageSetting("averageVehicleDurationInMinutes") / 10;
+        return  simulation.getGarageModel().getAmountOfPayingVehicles() * (simulation.getGarageModel().getPriceInEuro() * avgTimeBlock );
+
+    }
+
+    public double getRevenueYesterday() {
+        return simulation.getGarageModel().getRevenueYesterday();
     }
 }

@@ -6,7 +6,8 @@ import nl.hanze.experience.simulation.Simulation;
 import java.util.Arrays;
 
 /**
- * @author Mike van der Velde
+ * The model class for the settings where all the logical operations for the settings are handled
+ * @author Mike van der Velde and Zein Bseis
  * @version 0.0.4
  * @since 0.0.4
  */
@@ -45,12 +46,12 @@ public class SettingModel extends Model {
     }
 
     public String getPriceInEuro() {
-        return Float.toString(
-                (float)simulation.getGarageModel().getGarageSetting("priceInEuro")
+        return Double.toString(
+                (double)simulation.getGarageModel().getGarageSetting("priceInEuro")
         );
     }
     public void setPriceInEuro(String value) {
-        simulation.getGarageModel().setGarageSetting("priceInEuro", Float.valueOf(value));
+        simulation.getGarageModel().setGarageSetting("priceInEuro", Double.valueOf(value));
     }
 
     public String getSeed() {
@@ -74,6 +75,27 @@ public class SettingModel extends Model {
         simulation.getModifier().setHourModifier(hour, modifier);
     }
 
+    public String getBaseVehicleModifier(){
+        return Double.toString(
+                simulation.getModifier().getBaseVehicleModifier());
+    }
+
+    public void setBaseVehicleModifier(String modifier){
+        simulation.getModifier().setBaseVehicleModifier(Double.valueOf(modifier));
+    }
+
+    public String getTicketVehicleModifier(){
+        return Double.toString(
+                simulation.getModifier().getTicketVehicleModifier());
+    }
+
+    public void setTicketVehicleModifier(String modifier){
+        simulation.getModifier().setTicketVehicleModifier(Double.valueOf(modifier));
+    }
+    /**
+     * Tests if the if the simulation has started
+     * @return Boolean that is true if simulation is running
+     */
     public boolean simulationHasStarted() {
         return simulation.hasStarted();
     }
