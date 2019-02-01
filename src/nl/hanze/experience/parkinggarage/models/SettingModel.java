@@ -214,6 +214,16 @@ public class SettingModel extends Model {
         simulation.getModifier().setNeighbouringParkingSpotWeightModifier(Double.valueOf(modifier));
     }
 
+    public String getSimulationSleepTime(){
+        return Integer.toString(
+                (int)simulation.getGarageModel().getGarageSetting("simulationSleepTime"));
+    }
+
+    public void setSimulationSleepTime(String modifier){
+        simulation.getGarageModel().setGarageSetting("simulationSleepTime", Integer.valueOf(modifier));
+    }
+
+
     public String getSubscriptionSpots() {
         return Integer.toString(
                 (int)simulation.getGarageModel().getGarageSetting("subscriptionSpots")
@@ -347,6 +357,56 @@ public class SettingModel extends Model {
     }
     public void setMinReservationDurationInMinutes(String value) {
         simulation.getGarageModel().setGarageSetting("minReservationDurationInMinutes", Integer.valueOf(value));
+    }
+
+    public String getReservationReservedMinutes() {
+        return Integer.toString(
+                (int)simulation.getGarageModel().getGarageSetting("reservationReservedMinutes")
+        );
+    }
+
+    public void setReservationReservedMinutes(String value) {
+        simulation.getGarageModel().setGarageSetting("reservationReservedMinutes", Integer.valueOf(value));
+    }
+
+    public String getReservationKeptReservedMinutes() {
+        return Integer.toString(
+                (int)simulation.getGarageModel().getGarageSetting("reservationKeptReservedMinutes")
+        );
+    }
+
+    public void setReservationKeptReservedMinutes(String value) {
+        simulation.getGarageModel().setGarageSetting("reservationKeptReservedMinutes", Integer.valueOf(value));
+    }
+
+    public String getAmountOfTicketQueues() {
+        return Integer.toString(
+                (int)simulation.getGarageModel().getGarageSetting("amountOfTicketQueues")
+        );
+    }
+
+    public void setAmountOfTicketQueues(String value) {
+        simulation.getGarageModel().setGarageSetting("amountOfTicketQueues", Integer.valueOf(value));
+    }
+
+    public String getAmountOfSubscriptionQueues() {
+        return Integer.toString(
+                (int)simulation.getGarageModel().getGarageSetting("amountOfSubscriptionQueues")
+        );
+    }
+
+    public void setAmountOfSubscriptionQueues(String value) {
+        simulation.getGarageModel().setGarageSetting("amountOfSubscriptionQueues", Integer.valueOf(value));
+    }
+
+    public String getAmountOfExitQueues() {
+        return Integer.toString(
+                (int)simulation.getGarageModel().getGarageSetting("amountOfExitQueues")
+        );
+    }
+
+    public void setAmountOfExitQueues(String value) {
+        simulation.getGarageModel().setGarageSetting("amountOfExitQueues", Integer.valueOf(value));
     }
 
 

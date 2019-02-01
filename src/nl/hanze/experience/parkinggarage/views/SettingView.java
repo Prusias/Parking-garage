@@ -65,6 +65,13 @@ public class SettingView extends JFrameView {
     private JTextField subscriptionQueueSpeed;
     private JTextField exitQueueSpeed;
 
+    private JTextField reservationReservedMinutes;
+    private JTextField reservationKeptReservedMinutes;
+
+    private JTextField amountOfTicketQueues;
+    private JTextField amountOfSubscriptionQueues;
+    private JTextField amountOfExitQueues;
+
     private JTextField floorWeight;
     private JTextField rowWeight;
     private JTextField spotWeight;
@@ -83,6 +90,7 @@ public class SettingView extends JFrameView {
     private JTextField priceInEuroInput;
     private JTextField reservationPrice;
     private JTextField seedInput;
+    private JTextField simulationSleepTime;
 
     /**
      * Making a new settings view
@@ -249,6 +257,7 @@ public class SettingView extends JFrameView {
         subscriptionQueueSizeModifier.setText(settingModel.getSubscriptionQueueSizeModifier());
         subscriptionQueueMaxSize.setText(settingModel.getSubscriptionQueueMaxSize());
         neighbouringParkingSPotWeightModifier.setText(settingModel.getNeighbouringParkingSpotWeightModifier());
+        simulationSleepTime.setText(settingModel.getSimulationSleepTime());
 
         subscriptionSpots.setText(settingModel.getSubscriptionSpots());
         electricSpots.setText(settingModel.getElectricSpots());
@@ -266,6 +275,11 @@ public class SettingView extends JFrameView {
         maxReservationDurationInMinutes.setText(settingModel.getMaxReservationDurationInMinutes());
         minReservationDurationInMinutes.setText(settingModel.getMinReservationDurationInMinutes());
 
+        reservationReservedMinutes.setText(settingModel.getReservationReservedMinutes());
+        reservationKeptReservedMinutes.setText(settingModel.getReservationKeptReservedMinutes());
+        amountOfTicketQueues.setText(settingModel.getAmountOfTicketQueues());
+        amountOfSubscriptionQueues.setText(settingModel.getAmountOfSubscriptionQueues());
+        amountOfExitQueues.setText(settingModel.getAmountOfExitQueues());
         for (int i = 0; i < 7; i++) {
             weekdayModifiersInput[i].setText(settingModel.getWeekdayModifier(i));
         }
@@ -394,6 +408,10 @@ public class SettingView extends JFrameView {
         neighbouringParkingSPotWeightModifier = new JTextField(8);
         modifierSettings.add(neighbouringParkingSPotWeightModifier);
 
+        modifierSettings.add(new JLabel("Simulation sleep time:"));
+        simulationSleepTime = new JTextField(8);
+        modifierSettings.add(simulationSleepTime);
+
         advancedSettings.add(new JLabel("Amount of spots available for subscriptions:"));
         subscriptionSpots = new JTextField(8);
         advancedSettings.add(subscriptionSpots);
@@ -459,9 +477,35 @@ public class SettingView extends JFrameView {
         maxReservationDurationInMinutes = new JTextField(8);
         advancedSettings.add(maxReservationDurationInMinutes);
 
-        advancedSettings.add(new JLabel("Minimum stay of a vehicle with a reservation:"));
+        advancedSettings.add(new JSeparator());
+        advancedSettings.add(new JSeparator());
+
+        advancedSettings.add(new JLabel("Minimum stay of a vehicle with a reservation in minutes:"));
         minReservationDurationInMinutes = new JTextField(8);
         advancedSettings.add(minReservationDurationInMinutes);
+
+        advancedSettings.add(new JLabel("Reserved spot available before reservation in minutes:"));
+        reservationReservedMinutes = new JTextField(8);
+        advancedSettings.add(reservationReservedMinutes);
+
+        advancedSettings.add(new JLabel("Reserved spot available after reservation in minutes:"));
+        reservationKeptReservedMinutes = new JTextField(8);
+        advancedSettings.add(reservationKeptReservedMinutes);
+
+        advancedSettings.add(new JSeparator());
+        advancedSettings.add(new JSeparator());
+
+        advancedSettings.add(new JLabel("Number of ticket queues:"));
+        amountOfTicketQueues = new JTextField(8);
+        advancedSettings.add(amountOfTicketQueues);
+
+        advancedSettings.add(new JLabel("Number of subscription queues:"));
+        amountOfSubscriptionQueues = new JTextField(8);
+        advancedSettings.add(amountOfSubscriptionQueues);
+
+        advancedSettings.add(new JLabel("Number of exit queues:"));
+        amountOfExitQueues = new JTextField(8);
+        advancedSettings.add(amountOfExitQueues);
     }
 
     public String getAmountOfFloors() {return amountOfFloorsInput.getText();}
@@ -485,6 +529,7 @@ public class SettingView extends JFrameView {
     public String getSubscriptionQueueSizeModifier() {return subscriptionQueueSizeModifier.getText();}
     public String getSubscriptionQueueMaxSize() {return subscriptionQueueMaxSize.getText();}
     public String getNeighbouringParkingSpotWeightModifier() {return neighbouringParkingSPotWeightModifier.getText();}
+    public String getSimulationSleepTime() {return simulationSleepTime.getText();}
 
     public String getSubscriptionSpots() {return subscriptionSpots.getText();}
     public String getElectricSpots() {return electricSpots.getText();}
@@ -501,6 +546,12 @@ public class SettingView extends JFrameView {
     public String getAverageReservationDurationInMinutes() {return averageReservationDurationInMinutes.getText();}
     public String getMaxReservationDurationInMinutes() {return maxReservationDurationInMinutes.getText();}
     public String getMinReservationDurationInMinutes() {return minReservationDurationInMinutes.getText();}
+
+    public String getReservationReservedMinutes() {return reservationReservedMinutes.getText();}
+    public String getReservationKeptReservedMinutes() {return reservationKeptReservedMinutes.getText();}
+    public String getAmountOfTicketQueues() {return amountOfTicketQueues.getText();}
+    public String getAmountOfSubscriptionQueues() {return amountOfSubscriptionQueues.getText();}
+    public String getAmountOfExitQueues() {return amountOfExitQueues.getText();}
 
     public String[] getWeekdayModifiers() {
         String[] output = new String[7];

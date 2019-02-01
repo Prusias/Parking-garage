@@ -60,12 +60,13 @@ public class SettingController extends Controller {
             settingModel.setSubscriptionQueueSizeModifier(settingView.getSubscriptionQueueSizeModifier());
             settingModel.setSubscriptionQueueMaxSize(settingView.getSubscriptionQueueMaxSize());
             settingModel.setNeighbouringParkingSpotWeightModifier(settingView.getNeighbouringParkingSpotWeightModifier());
+            settingModel.setSimulationSleepTime(settingView.getSimulationSleepTime());
 
             settingModel.setSubscriptionSpots(settingView.getSubscriptionSpots());
             settingModel.setElectricSpots(settingView.getElectricSpots());
             settingModel.setMotorcycleSpots(settingView.getMotorcycleSpots());
             settingModel.setFloorWeight(settingView.getFloorWeight());
-            settingModel.setRowWeight(settingView.getFloorWeight());
+            settingModel.setRowWeight(settingView.getRowWeight());
             settingModel.setSpotWeight(settingView.getSpotWeight());
             settingModel.setTicketQueueSpeed(settingView.getTicketQueueSpeed());
             settingModel.setSubscriptionQueueSpeed(settingView.getSubscriptionQueueSpeed());
@@ -76,6 +77,12 @@ public class SettingController extends Controller {
             settingModel.setAverageReservationDurationInMinutes(settingView.getAverageReservationDurationInMinutes());
             settingModel.setMaxReservationDurationInMinutes(settingView.getMaxReservationDurationInMinutes());
             settingModel.setMinReservationDurationInMinutes(settingView.getMinReservationDurationInMinutes());
+
+            settingModel.setReservationReservedMinutes(settingView.getReservationReservedMinutes());
+            settingModel.setReservationKeptReservedMinutes(settingView.getReservationKeptReservedMinutes());
+            settingModel.setAmountOfTicketQueues(settingView.getAmountOfTicketQueues());
+            settingModel.setAmountOfSubscriptionQueues(settingView.getAmountOfSubscriptionQueues());
+            settingModel.setAmountOfExitQueues(settingView.getAmountOfExitQueues());
 
             String[] weekDayModifiers = settingView.getWeekdayModifiers();
             for (int i = 0; i < 7; i++) {
