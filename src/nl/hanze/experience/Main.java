@@ -66,6 +66,7 @@ public class Main {
         garageModel.setGarageSetting("amountOfTicketQueues", 1);
         garageModel.setGarageSetting("amountOfSubscriptionQueues", 1);
         garageModel.setGarageSetting("amountOfExitQueues", 1);
+        garageModel.setGarageSetting("reservationPrice", 5D);
 
         GarageController garageController = new GarageController(garageModel);
         GarageView garageView = new GarageView();

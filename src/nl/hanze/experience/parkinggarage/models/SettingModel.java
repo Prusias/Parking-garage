@@ -57,6 +57,16 @@ public class SettingModel extends Model {
         simulation.getGarageModel().setGarageSetting("priceInEuro", Double.valueOf(value));
     }
 
+    public String getReservationPrice() {
+        return Double.toString(
+                (double)simulation.getGarageModel().getGarageSetting("reservationPrice")
+        );
+    }
+
+    public void setReservationPrice(String value) {
+        simulation.getGarageModel().setGarageSetting("reservationPrice", Double.valueOf(value));
+    }
+
     public String getSeed() {
         return Long.toString(simulation.getSeed());
     }

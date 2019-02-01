@@ -81,6 +81,7 @@ public class SettingView extends JFrameView {
     private JTextField amountOfRowsInput;
     private JTextField amountOfSpotsInput;
     private JTextField priceInEuroInput;
+    private JTextField reservationPrice;
     private JTextField seedInput;
 
     /**
@@ -231,6 +232,7 @@ public class SettingView extends JFrameView {
         amountOfRowsInput.setText(settingModel.getAmountOfRows());
         amountOfSpotsInput.setText(settingModel.getAmountOfSpots());
         priceInEuroInput.setText(settingModel.getPriceInEuro());
+        reservationPrice.setText(settingModel.getReservationPrice());
         seedInput.setText(settingModel.getSeed());
 
         baseVehicleModifier.setText(settingModel.getBaseVehicleModifier());
@@ -316,6 +318,10 @@ public class SettingView extends JFrameView {
         simulationSettings.add(new JLabel("The price per 10 minutes in €:"));
         priceInEuroInput = new JTextField(8);
         simulationSettings.add(priceInEuroInput);
+
+        simulationSettings.add(new JLabel("Reservation cost in €:"));
+        reservationPrice = new JTextField(8);
+        simulationSettings.add(reservationPrice);
 
         weekdayModifiersInput = new JTextField[7];
         for (int i = 0; i < 7; i++) {
@@ -462,6 +468,7 @@ public class SettingView extends JFrameView {
     public String getAmountOfRows() {return amountOfRowsInput.getText();}
     public String getAmountOfSpots() {return amountOfSpotsInput.getText();}
     public String getPriceInEuro() {return priceInEuroInput.getText();}
+    public String getReservationPrice() {return reservationPrice.getText();}
     public String getSeed() {return seedInput.getText();}
 
     public String getBaseVehicleModifier(){return baseVehicleModifier.getText();}

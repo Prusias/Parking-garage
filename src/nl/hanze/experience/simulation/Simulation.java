@@ -368,7 +368,7 @@ public class Simulation {
 
             // By now we know we spawned a car.
             //System.out.println("Spawned a " + vehicle.getType() + " With PaymentType: " + vehicle.getPaymentType() + " Time left: " + vehicle.getDuration());
-            //generateVehicles();
+            generateVehicles();
         }
     }
     /**
