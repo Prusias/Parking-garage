@@ -15,7 +15,7 @@ import java.awt.*;
 import java.text.DecimalFormat;
 
 /**
- * The view for the vehicle graph
+ * The view for the vehicle pie chart where graphical operations regarding the vehicles pie chart happens
  * @author Mike van der Velde
  * @author Zein Bseis
  * @author Steven Woudstra

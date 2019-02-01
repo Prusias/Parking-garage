@@ -21,7 +21,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 /**
- * The view for the vehicle graph
+ * The view for the vehicles graph where graphical operations regarding the vehicles graph
  * @author Mike van der Velde
  * @author Zein Bseis
  * @author Steven Woudstra

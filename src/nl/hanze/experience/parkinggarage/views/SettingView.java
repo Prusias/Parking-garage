@@ -12,7 +12,7 @@ import java.awt.event.KeyEvent;
 import java.util.concurrent.Flow;
 
 /**
- * The class for the settings view
+ * The class for the settings view where the graphical operations for regarding the settings menu happens
  * @author Mike van der Velde
  * @author Zein Bseis
  * @author Steven Woudstra

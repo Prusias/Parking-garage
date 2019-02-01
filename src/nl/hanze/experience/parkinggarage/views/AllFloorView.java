@@ -9,7 +9,7 @@ import nl.hanze.experience.parkinggarage.models.GarageModel;
 import java.awt.*;
 
 /**
- * The view for the vehicle graph
+ * The view for all floors tab where all the graphical operations regarding the all floors tab happens
  * @author Mike van der Velde
  * @author Zein Bseis
  * @author Steven Woudstra
@@ -21,11 +21,18 @@ public class AllFloorView extends JPanelView {
     private Image floorImage;
     private Dimension size;
 
+    /**
+     * Make new view for all floors
+     */
     public AllFloorView() {
         this.setLayout(new GridLayout(1, 1));
         this.setBackground(Color.WHITE);
     }
 
+    /**
+     * Update the information in the view for all floors
+     * @param model A Model with the new information
+     */
     @Override
     public void update(Model model) {
         GarageModel garageModel = (GarageModel) model;

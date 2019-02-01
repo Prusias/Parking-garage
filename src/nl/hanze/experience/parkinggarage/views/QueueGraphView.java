@@ -13,14 +13,21 @@ import org.jfree.data.category.DefaultCategoryDataset;
 
 import java.awt.*;
 
-
+/**
+ * The view for queues graph where all graphical operations regarding the queues graph happens
+ * @author Mike van der Velde
+ * @author Zein Bseis
+ * @author Steven Woudstra
+ * @author Ivo Gerner
+ * @version 0.0.4
+ * @since 0.0.4
+ */
 public class QueueGraphView extends JPanelView {
 
     private static final int WIDTH = 300;
     private static final int HEIGHT = 300;
     private DefaultCategoryDataset set;
     private JFreeChart jFreeChart;
-
     public QueueGraphView() {
         set = new DefaultCategoryDataset();
         this.setAlignmentX(LEFT_ALIGNMENT);
