@@ -25,6 +25,8 @@ public class SimulationMenuView extends JMenuView {
     private JMenuItem startMenuItem;
     private JMenuItem pauseMenuItem;
     private JMenuItem resumeMenuItem;
+    private JMenuItem do1Tick;
+    private JMenuItem do100Ticks;
 
     /**
      * Make new drop menu in the simlation
@@ -42,11 +44,22 @@ public class SimulationMenuView extends JMenuView {
         pauseMenuItem.setEnabled(false);
         this.add(pauseMenuItem);
 
-
         resumeMenuItem = new JMenuItem("Resume");
         resumeMenuItem.addActionListener(e -> notifyController(EventId.RESUME));
         resumeMenuItem.setEnabled(false);
         this.add(resumeMenuItem);
+
+        this.addSeparator();
+
+        do1Tick = new JMenuItem("Run 1 ticks");
+        do1Tick.addActionListener(e -> notifyController(EventId.DO1));
+        do1Tick.setEnabled(false);
+        this.add(do1Tick);
+
+        do100Ticks = new JMenuItem("Run 100 ticks");
+        do100Ticks.addActionListener(e -> notifyController(EventId.DO100));
+        do100Ticks.setEnabled(false);
+        this.add(do100Ticks);
 
         this.addSeparator();
 
@@ -76,13 +89,19 @@ public class SimulationMenuView extends JMenuView {
             if (simulationMenuModel.simulationIsPaused()) {
                 pauseMenuItem.setEnabled(false);
                 resumeMenuItem.setEnabled(true);
+                do1Tick.setEnabled(true);
+                do100Ticks.setEnabled(true);
             } else {
                 pauseMenuItem.setEnabled(true);
                 resumeMenuItem.setEnabled(false);
+                do1Tick.setEnabled(false);
+                do100Ticks.setEnabled(false);
             }
         } else {
             pauseMenuItem.setEnabled(false);
             resumeMenuItem.setEnabled(false);
+            do1Tick.setEnabled(false);
+            do100Ticks.setEnabled(false);
         }
 
 

@@ -29,7 +29,7 @@ import static nl.hanze.experience.objects.Vehicle.Type;
  */
 public class Simulation {
     private SimulationThread simulationThread;
-    private final static int simulationSleepPerTick = 0;
+    private int simulationSleepPerTick = 0;
 
     private Random random;
     private long seed;
@@ -162,22 +162,7 @@ public class Simulation {
                         }
                     }
                 }
-                simulationInfoModel.setTickCount(tickCount);
-                simulationInfoModel.increaseTime();
-                //System.out.println("Tick: " + tickCount);
-                generateVehicles();
-                handleReservationsQueue();
-                handleSubscriptionQueue();
-                handleTicketQueue();
-                handleLeavingVehicles();
-                if (tickCount % 60 == 0) {
-                    handleGraphs();
-                }
-                if (tickCount % 1440 == 0) {
-                    handleDaily();
-                }
-
-                tickCount++;
+                doTick();
                 //System.out.println(tickCount);
                 try {
                     Thread.sleep(simulationSleepPerTick);
@@ -209,6 +194,29 @@ public class Simulation {
             }
         }
     }
+
+    public void doTick() {
+        if (simulationThread == null) {
+            throw new IllegalStateException("Simulation - SimulationThread is null");
+        }
+        simulationInfoModel.setTickCount(simulationThread.tickCount);
+        simulationInfoModel.increaseTime();
+        //System.out.println("Tick: " + tickCount);
+        generateVehicles();
+        handleReservationsQueue();
+        handleSubscriptionQueue();
+        handleTicketQueue();
+        handleLeavingVehicles();
+        if (simulationThread.tickCount % 60 == 0) {
+            handleGraphs();
+        }
+        if (simulationThread.tickCount % 1440 == 0) {
+            handleDaily();
+        }
+
+        simulationThread.tickCount++;
+    }
+
     /**
      * Get the Simulation information
      * @return information over the simulation

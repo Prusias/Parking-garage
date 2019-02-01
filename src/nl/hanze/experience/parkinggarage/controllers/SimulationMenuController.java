@@ -14,7 +14,7 @@ import nl.hanze.experience.parkinggarage.models.SimulationMenuModel;
  * @since 0.0.4
  */
 public class SimulationMenuController extends Controller {
-    public enum EventId { START, PAUSE, RESUME, SETTINGS, QUIT }
+    public enum EventId { START, PAUSE, RESUME, SETTINGS, QUIT, DO100, DO1 }
 
     /**
      * Make new controller for the simulator menu
@@ -50,6 +50,12 @@ public class SimulationMenuController extends Controller {
                 return true;
             case QUIT:
                 System.exit(0);
+            case DO1:
+                simulationMenuModel.Do1Tick();
+                return true;
+            case DO100:
+                simulationMenuModel.Do100Ticks();
+                return true;
         }
         return false;
     }

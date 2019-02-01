@@ -86,5 +86,13 @@ public class SimulationMenuModel extends Model {
      */
     public boolean simulationHasStarted() { return simulation.hasStarted(); }
 
+    public void Do1Tick() {
+        simulation.doTick();
+    }
+    public void Do100Ticks() {
+        for (int i = 0; i < 100; i++) {
+            simulation.doTick();
+        }
+    }
 
 }
