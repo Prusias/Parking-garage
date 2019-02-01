@@ -24,12 +24,12 @@ public class SettingView extends JFrameView {
 
     private Container container;
     private JPanel simulationSettings;
+    private JPanel modifierSettings;
     private JPanel advancedSettings;
-    private JPanel initSettings;
 
     private JPanel panel;
-    private JPanel modPanel;
-    private JPanel advPanel;
+    private JPanel modifierPanel;
+    private JPanel advancedPanel;
 
     private JTabbedPane tabbedPane;
 
@@ -74,8 +74,8 @@ public class SettingView extends JFrameView {
     private JTextField motorcycleSpots;
 
     private JPanel buttons;
-    private JPanel advButtons;
-    private JPanel initButtons;
+    private JPanel modifierButtons;
+    private JPanel advancedButtons;
 
     private JTextField amountOfFloorsInput;
     private JTextField amountOfRowsInput;
@@ -90,18 +90,18 @@ public class SettingView extends JFrameView {
         this.setBackground(Color.WHITE);
         new GridLayout(1, 1);
         panel = new JPanel();
-        modPanel = new JPanel();
-        advPanel = new JPanel();
+        modifierPanel = new JPanel();
+        advancedPanel = new JPanel();
         tabbedPane = new JTabbedPane();
 
 
         tabbedPane.addTab("Settings", panel);
         tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
 
-        tabbedPane.addTab("Modifiers", modPanel);
+        tabbedPane.addTab("Modifiers", modifierPanel);
         tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
 
-        tabbedPane.addTab("Advanced", advPanel);
+        tabbedPane.addTab("Advanced", advancedPanel);
         tabbedPane.setMnemonicAt(2, KeyEvent.VK_3);
 
         tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
@@ -114,42 +114,42 @@ public class SettingView extends JFrameView {
 
         container = this.getContentPane();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        modPanel.setLayout(new BoxLayout(modPanel, BoxLayout.Y_AXIS));
-        advPanel.setLayout(new BoxLayout(advPanel, BoxLayout.Y_AXIS));
+        modifierPanel.setLayout(new BoxLayout(modifierPanel, BoxLayout.Y_AXIS));
+        advancedPanel.setLayout(new BoxLayout(advancedPanel, BoxLayout.Y_AXIS));
 
         container.add(tabbedPane);
 
         // Add the JPanel for the simulation settings
         GridLayout simulationSettingsGridLayout = new GridLayout(0, 2);
+        GridLayout modifierSettingsGridLayout = new GridLayout(0,2);
         GridLayout advancedSettingsGridLayout = new GridLayout(0,2);
-        GridLayout initSettingsGridLayout = new GridLayout(0,2);
         simulationSettingsGridLayout.setHgap(10);
         simulationSettingsGridLayout.setVgap(10);
+        modifierSettingsGridLayout.setHgap(10);
+        modifierSettingsGridLayout.setVgap(10);
         advancedSettingsGridLayout.setHgap(10);
         advancedSettingsGridLayout.setVgap(10);
-        initSettingsGridLayout.setHgap(10);
-        initSettingsGridLayout.setVgap(10);
 
         simulationSettings = new JPanel();
+        modifierSettings = new JPanel();
         advancedSettings = new JPanel();
-        initSettings = new JPanel();
 
         simulationSettings.setLayout(simulationSettingsGridLayout);
+        modifierSettings.setLayout(modifierSettingsGridLayout);
         advancedSettings.setLayout(advancedSettingsGridLayout);
-        initSettings.setLayout(initSettingsGridLayout);
 
        // simulationSettings.setSize(600, 160);
         simulationSettings.setBorder(new EmptyBorder(10, 10, 10, 10));
+        modifierSettings.setBorder(new EmptyBorder(10, 10, 10, 10));
         advancedSettings.setBorder(new EmptyBorder(10, 10, 10, 10));
-        initSettings.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         panel.add(simulationSettings);
-        modPanel.add(advancedSettings);
-        advPanel.add(initSettings);
+        modifierPanel.add(modifierSettings);
+        advancedPanel.add(advancedSettings);
 
         panel.add(new JSeparator());
-        modPanel.add(new JSeparator());
-        advPanel.add(new JSeparator());
+        modifierPanel.add(new JSeparator());
+        advancedPanel.add(new JSeparator());
 
         // Add the JPanel for weekday modifiers
         GridLayout weekdayModifiersGridLayout = new GridLayout(0, 7);
@@ -190,13 +190,13 @@ public class SettingView extends JFrameView {
         buttons.setLayout(new FlowLayout(FlowLayout.LEFT));
         panel.add(buttons);
 
-        advButtons = new JPanel();
+        modifierButtons = new JPanel();
         buttons.setLayout(new FlowLayout(FlowLayout.LEFT));
-        modPanel.add(advButtons);
+        modifierPanel.add(modifierButtons);
 
-        initButtons = new JPanel();
+        advancedButtons = new JPanel();
         buttons.setLayout(new FlowLayout(FlowLayout.LEFT));
-        advPanel.add(initButtons);
+        advancedPanel.add(advancedButtons);
 
         addFields();
 
@@ -204,10 +204,10 @@ public class SettingView extends JFrameView {
         buttons.add(saveButton);
 
         JButton advSaveButton = new JButton("Save");
-        advButtons.add(advSaveButton);
+        modifierButtons.add(advSaveButton);
 
         JButton initSaveButton = new JButton("Save");
-        initButtons.add(initSaveButton);
+        advancedButtons.add(initSaveButton);
 
         saveButton.addActionListener(e -> notifyController(EventId.SAVE));
         advSaveButton.addActionListener(e -> notifyController(EventId.SAVE));
@@ -332,130 +332,130 @@ public class SettingView extends JFrameView {
             hourModifiers.add(hourModifiersInput[i]);
         }
 
-        advancedSettings.add(new JLabel("Modifier for all vehicles:"));
+        modifierSettings.add(new JLabel("Modifier for all vehicles:"));
         baseVehicleModifier = new JTextField(8);
-        advancedSettings.add(baseVehicleModifier);
+        modifierSettings.add(baseVehicleModifier);
 
-        advancedSettings.add(new JLabel("Modifier for any ticket vehicles:"));
+        modifierSettings.add(new JLabel("Modifier for any ticket vehicles:"));
         ticketVehicleModifier = new JTextField(8);
-        advancedSettings.add(ticketVehicleModifier);
+        modifierSettings.add(ticketVehicleModifier);
 
-        advancedSettings.add(new JLabel("Modifier for vehicles with a subscription:"));
+        modifierSettings.add(new JLabel("Modifier for vehicles with a subscription:"));
         subscriptionVehicleModifier = new JTextField(8);
-        advancedSettings.add(subscriptionVehicleModifier);
+        modifierSettings.add(subscriptionVehicleModifier);
 
-        advancedSettings.add(new JLabel("Modifier for vehicles with a reservation:"));
+        modifierSettings.add(new JLabel("Modifier for vehicles with a reservation:"));
         reservationVehicleModifier = new JTextField(8);
-        advancedSettings.add(reservationVehicleModifier);
+        modifierSettings.add(reservationVehicleModifier);
 
-        advancedSettings.add(new JLabel("Modifier for cars:"));
+        modifierSettings.add(new JLabel("Modifier for cars:"));
         regularCarModifier = new JTextField(8);
-        advancedSettings.add(regularCarModifier);
+        modifierSettings.add(regularCarModifier);
 
-        advancedSettings.add(new JLabel("Modifier for electric cars:"));
+        modifierSettings.add(new JLabel("Modifier for electric cars:"));
         electricCarModifier = new JTextField(8);
-        advancedSettings.add(electricCarModifier);
+        modifierSettings.add(electricCarModifier);
 
-        advancedSettings.add(new JLabel("Modifier for motorcylces:"));
+        modifierSettings.add(new JLabel("Modifier for motorcylces:"));
         motorcyleModifier = new JTextField(8);
-        advancedSettings.add(motorcyleModifier);
+        modifierSettings.add(motorcyleModifier);
 
-        advancedSettings.add(new JLabel("Parking duration modifier for normal tickets:"));
+        modifierSettings.add(new JLabel("Parking duration modifier for normal tickets:"));
         parkingDurationModifier = new JTextField(8);
-        advancedSettings.add(parkingDurationModifier);
+        modifierSettings.add(parkingDurationModifier);
 
-        advancedSettings.add(new JLabel("Parking duration modifier for reservation tickets"));
+        modifierSettings.add(new JLabel("Parking duration modifier for reservation tickets"));
         reservationDurationModifier = new JTextField(8);
-        advancedSettings.add(reservationDurationModifier);
+        modifierSettings.add(reservationDurationModifier);
 
-        advancedSettings.add(new JLabel("Cars start leaving is queue is this long:"));
+        modifierSettings.add(new JLabel("Cars start leaving is queue is this long:"));
         ticketQueueSizeModifier = new JTextField(8);
-        advancedSettings.add(ticketQueueSizeModifier);
+        modifierSettings.add(ticketQueueSizeModifier);
 
-        advancedSettings.add(new JLabel("Maximum ticket queue size:"));
+        modifierSettings.add(new JLabel("Maximum ticket queue size:"));
         ticketQueueMaxSize = new JTextField(8);
-        advancedSettings.add(ticketQueueMaxSize);
+        modifierSettings.add(ticketQueueMaxSize);
 
-        advancedSettings.add(new JLabel("Cars with a subscription start leaving if queue size is this long:"));
+        modifierSettings.add(new JLabel("Cars with a subscription start leaving if queue size is this long:"));
         subscriptionQueueSizeModifier = new JTextField(8);
-        advancedSettings.add(subscriptionQueueSizeModifier);
+        modifierSettings.add(subscriptionQueueSizeModifier);
 
-        advancedSettings.add(new JLabel("Maximum subscription queue size:"));
+        modifierSettings.add(new JLabel("Maximum subscription queue size:"));
         subscriptionQueueMaxSize = new JTextField(8);
-        advancedSettings.add(subscriptionQueueMaxSize);
+        modifierSettings.add(subscriptionQueueMaxSize);
 
-        advancedSettings.add(new JLabel("Weight of cars skipping spots between two cars:"));
+        modifierSettings.add(new JLabel("Weight of cars skipping spots between two cars:"));
         neighbouringParkingSPotWeightModifier = new JTextField(8);
-        advancedSettings.add(neighbouringParkingSPotWeightModifier);
+        modifierSettings.add(neighbouringParkingSPotWeightModifier);
 
-        initSettings.add(new JLabel("Amount of spots available for subscriptions:"));
+        advancedSettings.add(new JLabel("Amount of spots available for subscriptions:"));
         subscriptionSpots = new JTextField(8);
-        initSettings.add(subscriptionSpots);
+        advancedSettings.add(subscriptionSpots);
 
-        initSettings.add(new JLabel("Amount of spots available for electric vehicles:"));
+        advancedSettings.add(new JLabel("Amount of spots available for electric vehicles:"));
         electricSpots = new JTextField(8);
-        initSettings.add(electricSpots);
+        advancedSettings.add(electricSpots);
 
-        initSettings.add(new JLabel("Amount of spots available for motorcylces:"));
+        advancedSettings.add(new JLabel("Amount of spots available for motorcylces:"));
         motorcycleSpots = new JTextField(8);
-        initSettings.add(motorcycleSpots);
+        advancedSettings.add(motorcycleSpots);
 
-        initSettings.add(new JSeparator());
-        initSettings.add(new JSeparator());
+        advancedSettings.add(new JSeparator());
+        advancedSettings.add(new JSeparator());
 
-        initSettings.add(new JLabel("Desirability to go up a floor, lower values are more desirable:"));
+        advancedSettings.add(new JLabel("Desirability to go up a floor, lower values are more desirable:"));
         floorWeight = new JTextField(8);
-        initSettings.add(floorWeight);
+        advancedSettings.add(floorWeight);
 
-        initSettings.add(new JLabel("Desirability to the next row, lower values are more desirable:"));
+        advancedSettings.add(new JLabel("Desirability to the next row, lower values are more desirable:"));
         rowWeight = new JTextField(8);
-        initSettings.add(rowWeight);
+        advancedSettings.add(rowWeight);
 
-        initSettings.add(new JLabel("Desirability to park inbetween two cars, higher values are more desirable:"));
+        advancedSettings.add(new JLabel("Desirability to park inbetween two cars, higher values are more desirable:"));
         spotWeight = new JTextField(8);
-        initSettings.add(spotWeight);
+        advancedSettings.add(spotWeight);
 
-        initSettings.add(new JSeparator());
-        initSettings.add(new JSeparator());
+        advancedSettings.add(new JSeparator());
+        advancedSettings.add(new JSeparator());
 
-        initSettings.add(new JLabel("Speed normal queues are handled:"));
+        advancedSettings.add(new JLabel("Speed normal queues are handled:"));
         ticketQueueSpeed = new JTextField(8);
-        initSettings.add(ticketQueueSpeed);
+        advancedSettings.add(ticketQueueSpeed);
 
-        initSettings.add(new JLabel("Speed subscription queues are handled:"));
+        advancedSettings.add(new JLabel("Speed subscription queues are handled:"));
         subscriptionQueueSpeed = new JTextField(8);
-        initSettings.add(subscriptionQueueSpeed);
+        advancedSettings.add(subscriptionQueueSpeed);
 
-        initSettings.add(new JLabel("Speed exit queues are handled:"));
+        advancedSettings.add(new JLabel("Speed exit queues are handled:"));
         exitQueueSpeed = new JTextField(8);
-        initSettings.add(exitQueueSpeed);
+        advancedSettings.add(exitQueueSpeed);
 
-        initSettings.add(new JSeparator());
-        initSettings.add(new JSeparator());
+        advancedSettings.add(new JSeparator());
+        advancedSettings.add(new JSeparator());
 
-        initSettings.add(new JLabel("Average stay of a vehicle:"));
+        advancedSettings.add(new JLabel("Average stay of a vehicle:"));
         averageVehicleDurationInMinutes = new JTextField(8);
-        initSettings.add(averageVehicleDurationInMinutes);
+        advancedSettings.add(averageVehicleDurationInMinutes);
 
-        initSettings.add(new JLabel("Maximum stay of a vehicle:"));
+        advancedSettings.add(new JLabel("Maximum stay of a vehicle:"));
         maxVehicleDurationInMinutes = new JTextField(8);
-        initSettings.add(maxVehicleDurationInMinutes);
+        advancedSettings.add(maxVehicleDurationInMinutes);
 
-        initSettings.add(new JLabel("Minimum stay of a vehicle:"));
+        advancedSettings.add(new JLabel("Minimum stay of a vehicle:"));
         minVehicleDurationInMinutes = new JTextField(8);
-        initSettings.add(minVehicleDurationInMinutes);
+        advancedSettings.add(minVehicleDurationInMinutes);
 
-        initSettings.add(new JLabel("Average stay of a vehicle with a reservation:"));
+        advancedSettings.add(new JLabel("Average stay of a vehicle with a reservation:"));
         averageReservationDurationInMinutes = new JTextField(8);
-        initSettings.add(averageReservationDurationInMinutes);
+        advancedSettings.add(averageReservationDurationInMinutes);
 
-        initSettings.add(new JLabel("Maximum stay of a vehicle with a reservation:"));
+        advancedSettings.add(new JLabel("Maximum stay of a vehicle with a reservation:"));
         maxReservationDurationInMinutes = new JTextField(8);
-        initSettings.add(maxReservationDurationInMinutes);
+        advancedSettings.add(maxReservationDurationInMinutes);
 
-        initSettings.add(new JLabel("Minimum stay of a vehicle with a reservation:"));
+        advancedSettings.add(new JLabel("Minimum stay of a vehicle with a reservation:"));
         minReservationDurationInMinutes = new JTextField(8);
-        initSettings.add(minReservationDurationInMinutes);
+        advancedSettings.add(minReservationDurationInMinutes);
     }
 
     public String getAmountOfFloors() {return amountOfFloorsInput.getText();}
