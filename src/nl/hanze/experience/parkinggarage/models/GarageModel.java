@@ -280,6 +280,7 @@ public class GarageModel extends Model {
     public double getRevenueYesterday() {
         if (getDailyMoneyLog().size() > 0) {
             return calculatePriceInEuro((int) getDailyMoneyLog().get(getDailyMoneyLog().size() - 1));
+
         }
         return 0;
     }

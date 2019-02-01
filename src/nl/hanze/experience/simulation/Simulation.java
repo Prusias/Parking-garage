@@ -10,6 +10,7 @@ import nl.hanze.experience.simulation.reservations.ReservationTime;
 import nl.hanze.experience.simulation.reservations.ReservationTimeQueue;
 import nl.hanze.experience.simulation.reservations.ReservationsQueue;
 
+import java.awt.*;
 import java.time.LocalDateTime;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
@@ -44,9 +45,11 @@ public class Simulation {
     private VehiclePieModel vehiclePieModel;
     private QueueGraphModel queueGraphModel;
     private ReservationsQueue reservationsQueue;
+    private DailyIncomeGraphModel dailyIncomeGraphModel;
     private ReservationTimeQueue reservationsTimeParkingSpotQueue;
     private ReservationTimeQueue reservationTimeShowedUpQueue;
     private timeOfLeavingQueue timeOfLeavingQueue;
+
 
     private int vehiclesDrivenPast;
 
@@ -171,7 +174,7 @@ public class Simulation {
                     handleGraphs();
                 }
                 if (tickCount % 1440 == 0) {
-                    garageModel.createLogToDailyMonyLog();
+                    handleDaily();
                 }
 
                 tickCount++;
@@ -226,6 +229,9 @@ public class Simulation {
     }
     public void setVehiclePieModel(VehiclePieModel vehiclePieModel) {
         this.vehiclePieModel = vehiclePieModel;
+    }
+    public void setDailyIncomeGraphModel(DailyIncomeGraphModel dailyIncomeGraphModel) {
+        this.dailyIncomeGraphModel = dailyIncomeGraphModel;
     }
     public void setQueueGraphModel(QueueGraphModel queueGraphModel) {
         this.queueGraphModel = queueGraphModel;
@@ -688,5 +694,14 @@ public class Simulation {
 
         queueGraphModel.updateDataset(garageModel.getTicketQueueSize(),garageModel.getSubscriptionQueueSize(), reservationsQueue.size());
         queueGraphModel.notifyView();
+    }
+
+    private void handleDaily() {
+        if (dailyIncomeGraphModel == null) {
+            throw new IllegalStateException("Simulation - queueGraphModel not set");
+        }
+        garageModel.createLogToDailyMonyLog();
+        dailyIncomeGraphModel.updateTimeSeries(garageModel.getLocalDateTime(), garageModel.getRevenueYesterday());
+        dailyIncomeGraphModel.notifyView();
     }
 }

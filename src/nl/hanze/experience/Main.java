@@ -62,7 +62,7 @@ public class Main {
         garageModel.setGarageSetting("rowWeight", .7);
         garageModel.setGarageSetting("spotWeight", .2);
         garageModel.setGarageSetting("reservationReservedMinutes", 15);
-        garageModel.setGarageSetting("reservationKeptReservedMinutes", 20);
+        garageModel.setGarageSetting("reservationKeptReservedMinutes", 30);
         garageModel.setGarageSetting("amountOfTicketQueues", 1);
         garageModel.setGarageSetting("amountOfSubscriptionQueues", 1);
         garageModel.setGarageSetting("amountOfExitQueues", 1);
@@ -87,6 +87,11 @@ public class Main {
         QueueGraphView queueGraphView = new QueueGraphView();
         queueGraphModel.addView(queueGraphView);
         simulation.setQueueGraphModel(queueGraphModel);
+
+        DailyIncomeGraphModel dailyIncomeGraphModel = new DailyIncomeGraphModel();
+        DailyIncomeGraphView dailyIncomeGraphView = new DailyIncomeGraphView();
+        dailyIncomeGraphModel.addView(dailyIncomeGraphView);
+        simulation.setDailyIncomeGraphModel(dailyIncomeGraphModel);
 
         JFrame frame = new JFrame();
         frame.setTitle("Garage");
@@ -137,6 +142,7 @@ public class Main {
         tabbedView.addPanel(vehicleGraphView, "Vehicles in garage");
         tabbedView.addPanel(vehiclePieView, "Vehicle types in garage");
         tabbedView.addPanel(queueGraphView, "Queue size");
+        tabbedView.addPanel(dailyIncomeGraphView, "Daily income");
         container.add(tabbedView, c);
 
         container.setBackground(Color.WHITE);
