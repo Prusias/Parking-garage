@@ -66,7 +66,8 @@ public class Main {
         garageModel.setGarageSetting("amountOfTicketQueues", 1);
         garageModel.setGarageSetting("amountOfSubscriptionQueues", 1);
         garageModel.setGarageSetting("amountOfExitQueues", 1);
-        garageModel.setGarageSetting("reservationPrice", 5D);
+        garageModel.setGarageSetting("reservationPrice", 5.0);
+        garageModel.setGarageSetting("simulationSleepTime", 10);
 
         GarageController garageController = new GarageController(garageModel);
         GarageView garageView = new GarageView();
@@ -123,7 +124,7 @@ public class Main {
         c.insets = new Insets(5, 5, 5, 5);
         c.anchor = GridBagConstraints.CENTER;
         c.ipadx = 600;
-        c.ipady = 650;
+        c.ipady = 700;
         c.gridwidth = 1;
         c.gridx = 0;
         c.gridy = 1;

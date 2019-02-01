@@ -29,7 +29,6 @@ import static nl.hanze.experience.objects.Vehicle.Type;
  */
 public class Simulation {
     private SimulationThread simulationThread;
-    private int simulationSleepPerTick = 0;
 
     private Random random;
     private long seed;
@@ -165,7 +164,7 @@ public class Simulation {
                 doTick();
                 //System.out.println(tickCount);
                 try {
-                    Thread.sleep(simulationSleepPerTick);
+                    Thread.sleep((int)garageModel.getGarageSetting("simulationSleepTime"));
 
                 } catch (InterruptedException e) {
                     e.printStackTrace();

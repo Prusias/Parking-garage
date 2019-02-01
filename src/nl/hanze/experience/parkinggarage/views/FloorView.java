@@ -119,11 +119,15 @@ public class FloorView extends JPanelView {
                 return new Color(168, 168, 168);
 
             } else {
-                return new Color(68, 68, 68);
+                if (parkingSpot.getVehicle().getType() == Vehicle.Type.ELECTRIC_CAR) {
+                    return new Color(0, 100, 0);
+                } else if (parkingSpot.getVehicle().getType() == Vehicle.Type.MOTORCYCLE) {
+                    return new Color(255, 155, 50);
+                } else {
+                    return new Color(68, 68, 68);
+                }
             }
         }
-
-
     }
 
     // TODO: Dynamic size?
