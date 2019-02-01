@@ -95,4 +95,7 @@ public class SimulationMenuModel extends Model {
         }
     }
 
+    public void toggleNotifyViews() {
+        simulation.setNotifyViews(!simulation.getNotifyViews());
+    }
 }

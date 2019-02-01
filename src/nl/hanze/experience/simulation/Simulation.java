@@ -10,7 +10,6 @@ import nl.hanze.experience.simulation.reservations.ReservationTime;
 import nl.hanze.experience.simulation.reservations.ReservationTimeQueue;
 import nl.hanze.experience.simulation.reservations.ReservationsQueue;
 
-import java.awt.*;
 import java.time.LocalDateTime;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
@@ -34,6 +33,7 @@ public class Simulation {
     private long seed;
 
     private Modifier modifier;
+    private boolean notifyViews;
 
     private SimulationInfoModel simulationInfoModel;
     private SimulationInfoView simulationInfoView;
@@ -70,6 +70,7 @@ public class Simulation {
         timeOfLeavingQueue = new timeOfLeavingQueue();
 
         vehiclesDrivenPast = 0;
+        notifyViews = true;
 
         seed = ThreadLocalRandom.current().nextLong();
         random = new Random(seed);
@@ -245,6 +246,13 @@ public class Simulation {
     }
     public int getVehiclesDrivenPast() {
         return vehiclesDrivenPast;
+    }
+
+    public boolean getNotifyViews() {
+        return notifyViews;
+    }
+    public void setNotifyViews(boolean notifyViews) {
+        this.notifyViews = notifyViews;
     }
 
     /**
@@ -433,7 +441,9 @@ public class Simulation {
                 break;
             }
         }
-        garageModel.notifyView();
+        if (notifyViews) {
+            garageModel.notifyView();
+        }
     }
 
     // TODO: Handle Vehicle.Type
@@ -471,7 +481,9 @@ public class Simulation {
             timeOfLeavingQueue.add(vehicle);
             vehicle.setParkingSpot(parkingSpot);
             parkingSpot.setVehicle(vehicle);
-            garageModel.notifyView();
+            if (notifyViews) {
+                garageModel.notifyView();
+            }
         }
     }
 
@@ -540,7 +552,9 @@ public class Simulation {
             timeOfLeavingQueue.add(vehicle);
             vehicle.setParkingSpot(parkingSpot);
             parkingSpot.setVehicle(vehicle);
-            garageModel.notifyView();
+            if (notifyViews) {
+                garageModel.notifyView();
+            }
         }
     }
     /**
@@ -663,7 +677,9 @@ public class Simulation {
                 }
 
 //                System.out.println("Vehicle of Type: " + vehicle.getType() + " and PaymentType " + vehicle.getPaymentType() + " left." );
-                garageModel.notifyView();
+                if (notifyViews) {
+                    garageModel.notifyView();
+                }
             }
             // For the next loop
             vehicle = timeOfLeavingQueue.peek();
@@ -688,7 +704,7 @@ public class Simulation {
                 garageModel.getTotalTicVehicles(),
                 garageModel.getTotalResVehicles()
         );
-        vehicleGraphModel.notifyView();
+
 
         vehiclePieModel.updatePieDataset(
                 garageModel.getTotalTicVehicles(),
@@ -697,10 +713,15 @@ public class Simulation {
                 garageModel.getTotalSubVehicles(),
                 garageModel.getTotalResVehicles()
         );
-        vehiclePieModel.notifyView();
+
 
         queueGraphModel.updateDataset(garageModel.getTicketQueueSize(),garageModel.getSubscriptionQueueSize(), reservationsQueue.size());
-        queueGraphModel.notifyView();
+
+        if (notifyViews) {
+            vehicleGraphModel.notifyView();
+            vehiclePieModel.notifyView();
+            queueGraphModel.notifyView();
+        }
     }
 
     private void handleDaily() {
@@ -709,6 +730,9 @@ public class Simulation {
         }
         garageModel.createLogToDailyMonyLog();
         dailyIncomeGraphModel.updateTimeSeries(garageModel.getLocalDateTime(), garageModel.getRevenueYesterday());
-        dailyIncomeGraphModel.notifyView();
+
+        if (notifyViews) {
+            dailyIncomeGraphModel.notifyView();
+        }
     }
 }
