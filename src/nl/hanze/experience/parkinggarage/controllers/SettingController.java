@@ -43,6 +43,7 @@ public class SettingController extends Controller {
             settingModel.setAmountOfRows(settingView.getAmountOfRows());
             settingModel.setAmountOfSpots(settingView.getAmountOfSpots());
             settingModel.setPriceInEuro(settingView.getPriceInEuro());
+            settingModel.setReservationPrice(settingView.getReservationPrice());
             settingModel.setSeed(settingView.getSeed());
 
             settingModel.setBaseVehicleModifier(settingView.getBaseVehicleModifier());

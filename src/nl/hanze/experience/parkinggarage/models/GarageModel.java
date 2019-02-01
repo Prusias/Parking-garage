@@ -213,9 +213,13 @@ public class GarageModel extends Model {
     public void vehiclePay(Vehicle vehicle) {
         if (vehicle.getPaymentType() != Vehicle.PaymentType.SUBSCRIPTION) {
             int payingTime;
+            int reservationPrice = calculatePriceInCents((double)getGarageSetting("reservationPrice"));
             payingTime = vehicle.getDuration() / 10;
             if (vehicle.getDuration() % 10 != 0) {
                 payingTime = +1;
+            }
+            if (vehicle.getPaymentType() == Vehicle.PaymentType.RESERVATION) {
+                garage.addMoney((garage.getPrice() * payingTime) + reservationPrice);
             }
             garage.addMoney(garage.getPrice() * payingTime);
         }

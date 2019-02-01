@@ -9,7 +9,7 @@ import nl.hanze.experience.parkinggarage.models.GarageModel;
 import java.awt.*;
 
 /**
- * The view for the vehicle graph
+ * The view for the floor where all graphical operations regarding individual floors happens
  * @author Mike van der Velde
  * @author Zein Bseis
  * @author Steven Woudstra
@@ -22,12 +22,20 @@ public class FloorView extends JPanelView {
     private Dimension size;
     private int floor;
 
+    /**
+     * Make new floor view
+     * @param floor A floor to make the view for
+     */
     public FloorView(int floor) {
         this.setLayout(new GridLayout(1, 1));
         this.floor = floor;
         this.setBackground(Color.WHITE);
     }
 
+    /**
+     * Updating the information in the floor view class
+     * @param model Model A model with the new information
+     */
     @Override
     public void update(Model model) {
         GarageModel garageModel = (GarageModel) model;

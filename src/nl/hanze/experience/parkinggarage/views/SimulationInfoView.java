@@ -8,11 +8,11 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * The view class the information over the simulator progress
+ * The view class the information over the simulator progress where the graphical operations regarding the simulator progress happens
  * @author Mike van der Velde
- *  * @author Zein Bseis
- *  * @author Steven Woudstra
- *  * @author Ivo Gerner
+ * @author Zein Bseis
+ * @author Steven Woudstra
+ * @author Ivo Gerner
  * @version 0.0.4
  * @since 0.0.4
  */

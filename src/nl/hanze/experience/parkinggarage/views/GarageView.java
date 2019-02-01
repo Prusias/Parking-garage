@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * The view for the vehicle graph
+ * The view for the garage where all the graphical operations regarding the garage happens
  * @author Mike van der Velde
  * @author Zein Bseis
  * @author Steven Woudstra
@@ -22,6 +22,9 @@ public class GarageView extends JPanelView {
     private JPanelView[] floorViews;
     private Dimension size;
 
+    /**
+     * Make new garage view
+     */
     public GarageView() {
         this.setLayout(new GridLayout(1, 1));
         jTabbedPane = new JTabbedPane();
@@ -31,6 +34,10 @@ public class GarageView extends JPanelView {
         this.setBackground(Color.WHITE);
     }
 
+    /**
+     * Update the inromation in the garge view
+     * @param model Model with the new information
+     */
     @Override
     public void update(Model model) {
         GarageModel garageModel = (GarageModel) model;

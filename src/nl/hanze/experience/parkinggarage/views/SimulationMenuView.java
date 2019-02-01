@@ -10,7 +10,7 @@ import java.awt.*;
 import static nl.hanze.experience.parkinggarage.controllers.SimulationMenuController.EventId;
 
 /**
- * The view for the simulator drop menu
+ * The view for the simulator drop menu where the graphical operations regarding the drop down menu happens
  * @author Mike van der Velde
  * @author Zein Bseis
  * @author Steven Woudstra
