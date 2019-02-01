@@ -8,7 +8,7 @@ import org.jfree.data.time.TimeSeriesCollection;
 import java.time.LocalDateTime;
 
 /**
- * The model class for the vehicle graph where all the logical operation regarding the graph representing the vehicle happen
+ * The model class for the Daily income graph where all the logical operation regarding the graph representing the daily income happen
  * @author Mike van der Velde
  * @author Zein Bseis
  * @author Steven Woudstra
