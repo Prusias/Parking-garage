@@ -67,7 +67,7 @@ public class Main {
         garageModel.setGarageSetting("amountOfSubscriptionQueues", 1);
         garageModel.setGarageSetting("amountOfExitQueues", 1);
         garageModel.setGarageSetting("reservationPrice", 5.0);
-        garageModel.setGarageSetting("simulationSleepTime", 10);
+        garageModel.setGarageSetting("simulationSleepTime", 0);
 
         GarageController garageController = new GarageController(garageModel);
         GarageView garageView = new GarageView();

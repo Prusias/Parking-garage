@@ -27,6 +27,7 @@ public class SimulationMenuView extends JMenuView {
     private JMenuItem resumeMenuItem;
     private JMenuItem do1Tick;
     private JMenuItem do100Ticks;
+    private JMenuItem toggleViewUpdates;
 
     /**
      * Make new drop menu in the simlation
@@ -60,6 +61,13 @@ public class SimulationMenuView extends JMenuView {
         do100Ticks.addActionListener(e -> notifyController(EventId.DO100));
         do100Ticks.setEnabled(false);
         this.add(do100Ticks);
+
+        this.addSeparator();
+
+        toggleViewUpdates = new JMenuItem("Toggle view updates");
+        toggleViewUpdates.addActionListener(e -> notifyController(EventId.TOGGLEUPDATES));
+        toggleViewUpdates.setEnabled(true);
+        this.add(toggleViewUpdates);
 
         this.addSeparator();
 
