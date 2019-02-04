@@ -36,7 +36,7 @@ public class SimulationInfoModel extends Model {
     }
 
     public String getFormattedTime() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm");
         return formatter.format(simulation.getGarageModel().getLocalDateTime());
     }
 

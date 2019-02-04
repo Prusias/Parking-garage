@@ -1,8 +1,8 @@
 package nl.hanze.experience.parkinggarage.views;
 
-import nl.hanze.experience.mvc.*;
+import nl.hanze.experience.mvc.JPanelView;
+import nl.hanze.experience.mvc.Model;
 import nl.hanze.experience.parkinggarage.models.SimulationInfoModel;
-
 
 import javax.swing.*;
 import java.awt.*;
@@ -39,7 +39,7 @@ public class SimulationInfoView extends JPanelView {
         this.add(tickCountLabel);
 
         add(new JLabel("Time: "));
-        dateTimeLabel = new JLabel("00-00 00:00");
+        dateTimeLabel = new JLabel("2019-00-00 00:00");
         this.add(dateTimeLabel);
 
         add(new JLabel("SubQueue Length: "));
