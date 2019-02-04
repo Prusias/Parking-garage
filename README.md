@@ -2,7 +2,7 @@
 
 Made for Hanze University of applied sciences as the execution of a project
 about refactoring and extending a existing parking garage simulation in Java. 
-This project was made in 3 weeks but the majority of the work was done in the last week.
+This project was made in 3 weeks with the majority of the work being in the last week.
 
 ##### **Main screen of the simulation:**
 
