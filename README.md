@@ -4,6 +4,10 @@ Made for Hanze University of applied sciences as the execution of a project
 about refactoring and extending a existing parking garage simulation in Java. 
 This project was made in 3 weeks but the majority of the work was done in the last week.
 
+##### **Main screen of the simulation:**
+
+![Simulation](https://github.com/Prusias/Parkeergarage/blob/master/README/simulation.png)
+
 The details of this project are found in the "Project_Parkeergarage 2017.pdf".
 This pdf is in Dutch so we will list the requirements in short:
 
@@ -32,5 +36,11 @@ We also implemented some of our own bonus objectives.
 * Make the generation of cars and their stay duration realistic.
 * Add the ability to pause the simulation
 * Add several graphs to view data about the simulation
+
+##### **Some examples of the settings:**
+
+![Settings 1](https://github.com/Prusias/Parkeergarage/blob/master/README/settings.png)
+
+![Settings 2](https://github.com/Prusias/Parkeergarage/blob/master/README/settings2.png)
 
 
