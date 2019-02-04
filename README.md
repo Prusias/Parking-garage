@@ -8,7 +8,7 @@ This project was made in 3 weeks with the majority of the work being in the last
 
 ![Simulation](https://github.com/Prusias/Parkeergarage/blob/master/README/simulation.png)
 
-The details of this project are found in the "Project_Parkeergarage 2017.pdf".
+The details of this project are found in the [Project_Parkeergarage 2017.pdf](https://github.com/Prusias/Parking-garage/blob/master/Project_Parkeergarage%202017.pdf).
 This pdf is in Dutch so we will list the requirements in short:
 
 * Add a reservation system
